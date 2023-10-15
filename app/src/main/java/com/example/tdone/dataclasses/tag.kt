@@ -6,7 +6,7 @@ data class tag(
     companion object{
         private var instance:tag? = null
 
-        fun getIntance(name:String): tag {
+        fun getTag(name:String): tag {
             if(instance == null){
                 instance = tag(name)
             }

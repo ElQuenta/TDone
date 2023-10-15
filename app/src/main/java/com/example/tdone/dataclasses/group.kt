@@ -7,7 +7,7 @@ data class group(
     companion object{
         private var instance:group? = null
 
-        fun getIntance(name:String, task:List<task>): group {
+        fun getGroup(name:String, task:List<task>): group {
             if(instance == null){
                 instance = group(name,task)
             }
