@@ -1,11 +1,13 @@
 package com.example.tdone.dataclasses
+
 import java.time.LocalDate
 
 data class task(
-    val name:String,
-    var tag: List<tag>,
-    val group: group,
-    val notes: notes,
+    var name: String,
+    var tags: List<tag>,
+    var group: group,
+    var notes: notes,
     var vinculed: Boolean,
-    var date: LocalDate
+    var date: LocalDate?,
+    var checked: Boolean
 )
