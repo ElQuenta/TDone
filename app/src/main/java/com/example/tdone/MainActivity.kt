@@ -1,42 +1,18 @@
 package com.example.tdone
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.widget.Button
-import android.widget.ImageView
-
-
+import androidx.appcompat.app.AppCompatActivity
+import com.example.tdone.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    companion object {
-        val IMAGE_CODE = 100
-    }
 
-    private lateinit var imageView: ImageView
-    private lateinit var button: Button
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        imageView = findViewById(R.id.imgGalery)
-        button = findViewById(R.id.btnCamera)
-
-        button.setOnClickListener() {
-            pickImage()
-        }
-    }
-    fun pickImage() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, IMAGE_CODE)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == IMAGE_CODE && resultCode == RESULT_OK){
-            imageView.setImageURI(data?.data)
-        }
-    }
 }
