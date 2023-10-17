@@ -22,15 +22,15 @@
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:contentDescription="@string/navigate_menu_Button_Description"
                 android:src="@drawable/ic_menu_button"
-                app:tint="@color/white"
-                android:contentDescription="@string/navigate_menu_Button_Description" />
+                app:tint="@color/white" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/tv_Notas"
+        android:id="@+id/tv_notes"
         style="@style/TDone_titles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,43 +39,43 @@
         app:layout_constraintTop_toBottomOf="@id/action_bar" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_Notas_Recientes"
+        android:id="@+id/rv_current_notes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="16dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_Notas" />
+        app:layout_constraintTop_toBottomOf="@id/tv_notes" />
 
     <TextView
-        android:id="@+id/tv_Tareas"
+        android:id="@+id/tv_Tasks"
         style="@style/TDone_titles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tareas "
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_Notas_Recientes" />
+        app:layout_constraintTop_toBottomOf="@id/rv_current_notes" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_Tareas_por_Finalizar"
+        android:id="@+id/rv_near_to_end_tasks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/fab_Add_Item"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Tareas"
-        android:layout_marginHorizontal="8dp"/>
+        android:layout_marginHorizontal="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/fab_add_item"
+        app:layout_constraintTop_toBottomOf="@+id/tv_Tasks" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_Add_Item"
+        android:id="@+id/fab_add_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
+        android:contentDescription="@string/add_Item_Description"
         android:src="@android:drawable/ic_input_add"
         app:backgroundTint="@color/black"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/white"
-        android:contentDescription="@string/add_Item_Description" />
+        app:tint="@color/white" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
