@@ -1,4 +1,4 @@
-package com.example.tdone.rvInitialScreen.rvNotes
+package com.example.tdone.rvHoldersYAdapters.rvInitialScreen.initialScreenNotes
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

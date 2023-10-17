@@ -1,4 +1,4 @@
-package com.example.tdone.rvInitialScreen.rvTasks
+package com.example.tdone.rvHoldersYAdapters.rvInitialScreen.initialScreenTasks
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
