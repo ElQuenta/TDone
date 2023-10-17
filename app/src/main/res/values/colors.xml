@@ -2,7 +2,21 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="ToolbarTransparente">#80FFFFFF</color>
-    <color name="colorRojoSuave">#FFC0CB</color>
 
+    <!-- Colores Pantallas -->
+    <color name="head">#B3D9D9D9</color>
+
+    <!-- Colores de Fondo de las Notas -->
+    <color name="background_note_color1">#FFFFFFFF</color>
+    <color name="background_note_color2">#FFFCFE8B</color>
+    <color name="background_note_color3">#FFF0B47C</color>
+    <color name="background_note_color4">#FFFA6A6A</color>
+    <color name="background_note_color5">#FF69F37F</color>
+    <color name="background_note_color6">#FF8BDBE0</color>
+    <color name="background_note_color7">#FF6BACF8</color>
+    <color name="background_note_color8">#FF5F7FEE</color>
+    <color name="background_note_color9">#FF9666E4</color>
+    <color name="background_note_color10">#FF8765E7</color>
+    <color name="background_note_color11">#FFCB5DDD</color>
+    <color name="background_note_color12">#FFDC507A</color>
 </resources>
