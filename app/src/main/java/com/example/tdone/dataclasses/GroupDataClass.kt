@@ -1,6 +1,6 @@
 package com.example.tdone.dataclasses
 
-data class group(
+data class GroupDataClass(
     var name:String,
     var description: String
 )

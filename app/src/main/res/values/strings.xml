@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TDone</string>
+    <string name="add_Item_Description">Crear un nuevo Grupo, Tarea o Nota</string>
+    <string name="navigate_menu_Button_Description">Entrar al Menu Hamburguesa</string>
 </resources>

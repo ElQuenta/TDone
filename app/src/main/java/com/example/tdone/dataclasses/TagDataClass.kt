@@ -1,7 +1,7 @@
 package com.example.tdone.dataclasses
 
 
-data class tag(
+data class TagDataClass(
     var name:String,
     var color: Int
 )
