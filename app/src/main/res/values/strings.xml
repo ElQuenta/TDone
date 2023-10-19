@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pruebba_nav</string>
+    <string name="app_name">Tdone</string>
     <string name="nav_open">Open Navigation Drawer</string>
     <string name="nav_close">Close Navigation Drawer</string>
 </resources>
