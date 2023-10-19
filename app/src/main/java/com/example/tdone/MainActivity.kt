@@ -1,14 +1,11 @@
 package com.example.tdone
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.GravityCompat
-import com.example.tdone.databinding.ActivityMainBinding
-
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import com.example.tdone.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -51,7 +48,8 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     R.id.tod -> {
-                        Toast.makeText(this@MainActivity, "TODAS LAS TAREAS", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, "TODAS LAS TAREAS", Toast.LENGTH_SHORT)
+                            .show()
                     }
 
                     R.id.not -> {
@@ -69,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         return if (toggle.onOptionsItemSelected(item)) {
