@@ -2,4 +2,6 @@
     <string name="app_name">TDone</string>
     <string name="add_Item_Description">Crear un nuevo Grupo, Tarea o Nota</string>
     <string name="navigate_menu_Button_Description">Entrar al Menu Hamburguesa</string>
+    <string name="nav_open">Open Navigation Drawer</string>
+    <string name="nav_close">Close Navigation Drawer</string>
 </resources>
