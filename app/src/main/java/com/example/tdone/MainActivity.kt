@@ -102,6 +102,9 @@ class MainActivity : AppCompatActivity() {
         TaskDataClass(
             name = "Tarea Prueba 6",
             group = group1
+        ),
+        TaskDataClass(
+            name = "Tarea Prueba 7",
         )
     )
 

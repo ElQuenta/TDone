@@ -13,7 +13,9 @@ class InitialScreenTasksViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(task: TaskDataClass) {
         binding.tvTaskTittle.text =task.name
-        binding.tvTaskGroup.text = task.group.name
+        if (task.group != null) {
+            binding.tvTaskGroup.text = task.group!!.name
+        }
         binding.tvTaskEndDate.text = "12/12/2023"
 
         if(task.tag_DataClasses.isNotEmpty()){
