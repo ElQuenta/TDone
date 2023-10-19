@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item android:title="Inicio"
+            android:id="@+id/inic"
+            android:icon="@drawable/baseline_home_24"/>
+        <item android:title="Mis grupos"
+            android:id="@+id/mis"
+            android:icon="@drawable/baseline_checklist_rtl_24"/>
+        <item android:title="Todas las tareas"
+            android:id="@+id/tod"
+            android:icon="@drawable/baseline_check_circle_outline_24"/>
+        <item android:title="Mis Notas"
+            android:id="@+id/not"
+            android:icon="@drawable/baseline_note_alt_24"/>
+        <item android:title="Historial"
+            android:id="@+id/his"
+            android:icon="@drawable/baseline_history_24"/>
+    </group>
+
+    <item android:title="Profile">
+        <menu>
+            <group>
+                <item android:title="Log out"
+                    android:id="@+id/log"
+                    android:icon="@drawable/baseline_logout_24"/>
+            </group>
+        </menu>
+    </item>
+
+</menu>
