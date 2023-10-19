@@ -6,13 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/action_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/head"
-        app:layout_constraintTop_toTopOf="parent">
+        app:cardBackgroundColor="@color/head">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,41 +32,36 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+
     <TextView
         android:id="@+id/tv_notes"
         style="@style/TDone_titles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Notas"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/action_bar" />
+        android:text="Notas"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_current_notes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
-        android:layout_marginVertical="16dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_notes" />
+        android:layout_marginVertical="16dp" />
 
     <TextView
         android:id="@+id/tv_Tasks"
         style="@style/TDone_titles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tareas "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_current_notes" />
+        android:text="Tareas " />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_near_to_end_tasks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/fab_add_item"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Tasks" />
+        android:layout_marginTop="16dp"/>
 
-
+</LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_item"
         android:layout_width="wrap_content"

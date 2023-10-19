@@ -4,10 +4,10 @@ import java.time.LocalDate
 
 data class TaskDataClass(
     var name: String,
-    var tag_DataClasses: List<TagDataClass>,
+    var tag_DataClasses: List<TagDataClass> = listOf(),
     var group: GroupDataClass,
-    var NoteDataClass: NoteDataClass,
-    var vinculed: Boolean,
-    var date: LocalDate?,
-    var checked: Boolean
+    var NoteDataClass: NoteDataClass? = null,
+    var vinculed: Boolean = false,
+    var date: LocalDate? = null,
+    var checked: Boolean = false
 )
