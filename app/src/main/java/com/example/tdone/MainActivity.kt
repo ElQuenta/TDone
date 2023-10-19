@@ -1,68 +1,78 @@
 package com.example.tdone
 
-import android.content.Intent
-import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
+import com.example.tdone.databinding.ActivityMainBinding
 
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
-    private lateinit var drawer: DrawerLayout
+    private lateinit var binding: ActivityMainBinding
     private lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar_main)
-        setSupportActionBar(toolbar)
-        drawer = findViewById(R.id.drawer_layout)
-        toggle = ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close)
-        drawer.addDrawerListener(toggle)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeButtonEnabled(true)
 
-        val navigationView: NavigationView = findViewById(R.id.nav_view)
-        navigationView.setNavigationItemSelectedListener(this)
+        binding.apply {
+            navView.bringToFront()
 
-    }
+            setSupportActionBar(toolbar)
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.nav_item_one -> Toast.makeText(this,"Item 1",Toast.LENGTH_SHORT).show()
-            R.id.nav_item_two -> Toast.makeText(this,"Item 2",Toast.LENGTH_SHORT).show()
-            R.id.nav_item_three -> Toast.makeText(this,"Item 3",Toast.LENGTH_SHORT).show()
+            toggle = ActionBarDrawerToggle(
+                this@MainActivity,
+                drawerLayout,
+                R.string.nav_open,
+                R.string.nav_close
+            )
+
+
+            drawerLayout.addDrawerListener(toggle)
+
+            navView.setNavigationItemSelectedListener {
+                when (it.itemId) {
+
+                    R.id.inic -> {
+                        Toast.makeText(this@MainActivity, "INICIO", Toast.LENGTH_SHORT).show()
+
+                        drawerLayout.closeDrawer(GravityCompat.START)
+                    }
+
+                    R.id.mis -> {
+                        Toast.makeText(this@MainActivity, "MIS GRUPOS", Toast.LENGTH_SHORT).show()
+                    }
+
+                    R.id.tod -> {
+                        Toast.makeText(this@MainActivity, "TODAS LAS TAREAS", Toast.LENGTH_SHORT).show()
+                    }
+
+                    R.id.not -> {
+                        Toast.makeText(this@MainActivity, "MIS NOTAS", Toast.LENGTH_SHORT).show()
+                    }
+
+                    R.id.his -> {
+                        Toast.makeText(this@MainActivity, "HISTORIAL", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                true
+            }
+
+
         }
-        drawer.closeDrawer(GravityCompat.START)
-        return true
-    }
-
-    override fun onPostCreate(savedInstanceState: Bundle?) {
-        super.onPostCreate(savedInstanceState)
-        toggle.syncState()
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        toggle.onConfigurationChanged(newConfig)
 
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(toggle.onOptionsItemSelected(item)){
-            return true
+
+        return if (toggle.onOptionsItemSelected(item)) {
+            true
+        } else {
+            return super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
 }
