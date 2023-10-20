@@ -183,7 +183,7 @@ class MainActivity : AppCompatActivity() {
         binding.rvCurrentNotes.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvCurrentNotes.adapter = currentNotesAdapter
-
+        //GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
         nearToEndTaskAdapter = InitialScreenTasksAdapter(nearToEndTasks)
         binding.rvNearToEndTasks.layoutManager = LinearLayoutManager(this)
         binding.rvNearToEndTasks.adapter = nearToEndTaskAdapter
