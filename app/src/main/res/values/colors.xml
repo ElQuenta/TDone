@@ -29,7 +29,7 @@
     <color name="background_note_color10">#FF8765E7</color>
     <color name="background_note_color11">#FFCB5DDD</color>
     <color name="background_note_color12">#FFDC507A</color>
-
+    <color name="cafe">#6F4E37</color>
     <!-- Colores Tags -->
     <color name="tag_color1">#E53935</color>
     <color name="tag_color2">#D81B60</color>
