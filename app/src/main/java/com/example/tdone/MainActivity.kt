@@ -2,6 +2,9 @@ package com.example.tdone
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -14,11 +17,43 @@ import com.example.tdone.dataclasses.TagDataClass
 import com.example.tdone.dataclasses.TaskDataClass
 import com.example.tdone.rvHoldersYAdapters.rvInitialScreen.initialScreenNotes.InitialScreenNotesAdapter
 import com.example.tdone.rvHoldersYAdapters.rvInitialScreen.initialScreenTasks.InitialScreenTasksAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var toggle: ActionBarDrawerToggle
+
+    private lateinit var plusButton: FloatingActionButton
+    private lateinit var editButton: FloatingActionButton
+    private lateinit var groupButton: FloatingActionButton
+    private lateinit var noteButton: FloatingActionButton
+
+    private val rotateOpen: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.rotate_open_plus
+        )
+    }
+    private val rotateClose: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.rotate_close_plus
+        )
+    }
+    private val fromBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.from_bottom_anim
+        )
+    }
+    private val toBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.to_bottom_anim
+        )
+    }
+    private var clicked = false
 
     private lateinit var currentNotesAdapter: InitialScreenNotesAdapter
 
@@ -59,19 +94,19 @@ class MainActivity : AppCompatActivity() {
         description = "Grupo Prueba2"
     )
 
-    private val  tag1 = TagDataClass(
+    private val tag1 = TagDataClass(
         name = "Tag Prueba1",
         color = R.color.tag_color1
     )
-    private val  tag2 = TagDataClass(
+    private val tag2 = TagDataClass(
         name = "Tag Prueba2",
         color = R.color.tag_color2
     )
-    private val  tag3 = TagDataClass(
+    private val tag3 = TagDataClass(
         name = "Tag Prueba3",
         color = R.color.tag_color3
     )
-    private val  tag4 = TagDataClass(
+    private val tag4 = TagDataClass(
         name = "Tag Prueba4",
         color = R.color.tag_color4
     )
@@ -96,12 +131,11 @@ class MainActivity : AppCompatActivity() {
         ),
         TaskDataClass(
             name = "Tarea Prueba 4",
-            tag_DataClasses = listOf(tag1,tag2),
+            tag_DataClasses = listOf(tag1, tag2),
             group = group1
-        )
-        ,TaskDataClass(
+        ), TaskDataClass(
             name = "Tarea Prueba 5",
-            tag_DataClasses = listOf(tag3,tag4),
+            tag_DataClasses = listOf(tag3, tag4),
             group = group2
         ),
         TaskDataClass(
@@ -119,6 +153,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUi()
+
+        plusButton.setOnClickListener {
+            onAddButtonClicked()
+        }
+        editButton.setOnClickListener {
+            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+        }
+        groupButton.setOnClickListener {
+            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+        }
+        noteButton.setOnClickListener {
+            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+        }
 
 
         binding.apply {
@@ -170,6 +217,39 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+    private fun onAddButtonClicked() {
+        setVisibility(clicked)
+        setAnimation(clicked)
+        clicked = !clicked
+    }
+
+    private fun setVisibility(clicked: Boolean) {
+        if (!clicked) {
+            editButton.visibility = View.VISIBLE
+            groupButton.visibility = View.VISIBLE
+            noteButton.visibility = View.VISIBLE
+        } else {
+            editButton.visibility = View.INVISIBLE
+            groupButton.visibility = View.INVISIBLE
+            noteButton.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun setAnimation(clicked: Boolean) {
+        if (!clicked) {
+            editButton.startAnimation(fromBottom)
+            groupButton.startAnimation(fromBottom)
+            noteButton.startAnimation(fromBottom)
+            plusButton.startAnimation(rotateOpen)
+        } else {
+            editButton.startAnimation(toBottom)
+            groupButton.startAnimation(toBottom)
+            noteButton.startAnimation(toBottom)
+            plusButton.startAnimation(rotateClose)
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         return if (toggle.onOptionsItemSelected(item)) {
@@ -178,14 +258,19 @@ class MainActivity : AppCompatActivity() {
             return super.onOptionsItemSelected(item)
         }
     }
+
     private fun initUi() {
         currentNotesAdapter = InitialScreenNotesAdapter(notes)
         binding.rvCurrentNotes.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvCurrentNotes.adapter = currentNotesAdapter
-
+        //GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
         nearToEndTaskAdapter = InitialScreenTasksAdapter(nearToEndTasks)
         binding.rvNearToEndTasks.layoutManager = LinearLayoutManager(this)
         binding.rvNearToEndTasks.adapter = nearToEndTaskAdapter
+        plusButton = binding.plus
+        editButton = binding.edit
+        groupButton = binding.group
+        noteButton = binding.note
     }
 }
