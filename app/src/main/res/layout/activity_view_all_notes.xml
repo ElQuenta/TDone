@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
@@ -37,32 +37,11 @@
                 android:theme="?attr/actionBarTheme"
                 app:navigationIcon="@drawable/baseline_menu_open_24" />
 
-            <TextView
-                android:id="@+id/tv_notes"
-                style="@style/TDone_titles"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Notas"/>
-
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_current_notes"
+                android:id="@+id/rv_all_notes"
+                android:layout_marginTop="32dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" />
-
-            <TextView
-                android:id="@+id/tv_Tasks"
-                style="@style/TDone_titles"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tareas " />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_near_to_end_tasks"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginTop="16dp"/>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

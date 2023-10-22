@@ -1,5 +1,6 @@
 package com.example.tdone
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
@@ -121,6 +122,21 @@ class MainActivity : AppCompatActivity() {
         initUi()
 
 
+    }
+
+    private fun initUi() {
+        currentNotesAdapter = InitialScreenNotesAdapter(notes)
+        binding.rvCurrentNotes.adapter = currentNotesAdapter
+        binding.rvCurrentNotes.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        nearToEndTaskAdapter = InitialScreenTasksAdapter(nearToEndTasks)
+        binding.rvNearToEndTasks.layoutManager = LinearLayoutManager(this)
+        binding.rvNearToEndTasks.adapter = nearToEndTaskAdapter
+        prepearingBurgerMenu()
+    }
+
+    private fun prepearingBurgerMenu() {
         binding.apply {
             navView.bringToFront()
 
@@ -156,6 +172,8 @@ class MainActivity : AppCompatActivity() {
 
                     R.id.not -> {
                         Toast.makeText(this@MainActivity, "MIS NOTAS", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(binding.root.context,ViewAllNotesActivity::class.java)
+                        startActivity(intent)
                     }
 
                     R.id.his -> {
@@ -167,7 +185,6 @@ class MainActivity : AppCompatActivity() {
 
 
         }
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -177,15 +194,5 @@ class MainActivity : AppCompatActivity() {
         } else {
             return super.onOptionsItemSelected(item)
         }
-    }
-    private fun initUi() {
-        currentNotesAdapter = InitialScreenNotesAdapter(notes)
-        binding.rvCurrentNotes.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvCurrentNotes.adapter = currentNotesAdapter
-        //GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false)
-        nearToEndTaskAdapter = InitialScreenTasksAdapter(nearToEndTasks)
-        binding.rvNearToEndTasks.layoutManager = LinearLayoutManager(this)
-        binding.rvNearToEndTasks.adapter = nearToEndTaskAdapter
     }
 }
