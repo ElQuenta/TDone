@@ -37,32 +37,101 @@
                 android:theme="?attr/actionBarTheme"
                 app:navigationIcon="@drawable/baseline_menu_open_24" />
 
-            <TextView
-                android:id="@+id/tv_notes"
-                style="@style/TDone_titles"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Notas"/>
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/group_home_screen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_current_notes"
+                <TextView
+                    android:id="@+id/tv_notes"
+                    style="@style/TDone_titles"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Notas" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_current_notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_Tasks"
+                    style="@style/TDone_titles"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tareas " />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_near_to_end_tasks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/group_groups_screen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" />
+                android:orientation="vertical"
+                android:visibility="gone">
 
-            <TextView
-                android:id="@+id/tv_Tasks"
-                style="@style/TDone_titles"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tareas " />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_all_groups"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="32dp"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_near_to_end_tasks"
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/group_tasks_screen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginTop="16dp"/>
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_all_tasks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/group_notes_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_all_notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/group_history_screen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
 
         </LinearLayout>
 

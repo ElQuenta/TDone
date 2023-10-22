@@ -1,4 +1,4 @@
-package com.example.tdone.rvHoldersYAdapters.rvInitialScreen.initialScreenTasks
+package com.example.tdone.rvHoldersYAdapters.rvBase.baseTasks
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -7,7 +7,7 @@ import com.example.tdone.databinding.ItemTaskBinding
 import com.example.tdone.dataclasses.TaskDataClass
 import com.example.tdone.rvHoldersYAdapters.rvTags.TagsAdapter
 
-class InitialScreenTasksViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class BaseTasksViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemTaskBinding.bind(view)
 
@@ -23,5 +23,7 @@ class InitialScreenTasksViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             binding.rvTaskTags.layoutManager = LinearLayoutManager(binding.root.context)
             binding.rvTaskTags.adapter = tagsAdapter
         }
+
+        binding.cbTask.isChecked = task.checked
     }
 }
