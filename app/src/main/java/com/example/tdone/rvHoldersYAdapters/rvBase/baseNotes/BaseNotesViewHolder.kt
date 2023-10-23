@@ -1,4 +1,4 @@
-package com.example.tdone.rvHoldersYAdapters.rvInitialScreen.initialScreenNotes
+package com.example.tdone.rvHoldersYAdapters.rvBase.baseNotes
 
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -7,7 +7,7 @@ import com.example.tdone.databinding.ItemNotesBinding
 import com.example.tdone.dataclasses.NoteDataClass
 
 
-class InitialScreenNotesViewHolder(view: View): RecyclerView.ViewHolder(view) {
+class BaseNotesViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
     private val binding = ItemNotesBinding.bind(view)
     fun bind(note: NoteDataClass) {
