@@ -19,8 +19,6 @@ import com.example.tdone.dataclasses.TaskDataClass
 import com.example.tdone.rvHoldersYAdapters.rvBase.baseGroups.BaseGroupsAdapter
 import com.example.tdone.rvHoldersYAdapters.rvBase.baseNotes.BaseNotesAdapter
 import com.example.tdone.rvHoldersYAdapters.rvBase.baseTasks.BaseTasksAdapter
-import com.example.tdone.rvHoldersYAdapters.rvInitialScreen.initialScreenNotes.InitialScreenNotesAdapter
-import com.example.tdone.rvHoldersYAdapters.rvInitialScreen.initialScreenTasks.InitialScreenTasksAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
@@ -72,7 +70,6 @@ class MainActivity : AppCompatActivity() {
     }
     private var clicked = false
 
-    private lateinit var currentNotesAdapter: InitialScreenNotesAdapter
 
     private val notes = listOf<NoteDataClass>(
         NoteDataClass(
@@ -359,6 +356,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initListeners() {
+        plusButton.setOnClickListener {
+            onAddButtonClicked()
+        }
+        editButton.setOnClickListener {
+            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+        }
+        groupButton.setOnClickListener {
+            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+        }
+        noteButton.setOnClickListener {
+            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+        }
         prepearingBurgerMenu()
     }
 
@@ -400,19 +409,6 @@ class MainActivity : AppCompatActivity() {
         binding.rvAllNotes.layoutManager =
             GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
         binding.rvAllNotes.adapter = allNotesAdapter
-        plusButton.setOnClickListener {
-            onAddButtonClicked()
-        }
-        editButton.setOnClickListener {
-            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
-        }
-        groupButton.setOnClickListener {
-            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
-        }
-        noteButton.setOnClickListener {
-            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
-        }
-
 
         /*
         Screen History
@@ -420,6 +416,7 @@ class MainActivity : AppCompatActivity() {
         historyAdapter = BaseTasksAdapter(history)
         binding.rvHistory.layoutManager = LinearLayoutManager(this)
         binding.rvHistory.adapter = historyAdapter
+
 
         plusButton = binding.plus
         editButton = binding.edit
@@ -550,4 +547,5 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
 }
