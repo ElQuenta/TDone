@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/inicses"
-    tools:context=".SignIn">
+    tools:context=".SignInActivity">
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -71,7 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="Aún no se ha registrado? Registrese!"
+        android:text="¿Aún no se ha registrado? ¡Registrese!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

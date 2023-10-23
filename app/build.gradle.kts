@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.google.gms.google-services")
 }
 
 android {
@@ -16,6 +15,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures{
+        viewBinding = true
     }
 
     buildTypes {
@@ -34,13 +36,16 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    viewBinding{
+    viewBinding {
         enable = true
     }
-
 }
 
 dependencies {
+
+    //DataStore Persistencia de Datos
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -51,4 +56,5 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
 }
