@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tdone.R
 import com.example.tdone.dataclasses.TagDataClass
-import com.example.tdone.rvHoldersYAdapters.rvInitialScreen.initialScreenTasks.InitialScreenTasksViewHolder
 
 class TagsAdapter(
     var tags:List<TagDataClass>
