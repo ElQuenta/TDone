@@ -1,5 +1,6 @@
 package com.example.tdone
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -20,6 +21,7 @@ import com.example.tdone.rvHoldersYAdapters.rvBase.baseGroups.BaseGroupsAdapter
 import com.example.tdone.rvHoldersYAdapters.rvBase.baseNotes.BaseNotesAdapter
 import com.example.tdone.rvHoldersYAdapters.rvBase.baseTasks.BaseTasksAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,6 +46,11 @@ class MainActivity : AppCompatActivity() {
             HISTORY -> "Historal"
         }
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
+
 
     var screenState = Screens.HOME
     private lateinit var plusButton: FloatingActionButton
@@ -433,6 +440,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun prepearingBurgerMenu() {
+
         binding.apply {
             navView.bringToFront()
 
@@ -500,6 +508,14 @@ class MainActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                         drawerLayout.closeDrawer(GravityCompat.START)
+                    }
+                    R.id.log -> {
+                        FirebaseAuth.getInstance().signOut()
+                        // Redirigir a la pantalla de inicio de sesión (SignIn)
+                        val intent = Intent(this@MainActivity, SignIn::class.java)
+                        startActivity(intent)
+                        finish() // Cierra la actividad actual para evitar que el usuario vuelva atrás con el botón de retroceso
+                        true
                     }
                 }
                 true

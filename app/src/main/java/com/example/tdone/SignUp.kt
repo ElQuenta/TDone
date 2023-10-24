@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.example.tdone.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 class SignUp : AppCompatActivity() {
+
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var firebaseAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
