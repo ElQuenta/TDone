@@ -45,6 +45,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+    }
+
     var screenState = Screens.HOME
     private lateinit var plusButton: FloatingActionButton
     private lateinit var editButton: FloatingActionButton
