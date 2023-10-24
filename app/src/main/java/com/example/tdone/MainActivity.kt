@@ -34,8 +34,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var historyAdapter: BaseTasksAdapter
 
     enum class Screens() {
-        HOME, NOTES, TASKS, GROUPS, HISTOY
+        HOME, NOTES, TASKS, GROUPS, HISTORY;
 
+        fun navMessage(): String = when (this) {
+            HOME -> "Inicio😀"
+            NOTES -> "Notas"
+            TASKS -> "Tareas"
+            GROUPS -> "Grupos"
+            HISTORY -> "Historal"
+        }
     }
 
     var screenState = Screens.HOME
@@ -445,33 +452,53 @@ class MainActivity : AppCompatActivity() {
                 when (it.itemId) {
 
                     R.id.inic -> {
-                        Toast.makeText(this@MainActivity, "INICIO", Toast.LENGTH_SHORT).show()
                         changeScreen(Screens.HOME)
+                        Toast.makeText(
+                            this@MainActivity,
+                            screenState.navMessage(),
+                            Toast.LENGTH_SHORT
+                        ).show()
                         drawerLayout.closeDrawer(GravityCompat.START)
                     }
 
                     R.id.mis -> {
-                        Toast.makeText(this@MainActivity, "MIS GRUPOS", Toast.LENGTH_SHORT).show()
                         changeScreen(Screens.GROUPS)
+                        Toast.makeText(
+                            this@MainActivity,
+                            screenState.navMessage(),
+                            Toast.LENGTH_SHORT
+                        ).show()
                         drawerLayout.closeDrawer(GravityCompat.START)
                     }
 
                     R.id.tod -> {
-                        Toast.makeText(this@MainActivity, "TODAS LAS TAREAS", Toast.LENGTH_SHORT)
-                            .show()
                         changeScreen(Screens.TASKS)
+                        Toast.makeText(
+                            this@MainActivity,
+                            screenState.navMessage(),
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
                         drawerLayout.closeDrawer(GravityCompat.START)
                     }
 
                     R.id.not -> {
-                        Toast.makeText(this@MainActivity, "MIS NOTAS", Toast.LENGTH_SHORT).show()
                         changeScreen(Screens.NOTES)
+                        Toast.makeText(
+                            this@MainActivity,
+                            screenState.navMessage(),
+                            Toast.LENGTH_SHORT
+                        ).show()
                         drawerLayout.closeDrawer(GravityCompat.START)
                     }
 
                     R.id.his -> {
-                        Toast.makeText(this@MainActivity, "HISTORIAL", Toast.LENGTH_SHORT).show()
-                        changeScreen(Screens.HISTOY)
+                        changeScreen(Screens.HISTORY)
+                        Toast.makeText(
+                            this@MainActivity,
+                            screenState.navMessage(),
+                            Toast.LENGTH_SHORT
+                        ).show()
                         drawerLayout.closeDrawer(GravityCompat.START)
                     }
                 }
@@ -532,7 +559,7 @@ class MainActivity : AppCompatActivity() {
                 Screens.NOTES -> binding.groupNotesScreen.visibility = View.GONE
                 Screens.TASKS -> binding.groupTasksScreen.visibility = View.GONE
                 Screens.GROUPS -> binding.groupGroupsScreen.visibility = View.GONE
-                Screens.HISTOY -> binding.groupHistoryScreen.visibility = View.GONE
+                Screens.HISTORY -> binding.groupHistoryScreen.visibility = View.GONE
             }
             screenState = newState
             when (newState) {
@@ -540,7 +567,7 @@ class MainActivity : AppCompatActivity() {
                 Screens.NOTES -> binding.groupNotesScreen.visibility = View.VISIBLE
                 Screens.TASKS -> binding.groupTasksScreen.visibility = View.VISIBLE
                 Screens.GROUPS -> binding.groupGroupsScreen.visibility = View.VISIBLE
-                Screens.HISTOY -> binding.groupHistoryScreen.visibility = View.VISIBLE
+                Screens.HISTORY -> binding.groupHistoryScreen.visibility = View.VISIBLE
             }
 
 
