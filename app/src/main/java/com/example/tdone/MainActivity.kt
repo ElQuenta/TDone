@@ -23,7 +23,12 @@ import com.example.tdone.rvHoldersYAdapters.rvBase.baseTasks.BaseTasksAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 
+
 class MainActivity : AppCompatActivity() {
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+    }
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var toggle: ActionBarDrawerToggle
@@ -45,10 +50,6 @@ class MainActivity : AppCompatActivity() {
             GROUPS -> "Grupos"
             HISTORY -> "Historal"
         }
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
     }
 
 
@@ -364,6 +365,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         initUi()
         initListeners()
 
@@ -511,10 +513,9 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.log -> {
                         FirebaseAuth.getInstance().signOut()
-                        // Redirigir a la pantalla de inicio de sesión (SignIn)
                         val intent = Intent(this@MainActivity, SignIn::class.java)
                         startActivity(intent)
-                        finish() // Cierra la actividad actual para evitar que el usuario vuelva atrás con el botón de retroceso
+                        finish()
                         true
                     }
                 }
@@ -591,4 +592,5 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
 }
