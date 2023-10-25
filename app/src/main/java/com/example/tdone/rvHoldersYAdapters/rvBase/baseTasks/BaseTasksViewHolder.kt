@@ -25,5 +25,8 @@ class BaseTasksViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
 
         binding.cbTask.isChecked = task.checked
+        binding.root.setOnClickListener {
+            nav(task)
+        }
     }
 }
