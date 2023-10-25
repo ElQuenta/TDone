@@ -2,10 +2,12 @@ package com.example.tdone
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -21,10 +23,14 @@ import com.example.tdone.rvHoldersYAdapters.rvBase.baseGroups.BaseGroupsAdapter
 import com.example.tdone.rvHoldersYAdapters.rvBase.baseNotes.BaseNotesAdapter
 import com.example.tdone.rvHoldersYAdapters.rvBase.baseTasks.BaseTasksAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 
 class MainActivity : AppCompatActivity() {
+
+
+
     override fun onBackPressed() {
         super.onBackPressed()
         finishAffinity()
@@ -361,15 +367,56 @@ class MainActivity : AppCompatActivity() {
     )
 
 
+
+    private val PICK_IMAGE_REQUEST = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+
+        // Buscar el ImageView dentro del encabezado
+        val headerView = navigationView.getHeaderView(0) // 0 es el primer encabezado en la NavigationView
+        val headerImageView = headerView.findViewById<ImageView>(R.id.imageView)
+
+        // Configura un click listener en el ImageView del encabezado
+        headerImageView.setOnClickListener {
+            pickPhoto(it)
+        }
+
         initUi()
         initListeners()
 
     }
+    fun pickPhoto(view: View) {
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
+            val selectedImage = data?.data
+
+            // Mostrar la imagen seleccionada en el ImageView del encabezado
+            if (selectedImage != null) {
+                val navigationView = findViewById<NavigationView>(R.id.nav_view)
+                val headerView = navigationView.getHeaderView(0)
+                val headerImageView = headerView.findViewById<ImageView>(R.id.imageView)
+
+                // Configurar la imagen seleccionada en el ImageView del encabezado
+                headerImageView.setImageURI(selectedImage)
+            }
+        }
+    }
+
+
+
+
+
 
     private fun initListeners() {
         plusButton.setOnClickListener {

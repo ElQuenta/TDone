@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="@color/gray">
+    android:background="@color/gray"
+    tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="75dp"
         android:layout_height="75dp"
+        android:onClick="pickPhoto"
         android:layout_marginStart="12dp"
         android:layout_marginTop="35dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/pablo" />
+        app:srcCompat="@drawable/ic_launcher_background" />
 
     <TextView
         android:id="@+id/textView"
