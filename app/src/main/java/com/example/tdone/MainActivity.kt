@@ -3,6 +3,7 @@ package com.example.tdone
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.MotionEvent
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -379,7 +380,6 @@ class MainActivity : AppCompatActivity() {
 
         initUi()
         initListeners()
-
     }
 
     private fun initListeners() {
@@ -554,6 +554,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
     }
 
 
@@ -563,15 +564,24 @@ class MainActivity : AppCompatActivity() {
         clicked = !clicked
     }
 
+
     private fun setVisibility(clicked: Boolean) {
         if (!clicked) {
             editButton.visibility = View.VISIBLE
             groupButton.visibility = View.VISIBLE
             noteButton.visibility = View.VISIBLE
+
+            editButton.setClickable(true)
+            groupButton.setClickable(true)
+            noteButton.setClickable(true)
         } else {
             editButton.visibility = View.GONE
             groupButton.visibility = View.GONE
             noteButton.visibility = View.GONE
+
+            editButton.setClickable(false)
+            groupButton.setClickable(false)
+            noteButton.setClickable(false)
         }
     }
 
