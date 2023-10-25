@@ -11,7 +11,7 @@ class BaseTasksViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemTaskBinding.bind(view)
 
-    fun bind(task: TaskDataClass) {
+    fun bind(task: TaskDataClass, nav: (TaskDataClass) -> Unit) {
         binding.tvTaskTittle.text =task.name
         if (task.group != null) {
             binding.tvTaskGroup.text = task.group!!.name

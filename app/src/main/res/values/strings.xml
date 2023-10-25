@@ -4,4 +4,11 @@
     <string name="navigate_menu_Button_Description">Entrar al Menu Hamburguesa</string>
     <string name="nav_open">Open Navigation Drawer</string>
     <string name="nav_close">Close Navigation Drawer</string>
+    <string name="iten_nav_home_text">Inicio</string>
+    <string name="iten_nav_groups_text">Mis grupos</string>
+    <string name="iten_nav_tasks_text">Todas las tareas</string>
+    <string name="iten_nav_notes_text">Mis Notas</string>
+    <string name="iten_nav_history_text">Historial</string>
+    <string name="iten_nav_log_out_text">Log out</string>
+    <string name="iten_nav_profile_group_text">Perfil</string>
 </resources>

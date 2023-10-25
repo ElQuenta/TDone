@@ -1,5 +1,6 @@
 package com.example.tdone
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -45,9 +46,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-
+    companion object {
+        const val KEY_TASK = "key_task"
     }
 
     var screenState = Screens.HOME
@@ -393,7 +393,9 @@ class MainActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvCurrentNotes.adapter = currentNotesAdapter
 
-        nearToEndTaskAdapter = BaseTasksAdapter(nearToEndTasks)
+        nearToEndTaskAdapter = BaseTasksAdapter(nearToEndTasks) { task ->
+            navigateTask(task)
+        }
         binding.rvNearToEndTasks.layoutManager = LinearLayoutManager(this)
         binding.rvNearToEndTasks.adapter = nearToEndTaskAdapter
 
@@ -409,7 +411,9 @@ class MainActivity : AppCompatActivity() {
         Screen Tasks
          */
 
-        allTasksAdapter = BaseTasksAdapter(allTasks)
+        allTasksAdapter = BaseTasksAdapter(allTasks){ task ->
+            navigateTask(task)
+        }
         binding.rvAllTasks.layoutManager = LinearLayoutManager(this)
         binding.rvAllTasks.adapter = allTasksAdapter
 
@@ -425,7 +429,9 @@ class MainActivity : AppCompatActivity() {
         /*
         Screen History
          */
-        historyAdapter = BaseTasksAdapter(history)
+        historyAdapter = BaseTasksAdapter(history){ task ->
+            navigateTask(task)
+        }
         binding.rvHistory.layoutManager = LinearLayoutManager(this)
         binding.rvHistory.adapter = historyAdapter
 
@@ -456,7 +462,7 @@ class MainActivity : AppCompatActivity() {
             navView.setNavigationItemSelectedListener {
                 when (it.itemId) {
 
-                    R.id.inic -> {
+                    R.id.item_nav_home -> {
                         changeScreen(Screens.HOME)
                         Toast.makeText(
                             this@MainActivity,
@@ -466,7 +472,7 @@ class MainActivity : AppCompatActivity() {
                         drawerLayout.closeDrawer(GravityCompat.START)
                     }
 
-                    R.id.mis -> {
+                    R.id.item_nav_groups -> {
                         changeScreen(Screens.GROUPS)
                         Toast.makeText(
                             this@MainActivity,
@@ -476,7 +482,7 @@ class MainActivity : AppCompatActivity() {
                         drawerLayout.closeDrawer(GravityCompat.START)
                     }
 
-                    R.id.tod -> {
+                    R.id.item_nav_tasks -> {
                         changeScreen(Screens.TASKS)
                         Toast.makeText(
                             this@MainActivity,
@@ -487,7 +493,7 @@ class MainActivity : AppCompatActivity() {
                         drawerLayout.closeDrawer(GravityCompat.START)
                     }
 
-                    R.id.not -> {
+                    R.id.item_nav_notes -> {
                         changeScreen(Screens.NOTES)
                         Toast.makeText(
                             this@MainActivity,
@@ -497,7 +503,7 @@ class MainActivity : AppCompatActivity() {
                         drawerLayout.closeDrawer(GravityCompat.START)
                     }
 
-                    R.id.his -> {
+                    R.id.item_nav_history -> {
                         changeScreen(Screens.HISTORY)
                         Toast.makeText(
                             this@MainActivity,
@@ -528,9 +534,9 @@ class MainActivity : AppCompatActivity() {
             groupButton.visibility = View.VISIBLE
             noteButton.visibility = View.VISIBLE
         } else {
-            editButton.visibility = View.INVISIBLE
-            groupButton.visibility = View.INVISIBLE
-            noteButton.visibility = View.INVISIBLE
+            editButton.visibility = View.GONE
+            groupButton.visibility = View.GONE
+            noteButton.visibility = View.GONE
         }
     }
 
@@ -574,10 +580,13 @@ class MainActivity : AppCompatActivity() {
                 Screens.GROUPS -> binding.groupGroupsScreen.visibility = View.VISIBLE
                 Screens.HISTORY -> binding.groupHistoryScreen.visibility = View.VISIBLE
             }
-
-
         }
-
-
     }
+
+    private fun navigateTask(task: TaskDataClass) {
+        val intent = Intent(this, TaskViewActivity::class.java)
+        intent.putExtra(KEY_TASK, task)
+    }
+
+
 }
