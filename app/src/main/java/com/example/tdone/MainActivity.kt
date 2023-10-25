@@ -530,9 +530,9 @@ class MainActivity : AppCompatActivity() {
                         ).show()
                         drawerLayout.closeDrawer(GravityCompat.START)
                     }
-                    R.id.item_nav_log_out -> {
+                    R.id.log -> {
                         FirebaseAuth.getInstance().signOut()
-                        val intent = Intent(this@MainActivity, SignIn::class.java)
+                        val intent = Intent(this@MainActivity, SignInActivity::class.java)
                         startActivity(intent)
                         finish()
                         true
