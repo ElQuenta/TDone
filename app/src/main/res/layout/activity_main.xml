@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/gray"
                 android:theme="?attr/actionBarTheme"
-                app:navigationIcon="@drawable/baseline_menu_open_24" />
+                app:navigationIcon="@drawable/ic_nav_button" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/group_home_screen"
@@ -156,13 +156,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:clickable="true"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:backgroundTint="@color/black"
             app:fabSize="normal"
             app:tint="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/plus"
             app:layout_constraintEnd_toEndOf="@+id/plus"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
+            app:srcCompat="@drawable/ic_note" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/group"
@@ -170,12 +170,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:clickable="true"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:backgroundTint="@color/black"
             app:fabSize="normal"
             app:layout_constraintBottom_toTopOf="@+id/edit"
             app:layout_constraintEnd_toEndOf="@+id/edit"
-            app:srcCompat="@drawable/baseline_check_circle_outline_24"
+            app:srcCompat="@drawable/ic_task"
             app:tint="@color/white" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -184,12 +184,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:clickable="true"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:backgroundTint="@color/black"
             app:fabSize="normal"
             app:layout_constraintBottom_toTopOf="@+id/group"
             app:layout_constraintEnd_toEndOf="@+id/group"
-            app:srcCompat="@drawable/baseline_checklist_rtl_24"
+            app:srcCompat="@drawable/ic_group"
             app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

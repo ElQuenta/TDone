@@ -10,9 +10,17 @@ import com.example.tdone.dataclasses.NoteDataClass
 class BaseNotesViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
     private val binding = ItemNotesBinding.bind(view)
-    fun bind(note: NoteDataClass) {
-        binding.cvNote.setCardBackgroundColor(ContextCompat.getColor(binding.cvNote.context,note.color))
-        binding.tvTittleNote.text = note.name
+    fun bind(note: NoteDataClass, nav: (NoteDataClass) -> Unit) {
+        binding.root.setCardBackgroundColor(
+            ContextCompat.getColor(
+                binding.root.context,
+                note.color
+            )
+        )
+        binding.tvNoteTittle.text = note.name
+        binding.root.setOnClickListener {
+            nav(note)
+        }
     }
 
 }
