@@ -2,7 +2,6 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cv_note"
     android:layout_width="176dp"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -22,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-            android:id="@+id/tv_tittleNote"
+            android:id="@+id/tv_note_tittle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

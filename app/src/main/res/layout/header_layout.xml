@@ -7,33 +7,33 @@
     android:background="@color/gray">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/iv_profile"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="35dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/pablo" />
+        android:src="@drawable/image_perfil_ejemplo" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
         android:text="Jorge Luis Kalla"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintStart_toStartOf="@+id/iv_profile"
+        app:layout_constraintTop_toBottomOf="@+id/iv_profile" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:text="JorgeK@gmail.com"
         android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/tv_user_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,8 @@ class BaseGroupsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemGroupBinding.bind(view)
 
-    fun bind(group: GroupDataClass) {
+    fun bind(group: GroupDataClass, nav: (GroupDataClass) -> Unit) {
         binding.tvGroupName.text = group.name
+        binding.root.setOnClickListener { nav(group) }
     }
 }

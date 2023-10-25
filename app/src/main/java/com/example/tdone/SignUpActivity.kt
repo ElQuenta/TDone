@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.tdone.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
-class SignUp : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var firebaseAuth: FirebaseAuth
@@ -20,8 +20,8 @@ class SignUp : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        binding.textView.setOnClickListener {
-            val intent = Intent(this, SignIn::class.java)
+        binding.tvLogIn.setOnClickListener {
+            val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
         }
         binding.button.setOnClickListener {
@@ -34,7 +34,7 @@ class SignUp : AppCompatActivity() {
 
                     firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
                         if (it.isSuccessful) {
-                            val intent = Intent(this, SignIn::class.java)
+                            val intent = Intent(this, SignInActivity::class.java)
                             startActivity(intent)
                         } else {
                             Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/inicses"
-    tools:context=".SignIn">
+    android:background="@drawable/image_fondo_log_in"
+    tools:context=".SignInActivity">
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordLayout" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_sing_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"

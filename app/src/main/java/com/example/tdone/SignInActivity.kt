@@ -3,13 +3,11 @@ package com.example.tdone
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
 import com.example.tdone.databinding.ActivitySignInBinding
 import com.google.firebase.auth.FirebaseAuth
 
-class SignIn : AppCompatActivity() {
+class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInBinding
     private lateinit var firebaseAuth: FirebaseAuth
@@ -22,8 +20,8 @@ class SignIn : AppCompatActivity() {
 
 
         firebaseAuth = FirebaseAuth.getInstance()
-        binding.textView.setOnClickListener {
-            val intent = Intent(this, SignUp::class.java)
+        binding.tvSingIn.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
 

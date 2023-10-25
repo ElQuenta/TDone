@@ -52,6 +52,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    companion object {
+        const val KEY_TASK = "key_task"
+        const val KEY_NOTE = "key_note"
+        const val KEY_GROUP = "key_group"
+    }
 
     var screenState = Screens.HOME
     private lateinit var plusButton: FloatingActionButton
@@ -88,7 +93,9 @@ class MainActivity : AppCompatActivity() {
 
     private val notes = listOf<NoteDataClass>(
         NoteDataClass(
-            name = "Prueba 1", content = "Prueba", color = R.color.background_note_color2
+            name = "Prueba 1",
+            content = "En un mundo cada vez más conectado y globalizado, la comunicación efectiva se ha convertido en una habilidad esencial. Ya sea en el ámbito personal o profesional, la capacidad de expresar ideas de manera clara y coherente es fundamental para establecer relaciones significativas y alcanzar el éxito.\n\nEn el contexto actual, la tecnología desempeña un papel crucial en nuestras vidas. La omnipresencia de los dispositivos electrónicos y la disponibilidad de internet han transformado la forma en que interactuamos con el mundo que nos rodea. Estamos constantemente expuestos a una avalancha de información, lo que nos brinda la oportunidad de aprender y crecer, pero también nos desafía a discernir entre lo relevante y lo superfluo.\n\nEn este escenario, la educación se erige como el pilar fundamental sobre el cual se construye el futuro. Las instituciones educativas tienen la responsabilidad de preparar a las generaciones venideras para enfrentar los desafíos del siglo XXI. Esto implica no solo impartir conocimientos académicos, sino también fomentar habilidades como el pensamiento crítico, la creatividad y la colaboración. Los educadores desempeñan un papel vital al guiar y apoyar a los estudiantes en su viaje de aprendizaje.\n\nAdemás, la conciencia sobre cuestiones medioambientales y sociales está en aumento. La sostenibilidad se ha convertido en un tema central en las agendas de gobiernos, empresas y ciudadanos. La necesidad de preservar nuestro planeta para las generaciones futuras impulsa iniciativas en áreas como la energía renovable, la conservación de recursos y la reducción de emisiones de carbono.\n\nEn conclusión, vivimos en una era emocionante y desafiante, llena de oportunidades y responsabilidades. Es crucial que nos adaptemos a los cambios, aprendamos de las experiencias pasadas y trabajemos juntos para construir un futuro mejor y más equitativo para todos.",
+            color = R.color.background_note_color2
         ), NoteDataClass(
             name = "Prueba 2", content = "Prueba", color = R.color.background_note_color3
         ), NoteDataClass(
@@ -392,12 +399,16 @@ class MainActivity : AppCompatActivity() {
         Screen Home
          */
 
-        currentNotesAdapter = BaseNotesAdapter(notes)
+        currentNotesAdapter = BaseNotesAdapter(notes) { note ->
+            navigateNote(note)
+        }
         binding.rvCurrentNotes.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvCurrentNotes.adapter = currentNotesAdapter
 
-        nearToEndTaskAdapter = BaseTasksAdapter(nearToEndTasks)
+        nearToEndTaskAdapter = BaseTasksAdapter(nearToEndTasks) { task ->
+            navigateTask(task)
+        }
         binding.rvNearToEndTasks.layoutManager = LinearLayoutManager(this)
         binding.rvNearToEndTasks.adapter = nearToEndTaskAdapter
 
@@ -405,7 +416,9 @@ class MainActivity : AppCompatActivity() {
         Screen Group
          */
 
-        allGroupsAdapter = BaseGroupsAdapter(groups)
+        allGroupsAdapter = BaseGroupsAdapter(groups){ group ->
+            navigateGroup(group)
+        }
         binding.rvAllGroups.layoutManager = LinearLayoutManager(this)
         binding.rvAllGroups.adapter = allGroupsAdapter
 
@@ -413,7 +426,9 @@ class MainActivity : AppCompatActivity() {
         Screen Tasks
          */
 
-        allTasksAdapter = BaseTasksAdapter(allTasks)
+        allTasksAdapter = BaseTasksAdapter(allTasks) { task ->
+            navigateTask(task)
+        }
         binding.rvAllTasks.layoutManager = LinearLayoutManager(this)
         binding.rvAllTasks.adapter = allTasksAdapter
 
@@ -421,7 +436,9 @@ class MainActivity : AppCompatActivity() {
         Screen Notes
          */
 
-        allNotesAdapter = BaseNotesAdapter(allNotes)
+        allNotesAdapter = BaseNotesAdapter(allNotes) { note ->
+            navigateNote(note)
+        }
         binding.rvAllNotes.layoutManager =
             GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
         binding.rvAllNotes.adapter = allNotesAdapter
@@ -429,7 +446,9 @@ class MainActivity : AppCompatActivity() {
         /*
         Screen History
          */
-        historyAdapter = BaseTasksAdapter(history)
+        historyAdapter = BaseTasksAdapter(history) { task ->
+            navigateTask(task)
+        }
         binding.rvHistory.layoutManager = LinearLayoutManager(this)
         binding.rvHistory.adapter = historyAdapter
 
@@ -461,7 +480,7 @@ class MainActivity : AppCompatActivity() {
             navView.setNavigationItemSelectedListener {
                 when (it.itemId) {
 
-                    R.id.inic -> {
+                    R.id.item_nav_home -> {
                         changeScreen(Screens.HOME)
                         Toast.makeText(
                             this@MainActivity,
@@ -471,7 +490,7 @@ class MainActivity : AppCompatActivity() {
                         drawerLayout.closeDrawer(GravityCompat.START)
                     }
 
-                    R.id.mis -> {
+                    R.id.item_nav_groups -> {
                         changeScreen(Screens.GROUPS)
                         Toast.makeText(
                             this@MainActivity,
@@ -481,7 +500,7 @@ class MainActivity : AppCompatActivity() {
                         drawerLayout.closeDrawer(GravityCompat.START)
                     }
 
-                    R.id.tod -> {
+                    R.id.item_nav_tasks -> {
                         changeScreen(Screens.TASKS)
                         Toast.makeText(
                             this@MainActivity,
@@ -492,7 +511,7 @@ class MainActivity : AppCompatActivity() {
                         drawerLayout.closeDrawer(GravityCompat.START)
                     }
 
-                    R.id.not -> {
+                    R.id.item_nav_notes -> {
                         changeScreen(Screens.NOTES)
                         Toast.makeText(
                             this@MainActivity,
@@ -502,7 +521,7 @@ class MainActivity : AppCompatActivity() {
                         drawerLayout.closeDrawer(GravityCompat.START)
                     }
 
-                    R.id.his -> {
+                    R.id.item_nav_history -> {
                         changeScreen(Screens.HISTORY)
                         Toast.makeText(
                             this@MainActivity,
@@ -513,7 +532,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.log -> {
                         FirebaseAuth.getInstance().signOut()
-                        val intent = Intent(this@MainActivity, SignIn::class.java)
+                        val intent = Intent(this@MainActivity, SignInActivity::class.java)
                         startActivity(intent)
                         finish()
                         true
@@ -540,9 +559,9 @@ class MainActivity : AppCompatActivity() {
             groupButton.visibility = View.VISIBLE
             noteButton.visibility = View.VISIBLE
         } else {
-            editButton.visibility = View.INVISIBLE
-            groupButton.visibility = View.INVISIBLE
-            noteButton.visibility = View.INVISIBLE
+            editButton.visibility = View.GONE
+            groupButton.visibility = View.GONE
+            noteButton.visibility = View.GONE
         }
     }
 
@@ -586,11 +605,25 @@ class MainActivity : AppCompatActivity() {
                 Screens.GROUPS -> binding.groupGroupsScreen.visibility = View.VISIBLE
                 Screens.HISTORY -> binding.groupHistoryScreen.visibility = View.VISIBLE
             }
-
-
         }
+    }
 
+    private fun navigateTask(task: TaskDataClass) {
+        val intent = Intent(this, TaskViewActivity::class.java)
+        intent.putExtra(KEY_TASK, task)
+        startActivity(intent)
+    }
 
+    private fun navigateNote(note: NoteDataClass) {
+        val intent = Intent(this, NoteViewActivity::class.java)
+        intent.putExtra(KEY_NOTE, note)
+        startActivity(intent)
+    }
+
+    private fun navigateGroup(group: GroupDataClass) {
+        val intent = Intent(this,GroupViewActivity::class.java)
+        intent.putExtra(KEY_GROUP,group)
+        startActivity(intent)
     }
 
 }

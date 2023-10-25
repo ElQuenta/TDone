@@ -7,7 +7,8 @@ import com.example.tdone.R
 import com.example.tdone.dataclasses.NoteDataClass
 
 class BaseNotesAdapter(
-    private var notes: List<NoteDataClass>
+    private var notes: List<NoteDataClass>,
+    private var nav : (NoteDataClass) -> Unit
 ) : RecyclerView.Adapter<BaseNotesViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseNotesViewHolder {
         return BaseNotesViewHolder(
@@ -19,6 +20,6 @@ class BaseNotesAdapter(
     override fun getItemCount(): Int =notes.size
 
     override fun onBindViewHolder(holder: BaseNotesViewHolder, position: Int) {
-        holder.bind(notes[position])
+        holder.bind(notes[position],nav)
     }
 }
