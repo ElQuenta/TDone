@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.tdone.auth.SignInActivity
+import com.example.tdone.auth.SignIn
 import com.example.tdone.databinding.ActivityMainBinding
 import com.example.tdone.dataclasses.GroupDataClass
 import com.example.tdone.dataclasses.NoteDataClass
@@ -579,7 +579,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.log -> {
                         FirebaseAuth.getInstance().signOut()
-                        val intent = Intent(this@MainActivity, SignInActivity::class.java)
+                        val intent = Intent(this@MainActivity, SignIn::class.java)
                         startActivity(intent)
                         finish()
                     }

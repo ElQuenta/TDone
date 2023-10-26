@@ -15,6 +15,15 @@
         android:theme="@style/Theme.TDone"
         tools:targetApi="31">
         <activity
+            android:name=".viewIntoElements.GroupViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".viewIntoElements.NoteViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".viewIntoElements.TaskViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".auth.SignIn"
             android:exported="true">
             <intent-filter>
@@ -24,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignUp"
+            android:name=".auth.SignUp"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
