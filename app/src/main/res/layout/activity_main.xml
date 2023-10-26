@@ -140,7 +140,7 @@
         </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/plus"
+            android:id="@+id/fab_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -156,7 +156,7 @@
             app:tint="@color/white" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/edit"
+            android:id="@+id/fab_add_note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -165,12 +165,12 @@
             app:backgroundTint="@color/black"
             app:fabSize="normal"
             app:tint="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/plus"
-            app:layout_constraintEnd_toEndOf="@+id/plus"
+            app:layout_constraintBottom_toTopOf="@+id/fab_add"
+            app:layout_constraintEnd_toEndOf="@+id/fab_add"
             app:srcCompat="@drawable/ic_note" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/group"
+            android:id="@+id/fab_add_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -178,13 +178,13 @@
             android:visibility="gone"
             app:backgroundTint="@color/black"
             app:fabSize="normal"
-            app:layout_constraintBottom_toTopOf="@+id/edit"
-            app:layout_constraintEnd_toEndOf="@+id/edit"
+            app:layout_constraintBottom_toTopOf="@+id/fab_add_note"
+            app:layout_constraintEnd_toEndOf="@+id/fab_add_note"
             app:srcCompat="@drawable/ic_task"
             app:tint="@color/white" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/note"
+            android:id="@+id/fab_add_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -192,8 +192,8 @@
             android:visibility="gone"
             app:backgroundTint="@color/black"
             app:fabSize="normal"
-            app:layout_constraintBottom_toTopOf="@+id/group"
-            app:layout_constraintEnd_toEndOf="@+id/group"
+            app:layout_constraintBottom_toTopOf="@+id/fab_add_task"
+            app:layout_constraintEnd_toEndOf="@+id/fab_add_task"
             app:srcCompat="@drawable/ic_group"
             app:tint="@color/white" />
 

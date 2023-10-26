@@ -15,6 +15,9 @@ import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tdone.auth.SignIn
+import com.example.tdone.createElements.CreateGroupActivity
+import com.example.tdone.createElements.CreateNoteActivity
+import com.example.tdone.createElements.CreateTaskActivity
 import com.example.tdone.databinding.ActivityMainBinding
 import com.example.tdone.dataclasses.GroupDataClass
 import com.example.tdone.dataclasses.NoteDataClass
@@ -66,10 +69,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     var screenState = Screens.HOME
-    private lateinit var plusButton: FloatingActionButton
-    private lateinit var editButton: FloatingActionButton
-    private lateinit var groupButton: FloatingActionButton
-    private lateinit var noteButton: FloatingActionButton
+    private lateinit var fabAdd: FloatingActionButton
+    private lateinit var fabAddNote: FloatingActionButton
+    private lateinit var fabAddTask: FloatingActionButton
+    private lateinit var fabAddGroup: FloatingActionButton
 
     private val rotateOpen: Animation by lazy {
         AnimationUtils.loadAnimation(
@@ -419,17 +422,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initListeners() {
-        plusButton.setOnClickListener {
+        fabAdd.setOnClickListener {
             onAddButtonClicked()
         }
-        editButton.setOnClickListener {
+        fabAddNote.setOnClickListener {
             Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,CreateNoteActivity::class.java)
+            startActivity(intent)
         }
-        groupButton.setOnClickListener {
+        fabAddTask.setOnClickListener {
             Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,CreateTaskActivity::class.java)
+            startActivity(intent)
         }
-        noteButton.setOnClickListener {
+        fabAddGroup.setOnClickListener {
             Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,CreateGroupActivity::class.java)
+            startActivity(intent)
         }
         prepearingBurgerMenu()
     }
@@ -499,10 +508,10 @@ class MainActivity : AppCompatActivity() {
         binding.rvHistory.adapter = historyAdapter
 
 
-        plusButton = binding.plus
-        editButton = binding.edit
-        groupButton = binding.group
-        noteButton = binding.note
+        fabAdd = binding.fabAdd
+        fabAddNote = binding.fabAddNote
+        fabAddTask = binding.fabAddTask
+        fabAddGroup = binding.fabAddGroup
 
 
     }
@@ -603,35 +612,35 @@ class MainActivity : AppCompatActivity() {
 
     private fun setVisibility(clicked: Boolean) {
         if (!clicked) {
-            editButton.visibility = View.VISIBLE
-            groupButton.visibility = View.VISIBLE
-            noteButton.visibility = View.VISIBLE
+            fabAddNote.visibility = View.VISIBLE
+            fabAddTask.visibility = View.VISIBLE
+            fabAddGroup.visibility = View.VISIBLE
 
-            editButton.setClickable(true)
-            groupButton.setClickable(true)
-            noteButton.setClickable(true)
+            fabAddNote.setClickable(true)
+            fabAddTask.setClickable(true)
+            fabAddGroup.setClickable(true)
         } else {
-            editButton.visibility = View.GONE
-            groupButton.visibility = View.GONE
-            noteButton.visibility = View.GONE
+            fabAddNote.visibility = View.GONE
+            fabAddTask.visibility = View.GONE
+            fabAddGroup.visibility = View.GONE
 
-            editButton.setClickable(false)
-            groupButton.setClickable(false)
-            noteButton.setClickable(false)
+            fabAddNote.setClickable(false)
+            fabAddTask.setClickable(false)
+            fabAddGroup.setClickable(false)
         }
     }
 
     private fun setAnimation(clicked: Boolean) {
         if (!clicked) {
-            editButton.startAnimation(fromBottom)
-            groupButton.startAnimation(fromBottom)
-            noteButton.startAnimation(fromBottom)
-            plusButton.startAnimation(rotateOpen)
+            fabAddNote.startAnimation(fromBottom)
+            fabAddTask.startAnimation(fromBottom)
+            fabAddGroup.startAnimation(fromBottom)
+            fabAdd.startAnimation(rotateOpen)
         } else {
-            editButton.startAnimation(toBottom)
-            groupButton.startAnimation(toBottom)
-            noteButton.startAnimation(toBottom)
-            plusButton.startAnimation(rotateClose)
+            fabAddNote.startAnimation(toBottom)
+            fabAddTask.startAnimation(toBottom)
+            fabAddGroup.startAnimation(toBottom)
+            fabAdd.startAnimation(rotateClose)
         }
     }
 
