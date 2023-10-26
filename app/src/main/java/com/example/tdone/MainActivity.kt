@@ -1,9 +1,11 @@
 package com.example.tdone
 
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.MenuItem
+import android.view.MotionEvent
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -12,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,8 +38,12 @@ import com.google.firebase.auth.FirebaseUser
 
 class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
-        super.onBackPressed()
-        finishAffinity()
+        if (isExpanded) {
+            shrinkfab()
+        } else {
+            super.onBackPressed()
+            finishAffinity()
+        }
     }
 
     private lateinit var binding: ActivityMainBinding
@@ -69,10 +76,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     var screenState = Screens.HOME
-    private lateinit var plusButton: FloatingActionButton
-    private lateinit var editButton: FloatingActionButton
-    private lateinit var groupButton: FloatingActionButton
-    private lateinit var noteButton: FloatingActionButton
 
     private val rotateOpen: Animation by lazy {
         AnimationUtils.loadAnimation(
@@ -98,8 +101,6 @@ class MainActivity : AppCompatActivity() {
             R.anim.to_bottom_anim
         )
     }
-    private var clicked = false
-
 
     private val notes = listOf<NoteDataClass>(
         NoteDataClass(
@@ -378,10 +379,20 @@ class MainActivity : AppCompatActivity() {
     )
 
     private val PICK_IMAGE_REQUEST = 1
+    private var isExpanded = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.mainbtn.setOnClickListener{
+            if(isExpanded){
+                shrinkfab()
+            }else{
+                expandFab()
+            }
+        }
+
         user = FirebaseAuth.getInstance().currentUser
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
@@ -395,7 +406,45 @@ class MainActivity : AppCompatActivity() {
             pickPhoto(it)
         }
         initUi()
-        initListeners()
+    }
+
+    private fun shrinkfab(){
+
+        binding.transparent.visibility = View.GONE
+        binding.mainbtn.startAnimation(rotateClose)
+        binding.edit.startAnimation(toBottom)
+        binding.group.startAnimation(toBottom)
+        binding.note.startAnimation(toBottom)
+
+        isExpanded = !isExpanded
+    }
+
+    private fun expandFab(){
+
+        binding.transparent.visibility = View.VISIBLE
+        binding.mainbtn.startAnimation(rotateOpen)
+        binding.edit.startAnimation(fromBottom)
+        binding.group.startAnimation(fromBottom)
+        binding.note.startAnimation(fromBottom)
+
+        isExpanded = !isExpanded
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+
+        if(ev?.action == MotionEvent.ACTION_DOWN){
+
+            if(isExpanded){
+                val outRect = Rect()
+                binding.favContaint.getGlobalVisibleRect(outRect)
+
+                if(!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt())){
+                    shrinkfab()
+                }
+            }
+        }
+
+        return super.dispatchTouchEvent(ev)
     }
 
     fun pickPhoto(view: View) {
@@ -419,22 +468,6 @@ class MainActivity : AppCompatActivity() {
                 headerImageView.setImageURI(selectedImage)
             }
         }
-    }
-
-    private fun initListeners() {
-        plusButton.setOnClickListener {
-            onAddButtonClicked()
-        }
-        editButton.setOnClickListener {
-            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
-        }
-        groupButton.setOnClickListener {
-            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
-        }
-        noteButton.setOnClickListener {
-            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
-        }
-        prepearingBurgerMenu()
     }
 
     private fun initUi() {
@@ -501,11 +534,6 @@ class MainActivity : AppCompatActivity() {
         binding.rvHistory.layoutManager = LinearLayoutManager(this)
         binding.rvHistory.adapter = historyAdapter
 
-
-        plusButton = binding.plus
-        editButton = binding.edit
-        groupButton = binding.group
-        noteButton = binding.note
 
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tv_user_email).text =
             user?.email ?: "email_example@gmail.com"
@@ -599,47 +627,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-    private fun onAddButtonClicked() {
-        setVisibility(clicked)
-        setAnimation(clicked)
-        clicked = !clicked
-    }
-
-
-    private fun setVisibility(clicked: Boolean) {
-        if (!clicked) {
-            editButton.visibility = View.VISIBLE
-            groupButton.visibility = View.VISIBLE
-            noteButton.visibility = View.VISIBLE
-
-            editButton.setClickable(true)
-            groupButton.setClickable(true)
-            noteButton.setClickable(true)
-        } else {
-            editButton.visibility = View.GONE
-            groupButton.visibility = View.GONE
-            noteButton.visibility = View.GONE
-
-            editButton.setClickable(false)
-            groupButton.setClickable(false)
-            noteButton.setClickable(false)
-        }
-    }
-
-    private fun setAnimation(clicked: Boolean) {
-        if (!clicked) {
-            editButton.startAnimation(fromBottom)
-            groupButton.startAnimation(fromBottom)
-            noteButton.startAnimation(fromBottom)
-            plusButton.startAnimation(rotateOpen)
-        } else {
-            editButton.startAnimation(toBottom)
-            groupButton.startAnimation(toBottom)
-            noteButton.startAnimation(toBottom)
-            plusButton.startAnimation(rotateClose)
-        }
-    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
