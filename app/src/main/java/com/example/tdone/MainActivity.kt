@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.MenuItem
-import android.view.MotionEvent
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -33,9 +32,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 
 class MainActivity : AppCompatActivity() {
-
-
-
     override fun onBackPressed() {
         super.onBackPressed()
         finishAffinity()
@@ -378,8 +374,6 @@ class MainActivity : AppCompatActivity() {
         )
     )
 
-
-
     private val PICK_IMAGE_REQUEST = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -391,16 +385,16 @@ class MainActivity : AppCompatActivity() {
 
         // Buscar el ImageView dentro del encabezado
         val headerView = navigationView.getHeaderView(0) // 0 es el primer encabezado en la NavigationView
-        val headerImageView = headerView.findViewById<ImageView>(R.id.imageView)
+        val headerImageView = headerView.findViewById<ImageView>(R.id.iv_profile)
 
         // Configura un click listener en el ImageView del encabezado
         headerImageView.setOnClickListener {
             pickPhoto(it)
         }
-
         initUi()
         initListeners()
     }
+
     fun pickPhoto(view: View) {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST)
@@ -416,18 +410,13 @@ class MainActivity : AppCompatActivity() {
             if (selectedImage != null) {
                 val navigationView = findViewById<NavigationView>(R.id.nav_view)
                 val headerView = navigationView.getHeaderView(0)
-                val headerImageView = headerView.findViewById<ImageView>(R.id.imageView)
+                val headerImageView = headerView.findViewById<ImageView>(R.id.iv_profile)
 
                 // Configurar la imagen seleccionada en el ImageView del encabezado
                 headerImageView.setImageURI(selectedImage)
             }
         }
     }
-
-
-
-
-
 
     private fun initListeners() {
         plusButton.setOnClickListener {
