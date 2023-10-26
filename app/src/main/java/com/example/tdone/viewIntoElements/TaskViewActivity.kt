@@ -1,27 +1,29 @@
-package com.example.tdone
+package com.example.tdone.viewIntoElements
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.tdone.databinding.ActivityGroupViewBinding
-import com.example.tdone.dataclasses.GroupDataClass
+import android.os.Bundle
+import com.example.tdone.MainActivity
+import com.example.tdone.databinding.ActivityTaskViewBinding
+import com.example.tdone.dataclasses.TaskDataClass
 
-class GroupViewActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityGroupViewBinding
-    private lateinit var data: GroupDataClass
+class TaskViewActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityTaskViewBinding
+    private lateinit var data : TaskDataClass
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityGroupViewBinding.inflate(layoutInflater)
+        binding = ActivityTaskViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        data = intent.getSerializableExtra(MainActivity.KEY_GROUP) as GroupDataClass
+        data = intent.getSerializableExtra(MainActivity.KEY_TASK) as TaskDataClass
 
         initListeners()
         initUi()
+
     }
 
     private fun initUi() {
-        binding.tvGroupName.text = data.name
-        binding.tvGroupDescription.text = data.description
+        binding.tvTaskTittle.text = data.name
     }
 
     private fun initListeners() {

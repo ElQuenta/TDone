@@ -1,8 +1,9 @@
-package com.example.tdone
+package com.example.tdone.viewIntoElements
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.tdone.MainActivity
 import com.example.tdone.databinding.ActivityNoteViewBinding
 import com.example.tdone.dataclasses.NoteDataClass
 

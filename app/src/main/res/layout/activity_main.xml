@@ -68,7 +68,6 @@
                     android:id="@+id/rv_near_to_end_tasks"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
                     android:layout_marginTop="16dp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 

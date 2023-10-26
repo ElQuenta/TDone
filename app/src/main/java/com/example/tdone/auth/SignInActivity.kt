@@ -1,9 +1,10 @@
-package com.example.tdone
+package com.example.tdone.auth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.tdone.MainActivity
 import com.example.tdone.databinding.ActivitySignInBinding
 import com.google.firebase.auth.FirebaseAuth
 

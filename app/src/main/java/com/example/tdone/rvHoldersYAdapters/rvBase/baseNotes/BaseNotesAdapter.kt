@@ -8,11 +8,13 @@ import com.example.tdone.dataclasses.NoteDataClass
 
 class BaseNotesAdapter(
     private var notes: List<NoteDataClass>,
-    private var nav : (NoteDataClass) -> Unit
+    private val screenWidth: Int,
+    private var nav: (NoteDataClass) -> Unit
 ) : RecyclerView.Adapter<BaseNotesViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseNotesViewHolder {
         return BaseNotesViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_notes,parent,false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_notes,parent,false),
+            screenWidth
         )
     }
 

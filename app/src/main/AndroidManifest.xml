@@ -13,16 +13,16 @@
         android:theme="@style/Theme.TDone"
         tools:targetApi="31">
         <activity
-            android:name=".GroupViewActivity"
+            android:name=".viewIntoElements.GroupViewActivity"
             android:exported="false" />
         <activity
-            android:name=".NoteViewActivity"
+            android:name=".viewIntoElements.NoteViewActivity"
             android:exported="false" />
         <activity
-            android:name=".TaskViewActivity"
+            android:name=".viewIntoElements.TaskViewActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInActivity"
+            android:name=".auth.SignInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignUpActivity"
+            android:name=".auth.SignUpActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

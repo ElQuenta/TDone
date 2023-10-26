@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.tdone.auth.SignInActivity
 import com.example.tdone.databinding.ActivityMainBinding
 import com.example.tdone.dataclasses.GroupDataClass
 import com.example.tdone.dataclasses.NoteDataClass
@@ -20,6 +21,9 @@ import com.example.tdone.dataclasses.TaskDataClass
 import com.example.tdone.rvHoldersYAdapters.rvBase.baseGroups.BaseGroupsAdapter
 import com.example.tdone.rvHoldersYAdapters.rvBase.baseNotes.BaseNotesAdapter
 import com.example.tdone.rvHoldersYAdapters.rvBase.baseTasks.BaseTasksAdapter
+import com.example.tdone.viewIntoElements.GroupViewActivity
+import com.example.tdone.viewIntoElements.NoteViewActivity
+import com.example.tdone.viewIntoElements.TaskViewActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 
@@ -399,7 +403,10 @@ class MainActivity : AppCompatActivity() {
         Screen Home
          */
 
-        currentNotesAdapter = BaseNotesAdapter(notes) { note ->
+        currentNotesAdapter = BaseNotesAdapter(
+            notes,
+            getSize().getScreenWidth(this)
+        ) { note ->
             navigateNote(note)
         }
         binding.rvCurrentNotes.layoutManager =
@@ -436,7 +443,10 @@ class MainActivity : AppCompatActivity() {
         Screen Notes
          */
 
-        allNotesAdapter = BaseNotesAdapter(allNotes) { note ->
+        allNotesAdapter = BaseNotesAdapter(
+            allNotes,
+            getSize().getScreenWidth(this)
+        ) { note ->
             navigateNote(note)
         }
         binding.rvAllNotes.layoutManager =
@@ -457,6 +467,7 @@ class MainActivity : AppCompatActivity() {
         editButton = binding.edit
         groupButton = binding.group
         noteButton = binding.note
+
 
     }
 
@@ -535,7 +546,6 @@ class MainActivity : AppCompatActivity() {
                         val intent = Intent(this@MainActivity, SignInActivity::class.java)
                         startActivity(intent)
                         finish()
-                        true
                     }
                 }
                 true
@@ -621,7 +631,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun navigateGroup(group: GroupDataClass) {
-        val intent = Intent(this,GroupViewActivity::class.java)
+        val intent = Intent(this, GroupViewActivity::class.java)
         intent.putExtra(KEY_GROUP,group)
         startActivity(intent)
     }
