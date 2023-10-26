@@ -154,11 +154,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/favContaint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="81dp"
+            android:layout_height="274dp"
             android:minHeight="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/mainbtn"
                 android:layout_width="wrap_content"
@@ -166,11 +168,11 @@
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/black"
-                app:fabSize="normal"
                 android:src="@android:drawable/ic_input_add"
-                app:tint="@color/white"
+                app:fabSize="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:tint="@color/white" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/edit"
@@ -179,13 +181,12 @@
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/black"
-                app:fabSize="normal"
-                app:tint="@color/white"
                 android:visibility="invisible"
+                app:fabSize="normal"
                 app:layout_constraintBottom_toTopOf="@+id/mainbtn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/ic_note"
-                />
+                app:tint="@color/white" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/group"
@@ -194,13 +195,12 @@
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/black"
-                app:fabSize="normal"
-                app:tint="@color/white"
                 android:visibility="invisible"
-                app:srcCompat="@drawable/ic_task"
+                app:fabSize="normal"
                 app:layout_constraintBottom_toTopOf="@+id/edit"
                 app:layout_constraintEnd_toEndOf="parent"
-                />
+                app:srcCompat="@drawable/ic_task"
+                app:tint="@color/white" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/note"
@@ -209,12 +209,12 @@
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="12dp"
                 android:backgroundTint="@color/black"
-                app:fabSize="normal"
-                app:tint="@color/white"
                 android:visibility="invisible"
-                app:srcCompat="@drawable/ic_group"
+                app:fabSize="normal"
                 app:layout_constraintBottom_toTopOf="@+id/group"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_group"
+                app:tint="@color/white" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
