@@ -7,7 +7,8 @@ import com.example.tdone.R
 import com.example.tdone.dataclasses.GroupDataClass
 
 class BaseGroupsAdapter(
-    private var groups: List<GroupDataClass>
+    private var groups: List<GroupDataClass>,
+    private var nav: (GroupDataClass) -> Unit
 ) : RecyclerView.Adapter<BaseGroupsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseGroupsViewHolder {
         return BaseGroupsViewHolder(
@@ -18,6 +19,6 @@ class BaseGroupsAdapter(
     override fun getItemCount(): Int = groups.size
 
     override fun onBindViewHolder(holder: BaseGroupsViewHolder, position: Int) {
-        holder.bind(groups[position])
+        holder.bind(groups[position],nav)
     }
 }
