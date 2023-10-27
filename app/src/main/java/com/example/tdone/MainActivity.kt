@@ -406,6 +406,7 @@ class MainActivity : AppCompatActivity() {
             pickPhoto(it)
         }
         initUi()
+        prepearingBurgerMenu()
     }
 
     private fun shrinkfab(){
