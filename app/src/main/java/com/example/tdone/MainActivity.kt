@@ -392,13 +392,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.fabAdd.setOnClickListener{
-            if(isExpanded){
-                shrinkfab()
-            }else{
-                expandFab()
-            }
-        }
+
 
         user = FirebaseAuth.getInstance().currentUser
 
@@ -479,8 +473,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initListeners() {
-        fabAdd.setOnClickListener {
-            onAddButtonClicked()
+        binding.fabAdd.setOnClickListener{
+            if(isExpanded){
+                shrinkfab()
+            }else{
+                expandFab()
+            }
         }
         fabAddNote.setOnClickListener {
             Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
@@ -661,13 +659,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-    }
-
-
-    private fun onAddButtonClicked() {
-        setVisibility(clicked)
-        setAnimation(clicked)
-        clicked = !clicked
     }
 
 
