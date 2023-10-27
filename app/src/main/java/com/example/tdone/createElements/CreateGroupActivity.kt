@@ -1,6 +1,8 @@
 package com.example.tdone.createElements
 
 import android.os.Bundle
+import android.text.InputFilter
+import android.text.Spanned
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tdone.databinding.ActivityCreateGroupBinding
 
@@ -12,11 +14,11 @@ class CreateGroupActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initListeners()
-//        initUi()
+        initUi()
     }
 
     private fun initUi() {
-        TODO("Not yet implemented")
+
     }
 
     private fun initListeners() {

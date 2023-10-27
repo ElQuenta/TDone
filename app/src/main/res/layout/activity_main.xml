@@ -30,115 +30,123 @@
         android:layout_height="match_parent"
         android:id="@+id/constraint">
 
-        <LinearLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:background="@color/gray"
+            android:elevation="1dp"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_nav_button" />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/gray"
-                android:theme="?attr/actionBarTheme"
-                app:navigationIcon="@drawable/ic_nav_button" />
+                android:layout_marginTop="64dp"
+                android:orientation="vertical">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/group_home_screen"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="visible">
 
-                <TextView
-                    android:id="@+id/tv_notes"
-                    style="@style/TDone_titles"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Notas" />
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/group_home_screen"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_current_notes"
+                    <TextView
+                        android:id="@+id/tv_notes"
+                        style="@style/TDone_titles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Notas" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_current_notes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp" />
+
+                    <TextView
+                        android:id="@+id/tv_Tasks"
+                        style="@style/TDone_titles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tareas " />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_near_to_end_tasks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/group_groups_screen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp" />
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-                <TextView
-                    android:id="@+id/tv_Tasks"
-                    style="@style/TDone_titles"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tareas " />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_all_groups"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="32dp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_near_to_end_tasks"
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/group_tasks_screen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/group_groups_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_all_tasks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_all_groups"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="32dp"/>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/group_tasks_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_all_tasks"
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/group_notes_screen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/group_notes_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_all_notes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_all_notes"
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/group_history_screen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp" />
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/group_history_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_history"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_history"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-        </LinearLayout>
-
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add"
             android:layout_width="wrap_content"
@@ -146,6 +154,7 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp"
             android:clickable="true"
+            android:elevation="1dp"
             android:contentDescription="@string/add_Item_Description"
             android:focusable="true"
             android:src="@android:drawable/ic_input_add"
@@ -163,6 +172,7 @@
             android:clickable="true"
             android:visibility="gone"
             app:backgroundTint="@color/black"
+            android:elevation="1dp"
             app:fabSize="normal"
             app:tint="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/fab_add"
@@ -174,6 +184,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:elevation="1dp"
             android:clickable="true"
             android:visibility="gone"
             app:backgroundTint="@color/black"
@@ -185,6 +196,7 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add_group"
+            android:elevation="1dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
