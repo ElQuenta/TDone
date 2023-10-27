@@ -8,7 +8,7 @@ import com.example.tdone.MainActivity
 import com.example.tdone.databinding.ActivitySignInBinding
 import com.google.firebase.auth.FirebaseAuth
 
-class SignInActivity : AppCompatActivity() {
+class SignIn : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInBinding
     private lateinit var firebaseAuth: FirebaseAuth
@@ -22,7 +22,7 @@ class SignInActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
         binding.tvSingIn.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
+            val intent = Intent(this, SignUp::class.java)
             startActivity(intent)
         }
 

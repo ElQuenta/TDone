@@ -8,13 +8,14 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.tdone.auth.SignInActivity
+import com.example.tdone.auth.SignIn
 import com.example.tdone.databinding.ActivityMainBinding
 import com.example.tdone.dataclasses.GroupDataClass
 import com.example.tdone.dataclasses.NoteDataClass
@@ -29,6 +30,7 @@ import com.example.tdone.viewIntoElements.TaskViewActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var toggle: ActionBarDrawerToggle
+    private var user: FirebaseUser? = null
 
     private lateinit var currentNotesAdapter: BaseNotesAdapter
     private lateinit var nearToEndTaskAdapter: BaseTasksAdapter
@@ -379,7 +382,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        user = FirebaseAuth.getInstance().currentUser
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
 
@@ -504,7 +507,10 @@ class MainActivity : AppCompatActivity() {
         groupButton = binding.group
         noteButton = binding.note
 
-
+        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tv_user_email).text =
+            user?.email ?: "email_example@gmail.com"
+        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tv_user_name).text =
+            user?.displayName ?: "Usuario"
     }
 
     private fun prepearingBurgerMenu() {
@@ -579,7 +585,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.log -> {
                         FirebaseAuth.getInstance().signOut()
-                        val intent = Intent(this@MainActivity, SignInActivity::class.java)
+                        val intent = Intent(this@MainActivity, SignIn::class.java)
                         startActivity(intent)
                         finish()
                     }
