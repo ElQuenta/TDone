@@ -46,6 +46,7 @@ dependencies {
 
     //DataStore Persistencia de Datos
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+    // Imagen circular
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
     implementation("androidx.core:core-ktx:1.9.0")
