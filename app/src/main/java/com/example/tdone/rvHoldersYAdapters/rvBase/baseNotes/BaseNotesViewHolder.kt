@@ -22,7 +22,7 @@ class BaseNotesViewHolder(
             )
         )
         //Log.i("Miguel","Tamaño antiguo: ${binding.root.layoutParams.width}")
-        binding.root.layoutParams.width=(screenWidth*46)/100
+        binding.root.layoutParams.width=(screenWidth*40)/100
         //Log.i("Miguel","Tamaño Nuevo: ${binding.root.layoutParams.width}")
         binding.tvNoteTittle.text = note.name
         binding.root.setOnClickListener {
