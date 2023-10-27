@@ -19,6 +19,9 @@ import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tdone.auth.SignIn
+import com.example.tdone.createElements.CreateGroupActivity
+import com.example.tdone.createElements.CreateNoteActivity
+import com.example.tdone.createElements.CreateTaskActivity
 import com.example.tdone.databinding.ActivityMainBinding
 import com.example.tdone.dataclasses.GroupDataClass
 import com.example.tdone.dataclasses.NoteDataClass
@@ -76,6 +79,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     var screenState = Screens.HOME
+    private lateinit var fabAdd: FloatingActionButton
+    private lateinit var fabAddNote: FloatingActionButton
+    private lateinit var fabAddTask: FloatingActionButton
+    private lateinit var fabAddGroup: FloatingActionButton
 
     private val rotateOpen: Animation by lazy {
         AnimationUtils.loadAnimation(
@@ -385,7 +392,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.mainbtn.setOnClickListener{
+        binding.fabAdd.setOnClickListener{
             if(isExpanded){
                 shrinkfab()
             }else{
@@ -406,16 +413,16 @@ class MainActivity : AppCompatActivity() {
             pickPhoto(it)
         }
         initUi()
-        prepearingBurgerMenu()
+        initListeners()
     }
 
     private fun shrinkfab(){
 
         binding.transparent.visibility = View.GONE
-        binding.mainbtn.startAnimation(rotateClose)
-        binding.edit.startAnimation(toBottom)
-        binding.group.startAnimation(toBottom)
-        binding.note.startAnimation(toBottom)
+        binding.fabAdd.startAnimation(rotateClose)
+        binding.fabAddNote.startAnimation(toBottom)
+        binding.fabAddTask.startAnimation(toBottom)
+        binding.fabAddGroup.startAnimation(toBottom)
 
         isExpanded = !isExpanded
     }
@@ -423,10 +430,10 @@ class MainActivity : AppCompatActivity() {
     private fun expandFab(){
 
         binding.transparent.visibility = View.VISIBLE
-        binding.mainbtn.startAnimation(rotateOpen)
-        binding.edit.startAnimation(fromBottom)
-        binding.group.startAnimation(fromBottom)
-        binding.note.startAnimation(fromBottom)
+        binding.fabAdd.startAnimation(rotateOpen)
+        binding.fabAddNote.startAnimation(fromBottom)
+        binding.fabAddTask.startAnimation(fromBottom)
+        binding.fabAddGroup.startAnimation(fromBottom)
 
         isExpanded = !isExpanded
     }
@@ -469,6 +476,28 @@ class MainActivity : AppCompatActivity() {
                 headerImageView.setImageURI(selectedImage)
             }
         }
+    }
+
+    private fun initListeners() {
+        fabAdd.setOnClickListener {
+            onAddButtonClicked()
+        }
+        fabAddNote.setOnClickListener {
+            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,CreateNoteActivity::class.java)
+            startActivity(intent)
+        }
+        fabAddTask.setOnClickListener {
+            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,CreateTaskActivity::class.java)
+            startActivity(intent)
+        }
+        fabAddGroup.setOnClickListener {
+            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,CreateGroupActivity::class.java)
+            startActivity(intent)
+        }
+        prepearingBurgerMenu()
     }
 
     private fun initUi() {
@@ -534,6 +563,12 @@ class MainActivity : AppCompatActivity() {
         }
         binding.rvHistory.layoutManager = LinearLayoutManager(this)
         binding.rvHistory.adapter = historyAdapter
+
+
+        fabAdd = binding.fabAdd
+        fabAddNote = binding.fabAddNote
+        fabAddTask = binding.fabAddTask
+        fabAddGroup = binding.fabAddGroup
 
 
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.tv_user_email).text =
@@ -628,6 +663,47 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+    private fun onAddButtonClicked() {
+        setVisibility(clicked)
+        setAnimation(clicked)
+        clicked = !clicked
+    }
+
+
+    private fun setVisibility(clicked: Boolean) {
+        if (!clicked) {
+            fabAddNote.visibility = View.VISIBLE
+            fabAddTask.visibility = View.VISIBLE
+            fabAddGroup.visibility = View.VISIBLE
+
+            fabAddNote.setClickable(true)
+            fabAddTask.setClickable(true)
+            fabAddGroup.setClickable(true)
+        } else {
+            fabAddNote.visibility = View.GONE
+            fabAddTask.visibility = View.GONE
+            fabAddGroup.visibility = View.GONE
+
+            fabAddNote.setClickable(false)
+            fabAddTask.setClickable(false)
+            fabAddGroup.setClickable(false)
+        }
+    }
+
+    private fun setAnimation(clicked: Boolean) {
+        if (!clicked) {
+            fabAddNote.startAnimation(fromBottom)
+            fabAddTask.startAnimation(fromBottom)
+            fabAddGroup.startAnimation(fromBottom)
+            fabAdd.startAnimation(rotateOpen)
+        } else {
+            fabAddNote.startAnimation(toBottom)
+            fabAddTask.startAnimation(toBottom)
+            fabAddGroup.startAnimation(toBottom)
+            fabAdd.startAnimation(rotateClose)
+        }
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 

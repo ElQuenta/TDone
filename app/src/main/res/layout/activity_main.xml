@@ -30,114 +30,123 @@
         android:layout_height="match_parent"
         android:id="@+id/constraint">
 
-        <LinearLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:background="@color/gray"
+            android:elevation="1dp"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_nav_button" />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/gray"
-                android:theme="?attr/actionBarTheme"
-                app:navigationIcon="@drawable/ic_nav_button" />
+                android:layout_marginTop="64dp"
+                android:orientation="vertical">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/group_home_screen"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:visibility="visible">
 
-                <TextView
-                    android:id="@+id/tv_notes"
-                    style="@style/TDone_titles"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Notas" />
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/group_home_screen"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_current_notes"
+                    <TextView
+                        android:id="@+id/tv_notes"
+                        style="@style/TDone_titles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Notas" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_current_notes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp" />
+
+                    <TextView
+                        android:id="@+id/tv_Tasks"
+                        style="@style/TDone_titles"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tareas " />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_near_to_end_tasks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/group_groups_screen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp" />
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-                <TextView
-                    android:id="@+id/tv_Tasks"
-                    style="@style/TDone_titles"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tareas " />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_all_groups"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="32dp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_near_to_end_tasks"
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/group_tasks_screen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/group_groups_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_all_tasks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_all_groups"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="32dp"/>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/group_tasks_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_all_tasks"
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/group_notes_screen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/group_notes_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_all_notes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_all_notes"
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/group_history_screen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp" />
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/group_history_screen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_history"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_history"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
 
         </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
         <View
             android:id="@+id/transparent"
@@ -162,7 +171,7 @@
             >
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/mainbtn"
+                android:id="@+id/fab_add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
@@ -175,7 +184,7 @@
                 app:tint="@color/white" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/edit"
+                android:id="@+id/fab_add_note"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
@@ -183,13 +192,13 @@
                 android:backgroundTint="@color/black"
                 android:visibility="invisible"
                 app:fabSize="normal"
-                app:layout_constraintBottom_toTopOf="@+id/mainbtn"
+                app:layout_constraintBottom_toTopOf="@+id/fab_add"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/ic_note"
                 app:tint="@color/white" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/group"
+                android:id="@+id/fab_add_task"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
@@ -197,13 +206,13 @@
                 android:backgroundTint="@color/black"
                 android:visibility="invisible"
                 app:fabSize="normal"
-                app:layout_constraintBottom_toTopOf="@+id/edit"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/fab_add_note"
+                app:layout_constraintEnd_toEndOf="@+id/fab_add_note"
                 app:srcCompat="@drawable/ic_task"
                 app:tint="@color/white" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/note"
+                android:id="@+id/fab_add_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
@@ -211,7 +220,7 @@
                 android:backgroundTint="@color/black"
                 android:visibility="invisible"
                 app:fabSize="normal"
-                app:layout_constraintBottom_toTopOf="@+id/group"
+                app:layout_constraintBottom_toTopOf="@+id/fab_add_task"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/ic_group"
                 app:tint="@color/white" />
