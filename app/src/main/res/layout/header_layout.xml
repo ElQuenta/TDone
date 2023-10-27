@@ -7,18 +7,23 @@
     android:background="@color/colorGris"
     tools:context=".MainActivity">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/iv_profile"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_profile"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:onClick="pickPhoto"
         android:layout_marginStart="12dp"
         android:layout_marginTop="50dp"
+        app:cardCornerRadius="50dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background"
-        android:background="@drawable/circle_shape" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/ic_launcher_background"/>
+    </androidx.cardview.widget.CardView>
     <TextView
         android:id="@+id/tv_user_name"
         android:layout_width="wrap_content"
@@ -28,8 +33,8 @@
         tools:text="Jorge Luis Kalla"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/iv_profile"
-        app:layout_constraintTop_toTopOf="@+id/iv_profile" />
+        app:layout_constraintStart_toEndOf="@+id/cv_profile"
+        app:layout_constraintTop_toTopOf="@+id/cv_profile" />
 
     <TextView
         android:id="@+id/tv_user_email"
@@ -40,7 +45,7 @@
         android:textSize="15sp"
         tools:text="JorgeK@gmail.com"
         android:textColor="@color/black"
-        app:layout_constraintStart_toEndOf="@+id/iv_profile"
+        app:layout_constraintStart_toEndOf="@+id/cv_profile"
         app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
