@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="6dp"
+        android:textSize="15sp"
         tools:text="JorgeK@gmail.com"
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/iv_profile"
