@@ -17,6 +17,12 @@
         android:theme="@style/Theme.TDone"
         tools:targetApi="31">
         <activity
+            android:name=".resizeImages.ResizeImages"
+            android:exported="false" />
+        <activity
+            android:name=".calendar.Calendar"
+            android:exported="false" />
+        <activity
             android:name=".createElements.CreateGroupActivity"
             android:exported="false" />
         <activity
