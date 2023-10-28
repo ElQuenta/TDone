@@ -42,6 +42,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import java.io.ByteArrayOutputStream
+import java.util.Locale
 
 
 class MainActivity : AppCompatActivity() {
@@ -666,6 +667,35 @@ class MainActivity : AppCompatActivity() {
             user?.displayName ?: "Usuario"
     }
 
+
+
+
+
+    private fun setAppLocale(localeCode: String) {
+        val locale = Locale(localeCode)
+        Locale.setDefault(locale)
+        val resources = resources
+        val configuration = resources.configuration
+        configuration.setLocale(locale)
+        resources.updateConfiguration(configuration, resources.displayMetrics)
+
+        // Guardar la configuración del idioma en SharedPreferences para futuras sesiones
+        val prefs = getSharedPreferences("Settings", MODE_PRIVATE)
+        val editor = prefs.edit()
+        editor.putString("My_Lang", localeCode)
+        editor.apply()
+
+        // Reiniciar la actividad para aplicar los cambios de idioma
+        val refresh = Intent(this, MainActivity::class.java)
+        startActivity(refresh)
+        finish()
+    }
+
+
+
+
+
+
     private fun prepearingBurgerMenu() {
 
         binding.apply {
@@ -741,6 +771,12 @@ class MainActivity : AppCompatActivity() {
                         val intent = Intent(this@MainActivity, SignIn::class.java)
                         startActivity(intent)
                         finish()
+                    }R.id.language_english->{
+                    setAppLocale("en") // Cambiar a inglés
+                    true
+                    }R.id.language_spanish->{
+                    setAppLocale("es") // Cambiar a español
+                    true
                     }
                 }
                 true
