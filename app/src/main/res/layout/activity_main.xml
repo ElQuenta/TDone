@@ -51,12 +51,11 @@
                 android:visibility="visible">
 
                 <TextView
-                    android:title="@string/item_notas"
                     android:id="@+id/tv_notes"
                     style="@style/TDone_titles"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Notas" />
+                    android:text="@string/item_notas" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_current_notes"
@@ -65,12 +64,11 @@
                     android:layout_marginTop="16dp" />
 
                 <TextView
-                    android:title="@string/item_tareas"
                     android:id="@+id/tv_Tasks"
                     style="@style/TDone_titles"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tareas " />
+                    android:text="@string/item_tareas" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_near_to_end_tasks"
