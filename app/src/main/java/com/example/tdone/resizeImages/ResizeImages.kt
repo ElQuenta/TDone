@@ -1,6 +1,7 @@
 package com.example.tdone.resizeImages
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,10 @@ import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import com.example.tdone.R
 import com.example.tdone.databinding.ActivityResizeImagesBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import java.io.ByteArrayOutputStream
 
 
 class ResizeImages : AppCompatActivity() {
@@ -39,12 +44,41 @@ class ResizeImages : AppCompatActivity() {
             val imageUri = data?.data
             imageUri?.let {
                 val inputStream = contentResolver.openInputStream(it)
-                val bitmap = BitmapFactory.decodeStream(inputStream)
+                val originalBitmap = BitmapFactory.decodeStream(inputStream)
                 inputStream?.close()
 
-                val resizedBitmap = viewModel.resizeImage(bitmap, targetWidth, targetHeight)
+                // Redimensionar la imagen utilizando el ViewModel
+                val resizedBitmap = viewModel.resizeImage(originalBitmap, targetWidth, targetHeight)
 
-                binding.imageView.setImageBitmap(resizedBitmap)
+                // Subir la imagen redimensionada a Firebase Storage
+                val currentUser = FirebaseAuth.getInstance().currentUser
+                val userUid = currentUser?.uid
+                val storage = FirebaseStorage.getInstance()
+                val storageRef = storage.reference
+                val imagesRef = storageRef.child("images/$userUid/${System.currentTimeMillis()}.jpg")
+
+                val baos = ByteArrayOutputStream()
+                resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
+
+                val uploadTask = imagesRef.putBytes(data)
+                uploadTask.addOnSuccessListener {
+                    // La imagen se ha subido exitosamente
+                    // Puedes obtener la URL de descarga de la imagen
+                    imagesRef.downloadUrl.addOnSuccessListener { uri ->
+                        val downloadUrl = uri.toString()
+
+                        // Guarda la URL en la base de datos junto con el UID del usuario
+                        val database = FirebaseDatabase.getInstance()
+                        val userImagesRef = database.getReference("user_images").child(userUid!!)
+                        userImagesRef.push().setValue(downloadUrl)
+
+                        // Asigna la URL de descarga al viewModel
+                        viewModel.imageUri.set(downloadUrl)
+                    }
+                }.addOnFailureListener {
+                    // Ocurrió un error al subir la imagen
+                }
             }
         }
     }
