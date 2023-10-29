@@ -15,4 +15,6 @@
     <string name="iten_nav_idioma_spanish">Spanish</string>
     <string name="iten_nav_idioma_english">English</string>
     <string name="iten_nav_idioma">Language</string>
+    <string name="item_notas">NOTES</string>
+    <string name="item_tareas">TASKS</string>
 </resources>
