@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TDone</string>
+    <string name="add_Item_Description">Create a new Group, Task, or Note</string>
+    <string name="navigate_menu_Button_Description">Open the Hamburger Menu</string>
+    <string name="nav_open">Open Navigation Drawer</string>
+    <string name="nav_close">Close Navigation Drawer</string>
+    <string name="iten_nav_home_text">Home</string>
+    <string name="iten_nav_groups_text">My Groups</string>
+    <string name="iten_nav_tasks_text">All Tasks</string>
+    <string name="iten_nav_notes_text">My Notes</string>
+    <string name="iten_nav_history_text">History</string>
+    <string name="iten_nav_log_out_text">Log out</string>
+    <string name="iten_nav_profile_group_text">Profile</string>
+    <string name="iten_nav_idioma_spanish">Spanish</string>
+    <string name="iten_nav_idioma_english">English</string>
+    <string name="iten_nav_idioma">Language</string>
+    <string name="item_notas">NOTES</string>
+    <string name="item_tareas">TASKS</string>
+</resources>

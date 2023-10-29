@@ -55,7 +55,7 @@
                     style="@style/TDone_titles"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Notas" />
+                    android:text="@string/item_notas" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_current_notes"
@@ -68,7 +68,7 @@
                     style="@style/TDone_titles"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tareas " />
+                    android:text="@string/item_tareas" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_near_to_end_tasks"

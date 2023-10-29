@@ -9,6 +9,12 @@
     <string name="iten_nav_tasks_text">Todas las tareas</string>
     <string name="iten_nav_notes_text">Mis Notas</string>
     <string name="iten_nav_history_text">Historial</string>
-    <string name="iten_nav_log_out_text">Log out</string>
+    <string name="iten_nav_log_out_text">Cerrar Sesión</string>
     <string name="iten_nav_profile_group_text">Perfil</string>
+    <string name="iten_nav_idioma_spanish">Español</string>
+    <string name="iten_nav_idioma_english">Inglés</string>
+    <string name="iten_nav_idioma">Idioma</string>
+    <string name="item_notas">NOTAS</string>
+    <string name="item_tareas">TAREAS</string>
+
 </resources>

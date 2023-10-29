@@ -17,7 +17,19 @@
         <item android:title="@string/iten_nav_history_text"
             android:id="@+id/item_nav_history"
             android:icon="@drawable/ic_history"/>
+
     </group>
+
+        <item android:title="@string/iten_nav_idioma">
+        <menu>
+            <group>
+                <item android:title="@string/iten_nav_idioma_english"
+                    android:id="@+id/language_english"/>
+                <item android:title="@string/iten_nav_idioma_spanish"
+                    android:id="@+id/language_spanish"/>
+            </group>
+        </menu>
+    </item>
 
     <item android:title="@string/iten_nav_profile_group_text">
         <menu>

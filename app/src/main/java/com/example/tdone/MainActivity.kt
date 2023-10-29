@@ -1,9 +1,14 @@
 package com.example.tdone
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Rect
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Base64
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
@@ -14,7 +19,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,6 +41,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import java.io.ByteArrayOutputStream
+import java.util.Locale
 
 
 class MainActivity : AppCompatActivity() {
@@ -385,6 +391,44 @@ class MainActivity : AppCompatActivity() {
         )
     )
 
+
+
+
+
+    private fun saveImageToSharedPreferences(bitmap: Bitmap) {
+        val sharedPreferences: SharedPreferences = getSharedPreferences("MisPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+
+        editor.putString("imagen_de_perfil", Base64.encodeToString(byteArray, Base64.DEFAULT))
+        editor.apply()
+    }
+
+    // Recuperar la imagen de SharedPreferences
+    private fun retrieveImageFromSharedPreferences(): Bitmap? {
+        val sharedPreferences: SharedPreferences = getSharedPreferences("MisPrefs", Context.MODE_PRIVATE)
+        val encodedImage = sharedPreferences.getString("imagen_de_perfil", null)
+
+        if (encodedImage != null) {
+            val byteArray = Base64.decode(encodedImage, Base64.DEFAULT)
+            return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+        }
+
+        return null
+    }
+
+
+
+
+
+
+
+
+
+
     private val PICK_IMAGE_REQUEST = 1
     private var isExpanded = false
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -392,23 +436,43 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         user = FirebaseAuth.getInstance().currentUser
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
-
-        // Buscar el ImageView dentro del encabezado
-        val headerView = navigationView.getHeaderView(0) // 0 es el primer encabezado en la NavigationView
+        val headerView = navigationView.getHeaderView(0) // 0 es el primer encabezado en NavigationView
         val headerImageView = headerView.findViewById<ImageView>(R.id.iv_profile)
 
-        // Configura un click listener en el ImageView del encabezado
+        // Recuperar la imagen de perfil y establecerla en el ImageView
+        val imagenDePerfil = retrieveImageFromSharedPreferences()
+        if (imagenDePerfil != null) {
+            headerImageView.setImageBitmap(imagenDePerfil)
+        }
+
+        // Establecer un listener de clic en el ImageView para seleccionar una nueva foto
         headerImageView.setOnClickListener {
             pickPhoto(it)
         }
+
         initUi()
         initListeners()
     }
+
+
+//        user = FirebaseAuth.getInstance().currentUser
+//
+//        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+//
+//        // Buscar el ImageView dentro del encabezado
+//        val headerView = navigationView.getHeaderView(0) // 0 es el primer encabezado en la NavigationView
+//        val headerImageView = headerView.findViewById<ImageView>(R.id.iv_profile)
+//
+//        // Configura un click listener en el ImageView del encabezado
+//        headerImageView.setOnClickListener {
+//            pickPhoto(it)
+//        }
+//        initUi()
+//        initListeners()
+//        }
 
     private fun shrinkfab(){
 
@@ -454,23 +518,51 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST)
     }
 
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
             val selectedImage = data?.data
 
-            // Mostrar la imagen seleccionada en el ImageView del encabezado
             if (selectedImage != null) {
+                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedImage)
+
+                // Guardar la imagen seleccionada en SharedPreferences
+                saveImageToSharedPreferences(bitmap)
+
+                // Mostrar la imagen seleccionada en el ImageView
                 val navigationView = findViewById<NavigationView>(R.id.nav_view)
                 val headerView = navigationView.getHeaderView(0)
                 val headerImageView = headerView.findViewById<ImageView>(R.id.iv_profile)
 
-                // Configurar la imagen seleccionada en el ImageView del encabezado
-                headerImageView.setImageURI(selectedImage)
+                headerImageView.setImageBitmap(bitmap)
             }
         }
     }
+
+
+
+
+
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
+//            val selectedImage = data?.data
+//
+//            // Mostrar la imagen seleccionada en el ImageView del encabezado
+//            if (selectedImage != null) {
+//                val navigationView = findViewById<NavigationView>(R.id.nav_view)
+//                val headerView = navigationView.getHeaderView(0)
+//                val headerImageView = headerView.findViewById<ImageView>(R.id.iv_profile)
+//
+//                // Configurar la imagen seleccionada en el ImageView del encabezado
+//                headerImageView.setImageURI(selectedImage)
+//            }
+//        }
+//    }
 
     private fun initListeners() {
         binding.fabAdd.setOnClickListener{
@@ -575,6 +667,35 @@ class MainActivity : AppCompatActivity() {
             user?.displayName ?: "Usuario"
     }
 
+
+
+
+
+    private fun setAppLocale(localeCode: String) {
+        val locale = Locale(localeCode)
+        Locale.setDefault(locale)
+        val resources = resources
+        val configuration = resources.configuration
+        configuration.setLocale(locale)
+        resources.updateConfiguration(configuration, resources.displayMetrics)
+
+        // Guardar la configuración del idioma en SharedPreferences para futuras sesiones
+        val prefs = getSharedPreferences("Settings", MODE_PRIVATE)
+        val editor = prefs.edit()
+        editor.putString("My_Lang", localeCode)
+        editor.apply()
+
+        // Reiniciar la actividad para aplicar los cambios de idioma
+        val refresh = Intent(this, MainActivity::class.java)
+        startActivity(refresh)
+        finish()
+    }
+
+
+
+
+
+
     private fun prepearingBurgerMenu() {
 
         binding.apply {
@@ -650,6 +771,12 @@ class MainActivity : AppCompatActivity() {
                         val intent = Intent(this@MainActivity, SignIn::class.java)
                         startActivity(intent)
                         finish()
+                    }R.id.language_english->{
+                    setAppLocale("en") // Cambiar a inglés
+                    true
+                    }R.id.language_spanish->{
+                    setAppLocale("es") // Cambiar a español
+                    true
                     }
                 }
                 true
@@ -744,3 +871,4 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
+
