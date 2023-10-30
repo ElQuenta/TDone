@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         const val KEY_GROUP = "key_group"
     }
 
-    var screenState = Screens.HOME
+    private var screenState = Screens.HOME
     private lateinit var fabAdd: FloatingActionButton
     private lateinit var fabAddNote: FloatingActionButton
     private lateinit var fabAddTask: FloatingActionButton

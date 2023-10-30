@@ -210,8 +210,12 @@ class CreateTaskActivity : AppCompatActivity() {
 
     private fun updateGroup(group: GroupDataClass) {
         if (group != selectedGroup) {
-            selectedNote
+            selectedGroup = group
+        }else{
+            selectedGroup = groups.last()
         }
+        selectionGroupAdapter.currentGroup=selectedGroup
+        selectionGroupAdapter.notifyDataSetChanged()
     }
 
 }
