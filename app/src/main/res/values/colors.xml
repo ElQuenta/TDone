@@ -45,6 +45,6 @@
     <color name="tag_color11">#FB8C00</color>
     <color name="tag_color12">#F4511E</color>
 
-
+    <color name="transparent">#00000000</color>
 
 </resources>

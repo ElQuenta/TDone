@@ -14,7 +14,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -505,7 +504,7 @@ class MainActivity : AppCompatActivity() {
 
         currentNotesAdapter = BaseNotesAdapter(
             notes,
-            getSize().getScreenWidth(this)
+            getSize().getMainScreenWidth(this)
         ) { note ->
             navigateNote(note)
         }
@@ -545,7 +544,7 @@ class MainActivity : AppCompatActivity() {
 
         allNotesAdapter = BaseNotesAdapter(
             allNotes,
-            getSize().getScreenWidth(this)
+            getSize().getMainScreenWidth(this)
         ) { note ->
             navigateNote(note)
         }

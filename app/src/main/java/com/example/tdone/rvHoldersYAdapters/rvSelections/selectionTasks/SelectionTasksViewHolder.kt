@@ -1,22 +1,27 @@
-package com.example.tdone.rvHoldersYAdapters.rvBase.baseTasks
+package com.example.tdone.rvHoldersYAdapters.rvSelections.selectionTasks
 
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tdone.R
 import com.example.tdone.databinding.ItemTaskBinding
 import com.example.tdone.dataclasses.TaskDataClass
-import com.example.tdone.rvHoldersYAdapters.rvTags.TagsAdapter
-class BaseTasksViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+class SelectionTasksViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemTaskBinding.bind(view)
 
-    fun bind(task: TaskDataClass, nav: (TaskDataClass) -> Unit) {
-        binding.tvTaskTittle.text =task.name
-        if (task.group != null) {
-            binding.tvTaskGroup.text = task.group!!.name
-        }
+    fun bind(task: TaskDataClass, currentTask: TaskDataClass) {
+        binding.root.setCardBackgroundColor(
+            if (task == currentTask) {
+                ContextCompat.getColor(binding.root.context, R.color.white)
+            } else {
+                ContextCompat.getColor(binding.root.context, R.color.colorGris)
+            }
+        )
+        binding.tvTaskTittle.text = task.name
+        binding.tvTaskGroup.text = task.group?.name ?: ""
         binding.tvTaskEndDate.text = "12/12/2023"
-
         when (task.tag_DataClasses.size) {
             0 -> {
                 binding.tag1.root.visibility = View.GONE
@@ -72,10 +77,8 @@ class BaseTasksViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 )
             }
         }
-
-        binding.cbTask.isChecked = task.checked
-        binding.root.setOnClickListener {
-            nav(task)
-        }
+        binding.cbTask.visibility = View.INVISIBLE
+        binding.cbTask.layoutParams.width = 0
+        binding.cbTask.isClickable = false
     }
 }
