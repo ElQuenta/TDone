@@ -42,6 +42,11 @@
                 android:layout_marginTop="16dp"
                 android:background="@color/black" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rv_selected_tags"/>
+
             <TextView
                 android:id="@+id/tv_note_body"
                 android:layout_width="match_parent"

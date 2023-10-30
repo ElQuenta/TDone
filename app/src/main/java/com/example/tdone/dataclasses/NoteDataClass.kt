@@ -7,7 +7,7 @@ data class NoteDataClass(
     var content: String,
     val TaskDataClass: TaskDataClass? = null,
     var vinculed: Boolean = false,
-    var TagDataClass: List<TagDataClass>? = listOf(),
+    var TagDataClass: List<TagDataClass> = listOf(),
     var imagen: Int? = null, //investigar referencia al archivo de las imagenes
     var color: Int
 ): Serializable

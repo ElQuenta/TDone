@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         const val KEY_GROUP = "key_group"
     }
 
-    var screenState = Screens.HOME
+    private var screenState = Screens.HOME
     private lateinit var fabAdd: FloatingActionButton
     private lateinit var fabAddNote: FloatingActionButton
     private lateinit var fabAddTask: FloatingActionButton
@@ -597,7 +597,7 @@ class MainActivity : AppCompatActivity() {
 
         currentNotesAdapter = BaseNotesAdapter(
             notes,
-            getSize().getScreenWidth(this)
+            getSize().getMainScreenWidth(this)
         ) { note ->
             navigateNote(note)
         }
@@ -637,7 +637,7 @@ class MainActivity : AppCompatActivity() {
 
         allNotesAdapter = BaseNotesAdapter(
             allNotes,
-            getSize().getScreenWidth(this)
+            getSize().getMainScreenWidth(this)
         ) { note ->
             navigateNote(note)
         }
