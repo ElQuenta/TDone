@@ -34,10 +34,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
+                android:gravity="center_horizontal"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+
                 <EditText
+                    android:id="@+id/et_task_tittle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autofillHints="name"
@@ -52,6 +55,11 @@
                     android:layout_marginTop="16dp"
                     android:background="@color/black" />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_selected_tags"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -60,32 +68,36 @@
                     android:weightSum="4">
 
                     <ImageButton
+                        android:id="@+id/btn_add_link"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_task" />
+                        android:src="@drawable/ic_add_link" />
 
                     <ImageButton
+                        android:id="@+id/btn_add_date"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_task" />
+                        android:src="@drawable/ic_add_date" />
 
                     <ImageButton
+                        android:id="@+id/btn_add_group"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_task" />
+                        android:src="@drawable/ic_add_group" />
 
                     <ImageButton
+                        android:id="@+id/btn_add_tag"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_task" />
+                        android:src="@drawable/ic_add_tag" />
 
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -98,23 +110,33 @@
                     android:orientation="vertical"
                     android:visibility="gone">
 
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_selection_note"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
                 </LinearLayout>
-                <!-- Selección de Portada-->
+                <!-- Selección de Fecha de Finalización-->
                 <LinearLayout
-                    android:id="@+id/selection_front"
+                    android:id="@+id/selection_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone">
 
                 </LinearLayout>
-                <!-- Selección de Colores de Fondo-->
+                <!-- Selección de grupo-->
                 <LinearLayout
-                    android:id="@+id/selection_background"
+                    android:id="@+id/selection_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_selection_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
                 <!-- Selección de Tags/Etiquetas-->
@@ -124,6 +146,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:visibility="gone">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_selection_tag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tdone.R
 import com.example.tdone.databinding.ItemFrontBinding
 
-class selectionFrontViewHolder(view: View, var size: Int) : RecyclerView.ViewHolder(view) {
+class SelectionFrontViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ItemFrontBinding.bind(view)
 
     fun bind(image: Int, currentImage: Int) {

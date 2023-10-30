@@ -16,9 +16,8 @@ import com.example.tdone.databinding.ActivityCreateNoteBinding
 import com.example.tdone.dataclasses.GroupDataClass
 import com.example.tdone.dataclasses.TagDataClass
 import com.example.tdone.dataclasses.TaskDataClass
-import com.example.tdone.getSize
 import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionBackground.SelectionColorAdapter
-import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionFront.selectionFrontAdapter
+import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionFront.SelectionFrontAdapter
 import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionTags.SelectionTagAdapter
 import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionTasks.SelectionTasksAdapter
 import com.example.tdone.rvHoldersYAdapters.rvTags.TagsAdapter
@@ -31,7 +30,7 @@ class CreateNoteActivity : AppCompatActivity() {
     private lateinit var selectedTagsAdapter: TagsAdapter
     private lateinit var selectionTaskAdapter: SelectionTasksAdapter
     private lateinit var selectionColorsAdapter: SelectionColorAdapter
-    private lateinit var selectionFrontAdapter: selectionFrontAdapter
+    private lateinit var selectionFrontAdapter: SelectionFrontAdapter
 
     private val tags = mutableListOf(
         TagDataClass(
@@ -190,7 +189,7 @@ class CreateNoteActivity : AppCompatActivity() {
             this.adapter = selectionColorsAdapter
         }
 
-        selectionFrontAdapter = selectionFrontAdapter(fronts,selectedFront,getSize().getCreateNoteScreenWidth(this)){ image ->
+        selectionFrontAdapter = SelectionFrontAdapter(fronts, selectedFront) { image ->
             updateFront(image)
         }
         binding.rvSelectionFront.apply {
