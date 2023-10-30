@@ -42,13 +42,16 @@
                 android:background="@color/gray"
                 android:theme="?attr/actionBarTheme"
                 app:navigationIcon="@drawable/ic_nav_button" />
-
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <androidx.core.widget.NestedScrollView
                 android:id="@+id/group_home_screen"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_height="wrap_content"
                 android:visibility="visible">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_notes"
@@ -57,11 +60,11 @@
                     android:layout_height="wrap_content"
                     android:text="@string/item_notas" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_current_notes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_current_notes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp" />
 
                 <TextView
                     android:id="@+id/tv_Tasks"
@@ -70,12 +73,16 @@
                     android:layout_height="wrap_content"
                     android:text="@string/item_tareas" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_near_to_end_tasks"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_near_to_end_tasks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.core.widget.NestedScrollView>
+
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/group_groups_screen"
@@ -112,11 +119,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:gravity="center_horizontal"
                 android:visibility="gone">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_all_notes"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp" />
 
