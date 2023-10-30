@@ -17,4 +17,12 @@
     <string name="iten_nav_idioma">Language</string>
     <string name="item_notas">NOTES</string>
     <string name="item_tareas">TASKS</string>
+    <string name="hint_email">Type your email</string>
+    <string name="hint_password">Type your password mín 6 characters</string>
+    <string name="inic_ses">SIGN IN</string>
+    <string name="usuario">Type your user name</string>
+    <string name="hint_repassword">Retype your password mín 6 characteres</string>
+    <string name="registrate">SIGN UP</string>
+    <string name="no_registrado">Not Registered Yet, Sign Up!</string>
+    <string name="ya_registrado"> Already Registered, Sign In</string>
 </resources>

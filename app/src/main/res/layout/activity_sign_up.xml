@@ -25,7 +25,7 @@
             android:id="@+id/emailEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Escribe tu e-mail"
+            android:hint="@string/hint_email"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -45,7 +45,7 @@
             android:id="@+id/userNameEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Escribe tu nombre de Usuario"
+            android:hint="@string/usuario"
             android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -68,7 +68,7 @@
             android:id="@+id/passET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Escribe tu contraseña mín 6 caracteres"
+            android:hint="@string/hint_password"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,7 +90,7 @@
             android:id="@+id/confirmPassEt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Reescribe tu contraseña mín 6 caracteres"
+            android:hint="@string/hint_repassword"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,7 +100,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:background="@color/cafe"
-        android:text="Registrate"
+        android:text="@string/registrate"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -113,7 +113,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="¿Ya está registrado? ¡Inicie Sesión!"
+        android:text="@string/ya_registrado"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
