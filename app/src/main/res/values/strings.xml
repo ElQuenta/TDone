@@ -16,5 +16,12 @@
     <string name="iten_nav_idioma">Idioma</string>
     <string name="item_notas">NOTAS</string>
     <string name="item_tareas">TAREAS</string>
-
+    <string name="hint_email">Escribe tu e-mail</string>
+    <string name="hint_password">Escribe tu contraseña mín 6 caracteres</string>
+    <string name="inic_ses">INICIAR SESIÓN</string>
+    <string name="usuario">Escribe tu nombre de usuario</string>
+    <string name="hint_repassword">Reescribe tu contraseña mín 6 caracteres</string>
+    <string name="registrate">REGISTRATE</string>
+    <string name="no_registrado"> ¿Aún no se ha registrado? ¡Registrese!</string>
+    <string name="ya_registrado"> ¿Ya está registrado? ¡Inicie Sesión!</string>
 </resources>

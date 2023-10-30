@@ -22,22 +22,23 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="3"
+            android:gravity="center_vertical"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_task_tittle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 tools:text="Titulo de la Nota" />
 
             <TextView
                 android:id="@+id/tv_task_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="11sp"
+                android:textSize="16sp"
                 tools:text="Grupo" />
 
         </LinearLayout>
@@ -50,12 +51,20 @@
             android:gravity="bottom"
             tools:text="12/12/2222"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_task_tags"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginEnd="12dp"/>
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <include layout="@layout/item_tag"
+                android:id="@+id/tag1"/>
+            <include layout="@layout/item_tag"
+                android:id="@+id/tag2"/>
+            <include layout="@layout/item_tag"
+                android:id="@+id/tag3"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.cardview.widget.CardView>

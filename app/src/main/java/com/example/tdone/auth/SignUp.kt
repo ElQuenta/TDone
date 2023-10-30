@@ -3,10 +3,12 @@ package com.example.tdone.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tdone.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 
 class SignUp : AppCompatActivity() {
@@ -37,8 +39,12 @@ class SignUp : AppCompatActivity() {
 
                     firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
                         if (it.isSuccessful) {
-                            updateName(username)
-
+                            val user = firebaseAuth.currentUser
+                            user?.sendEmailVerification()?.addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    validateUser(username, user)
+                                }
+                            }
                         } else {
                             Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
 
@@ -54,16 +60,28 @@ class SignUp : AppCompatActivity() {
         }
     }
 
-    private fun updateName(username: String) {
-        val user = firebaseAuth.currentUser
-        val profileUpdates =
-            UserProfileChangeRequest.Builder().setDisplayName(username).build()
-        user?.updateProfile(profileUpdates)
-            ?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val intent = Intent(this, SignIn::class.java)
-                    startActivity(intent)
-                }
+    private fun validateUser(username: String, user: FirebaseUser) {
+
+        Toast.makeText(this, "verify your email to continue", Toast.LENGTH_SHORT).show()
+        val profileUpdates = UserProfileChangeRequest.Builder().setDisplayName(username).build()
+        user.updateProfile(profileUpdates).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Handler().postDelayed({
+                    user.reload().addOnCompleteListener { reloadTask ->
+                        if (reloadTask.isSuccessful) {
+                            if (user.isEmailVerified) {
+                                val intent = Intent(this, SignIn::class.java)
+                                startActivity(intent)
+                            } else {
+                                Toast.makeText(this, "not verify yet", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        }
+                    }
+                }, 10000)
             }
+        }
+
+
     }
 }
