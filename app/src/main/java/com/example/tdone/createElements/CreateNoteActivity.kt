@@ -14,6 +14,7 @@ import com.example.tdone.createElements.CreateNoteActivity.ScreenState.SELECT_LI
 import com.example.tdone.createElements.CreateNoteActivity.ScreenState.SELECT_TAG
 import com.example.tdone.databinding.ActivityCreateNoteBinding
 import com.example.tdone.dataclasses.GroupDataClass
+import com.example.tdone.dataclasses.ImageDataClass
 import com.example.tdone.dataclasses.TagDataClass
 import com.example.tdone.dataclasses.TaskDataClass
 import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionBackground.SelectionColorAdapter
@@ -34,83 +35,83 @@ class CreateNoteActivity : AppCompatActivity() {
 
     private val tags = mutableListOf(
         TagDataClass(
-            name = "Tag Prueba1",
-            color = R.color.tag_color1
+            tagName = "Tag Prueba1",
+            tagColor = R.color.tag_color1
         ), TagDataClass(
-            name = "Tag Prueba2",
-            color = R.color.tag_color2
+            tagName = "Tag Prueba2",
+            tagColor = R.color.tag_color2
         ), TagDataClass(
-            name = "Tag Prueba3",
-            color = R.color.tag_color3
+            tagName = "Tag Prueba3",
+            tagColor = R.color.tag_color3
         ), TagDataClass(
-            name = "Tag Prueba4",
-            color = R.color.tag_color4
+            tagName = "Tag Prueba4",
+            tagColor = R.color.tag_color4
         ), TagDataClass(
-            name = "Tag Prueba5",
-            color = R.color.tag_color5
+            tagName = "Tag Prueba5",
+            tagColor = R.color.tag_color5
         ), TagDataClass(
-            name = "Tag Prueba6",
-            color = R.color.tag_color6
+            tagName = "Tag Prueba6",
+            tagColor = R.color.tag_color6
         ), TagDataClass(
-            name = "Tag Prueba7",
-            color = R.color.tag_color7
+            tagName = "Tag Prueba7",
+            tagColor = R.color.tag_color7
         ), TagDataClass(
-            name = "Tag Prueba8",
-            color = R.color.tag_color8
+            tagName = "Tag Prueba8",
+            tagColor = R.color.tag_color8
         ), TagDataClass(
-            name = "Tag Prueba9",
-            color = R.color.tag_color9
+            tagName = "Tag Prueba9",
+            tagColor = R.color.tag_color9
         ), TagDataClass(
-            name = "Tag Prueba10",
-            color = R.color.tag_color10
+            tagName = "Tag Prueba10",
+            tagColor = R.color.tag_color10
         ), TagDataClass(
-            name = "Tag Prueba11",
-            color = R.color.tag_color11
+            tagName = "Tag Prueba11",
+            tagColor = R.color.tag_color11
         ), TagDataClass(
-            name = "Nueva Tag",
-            color = R.color.white
+            tagName = "Nueva Tag",
+            tagColor = R.color.white
         )
 
     )
     private val groups = listOf<GroupDataClass>(
         GroupDataClass(
-            name = "Grupo Prueba1",
-            description = "Grupo Prueba1"
+            groupName = "Grupo Prueba1",
+            groupDescription = "Grupo Prueba1"
         ), GroupDataClass(
-            name = "Grupo Prueba2",
-            description = "Grupo Prueba2"
+            groupName = "Grupo Prueba2",
+            groupDescription = "Grupo Prueba2"
         )
     )
     private val tasks = listOf<TaskDataClass>(
         TaskDataClass(
-            name = "Tarea Prueba 1",
-            tag_DataClasses = listOf(tags[0]),
-            group = groups[0]
+            taskName = "Tarea Prueba 1",
+            taskTags = listOf(tags[0]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 2",
-            tag_DataClasses = listOf(tags[1]),
-            group = groups[1]
+            taskName = "Tarea Prueba 2",
+            taskTags = listOf(tags[1]),
+            taskGroup = groups[1]
         ), TaskDataClass(
-            name = "Tarea Prueba 3",
-            tag_DataClasses = listOf(tags[2]),
-            group = groups[0]
+            taskName = "Tarea Prueba 3",
+            taskTags = listOf(tags[2]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 4",
-            tag_DataClasses = listOf(tags[0], tags[1]),
-            group = groups[0]
+            taskName = "Tarea Prueba 4",
+            taskTags = listOf(tags[0], tags[1]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 5",
-            tag_DataClasses = listOf(tags[2], tags[3]),
-            group = groups[1]
+            taskName = "Tarea Prueba 5",
+            taskTags = listOf(tags[2], tags[3]),
+            taskGroup = groups[1]
         ), TaskDataClass(
-            name = "Tarea Prueba 6",
-            group = groups[0]
+            taskName = "Tarea Prueba 6",
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 7"
+            taskName = "Tarea Prueba 7"
         ), TaskDataClass(
-            name = "Tarea Prueba 8",
-            tag_DataClasses = listOf(tags[2], tags[3])
-        ), TaskDataClass(name = "Ninguna Tarea")
+            taskName = "Tarea Prueba 8",
+            taskTags = listOf(tags[2], tags[3])
+        ), TaskDataClass(taskName = "Ninguna Tarea")
     )
     private val colors = listOf(
         R.color.background_note_color1,
@@ -126,17 +127,41 @@ class CreateNoteActivity : AppCompatActivity() {
         R.color.background_note_color11,
         R.color.background_note_color12
     )
-    private val fronts = listOf(
-        R.drawable.avatar1,
-        R.drawable.frontpage1,
-        R.drawable.frontpage2,
-        R.drawable.frontpage3,
-        R.drawable.frontpage4,
-        R.drawable.frontpage5,
-        R.drawable.frontpage6,
-        R.drawable.frontpage7,
-        R.drawable.frontpage8,
-        R.drawable.avatar
+    private val fronts = listOf<ImageDataClass>(
+        ImageDataClass(
+            refImage = R.drawable.avatar,
+            isReferenceImage = true,
+            selected = true
+        ), ImageDataClass(
+            refImage = R.drawable.frontpage1,
+            isReferenceImage = true,
+        ), ImageDataClass(
+            refImage = R.drawable.frontpage2,
+            isReferenceImage = true,
+        ), ImageDataClass(
+            refImage = R.drawable.frontpage3,
+            isReferenceImage = true,
+        ), ImageDataClass(
+            refImage = R.drawable.frontpage4,
+            isReferenceImage = true,
+        ), ImageDataClass(
+            refImage = R.drawable.frontpage5,
+            isReferenceImage = true,
+        ), ImageDataClass(
+            refImage = R.drawable.frontpage6,
+            isReferenceImage = true,
+        ), ImageDataClass(
+            refImage = R.drawable.frontpage7,
+            isReferenceImage = true,
+        ), ImageDataClass(
+            refImage = R.drawable.frontpage8,
+            isReferenceImage = true,
+        ), ImageDataClass(
+            refImage = R.drawable.avatar1,
+            isReferenceImage = true,
+        )
+
+
     )
     private var selectedTask = tasks.last()
     private val selectedTags = mutableListOf<TagDataClass>()
@@ -172,7 +197,7 @@ class CreateNoteActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvSelectedTags.adapter = selectedTagsAdapter
 
-        selectionTaskAdapter = SelectionTasksAdapter(tasks, selectedTask) { task ->
+        selectionTaskAdapter = SelectionTasksAdapter(tasks) { task ->
             updateTask(task)
         }
         binding.rvSelectionTask.apply {
@@ -189,7 +214,7 @@ class CreateNoteActivity : AppCompatActivity() {
             this.adapter = selectionColorsAdapter
         }
 
-        selectionFrontAdapter = SelectionFrontAdapter(fronts, selectedFront) { image ->
+        selectionFrontAdapter = SelectionFrontAdapter(fronts) { image ->
             updateFront(image)
         }
         binding.rvSelectionFront.apply {
@@ -236,11 +261,15 @@ class CreateNoteActivity : AppCompatActivity() {
     }
 
     private fun updateTask(task: TaskDataClass) {
+        tasks[tasks.indexOf(selectedTask)].hasVinculation = false
         if (selectedTask != task) {
             selectedTask = task
-            selectionTaskAdapter.currentTask = selectedTask
-            selectionTaskAdapter.notifyDataSetChanged()
+        } else {
+            selectedTask != tasks.last()
         }
+        tasks[tasks.indexOf(selectedTask)].hasVinculation = true
+        selectionTaskAdapter.updateTasks(tasks)
+
     }
 
     private fun updateColor(color: Int) {
@@ -252,25 +281,39 @@ class CreateNoteActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateFront(image: Int) {
+    private fun updateFront(image: ImageDataClass) {
+        fronts[fronts.indexOf(selectedFront)].selected = false
         if (selectedFront != image) {
-            when(image){
+            when (image) {
                 fronts[0] -> {
                     binding.ivFrontNote.visibility = View.GONE
                 }
+
                 fronts.last() -> {
-                    binding.ivFrontNote.setImageResource(image)
+                    if (image.isReferenceImage) {
+                        binding.ivFrontNote.setImageResource(image.refImage)
+                    } else {
+                        binding.ivFrontNote.setImageURI(image.uriImage)
+                    }
                     binding.ivFrontNote.visibility = View.VISIBLE
                 }
+
                 else -> {
-                    binding.ivFrontNote.setImageResource(image)
+                    if (image.isReferenceImage) {
+                        binding.ivFrontNote.setImageResource(image.refImage)
+                    } else {
+                        binding.ivFrontNote.setImageURI(image.uriImage)
+                    }
                     binding.ivFrontNote.visibility = View.VISIBLE
                 }
             }
             selectedFront = image
-            selectionFrontAdapter.currentImage = selectedFront
-            selectionFrontAdapter.notifyDataSetChanged()
+        } else {
+            selectedFront = fronts[0]
         }
+        fronts[fronts.indexOf(selectedFront)].selected = true
+
+        selectionFrontAdapter.updateImages(fronts)
     }
 
     private fun updateSelectedTags() {

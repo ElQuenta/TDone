@@ -11,12 +11,12 @@ class SelectionGroupsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemGroupBinding.bind(view)
 
-    fun bind(data: GroupDataClass, currentGroup: GroupDataClass) {
-        binding.tvGroupName.text = data.name
+    fun bind(data: GroupDataClass) {
+        binding.tvGroupName.text = data.groupName
         binding.root.setCardBackgroundColor(
             ContextCompat.getColor(
                 binding.root.context,
-                if (data == currentGroup) {
+                if (data.groupSelected) {
                     R.color.white
                 } else {
                     R.color.colorGris

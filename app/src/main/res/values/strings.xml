@@ -24,4 +24,9 @@
     <string name="registrate">REGISTRATE</string>
     <string name="no_registrado"> ¿Aún no se ha registrado? ¡Registrese!</string>
     <string name="ya_registrado"> ¿Ya está registrado? ¡Inicie Sesión!</string>
+    <string name="group_name">Nombre del Grupo</string>
+    <string name="description">Descripción</string>
+    <string name="add">Añadir</string>
+    <string name="Title">Título</string>
+    <string name="Content">Contenido</string>
 </resources>

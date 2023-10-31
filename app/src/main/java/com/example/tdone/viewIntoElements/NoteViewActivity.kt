@@ -26,11 +26,11 @@ class NoteViewActivity : AppCompatActivity() {
     }
 
     private fun initUi() {
-        binding.tvNoteTittle.text = data.name
-        binding.tvNoteBody.text = data.content
-        binding.root.setBackgroundColor(ContextCompat.getColor(this, data.color))
+        binding.tvNoteTittle.text = data.noteTittle
+        binding.tvNoteBody.text = data.noteBody
+        binding.root.setBackgroundColor(ContextCompat.getColor(this, data.noteBackground))
 
-        tagsAdapter = TagsAdapter(data.TagDataClass)
+        tagsAdapter = TagsAdapter(data.noteTags)
         binding.rvSelectedTags.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvSelectedTags.adapter = tagsAdapter

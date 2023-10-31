@@ -23,7 +23,7 @@ class TaskViewActivity : AppCompatActivity() {
     }
 
     private fun initUi() {
-        binding.tvTaskTittle.text = data.name
+        binding.tvTaskTittle.text = data.taskName
     }
 
     private fun initListeners() {

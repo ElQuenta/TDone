@@ -21,8 +21,8 @@ class GroupViewActivity : AppCompatActivity() {
     }
 
     private fun initUi() {
-        binding.tvGroupName.text = data.name
-        binding.tvGroupDescription.text = data.description
+        binding.tvGroupName.text = data.groupName
+        binding.tvGroupDescription.text = data.groupDescription
     }
 
     private fun initListeners() {

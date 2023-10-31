@@ -25,4 +25,9 @@
     <string name="registrate">SIGN UP</string>
     <string name="no_registrado">Not Registered Yet, Sign Up!</string>
     <string name="ya_registrado"> Already Registered, Sign In</string>
+    <string name="group_name">Group Name</string>
+    <string name="description">Description</string>
+    <string name="add">Add</string>
+    <string name="Title">Title</string>
+    <string name="Content">Content</string>
 </resources>

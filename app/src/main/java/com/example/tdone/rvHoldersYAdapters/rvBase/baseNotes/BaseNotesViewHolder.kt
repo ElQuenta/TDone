@@ -1,6 +1,5 @@
 package com.example.tdone.rvHoldersYAdapters.rvBase.baseNotes
 
-import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -18,13 +17,13 @@ class BaseNotesViewHolder(
         binding.root.setCardBackgroundColor(
             ContextCompat.getColor(
                 binding.root.context,
-                note.color
+                note.noteBackground
             )
         )
         //Log.i("Miguel","Tamaño antiguo: ${binding.root.layoutParams.width}")
         binding.root.layoutParams.width=(screenWidth*40)/100
         //Log.i("Miguel","Tamaño Nuevo: ${binding.root.layoutParams.width}")
-        binding.tvNoteTittle.text = note.name
+        binding.tvNoteTittle.text = note.noteTittle
         binding.root.setOnClickListener {
             nav(note)
         }

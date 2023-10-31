@@ -10,17 +10,22 @@ class SelectionNotesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemNotesBinding.bind(view)
 
-    fun bind(data: NoteDataClass, currentNote: NoteDataClass) {
-        if (data.imagen != null) {
-            binding.ivFrontNote.setImageResource(data.imagen!!)
+    fun bind(data: NoteDataClass) {
+        if(data.noteFront !=null){
+            if (data.noteFront!!.isReferenceImage){
+                binding.ivFrontNote.setImageResource(data.noteFront!!.refImage)
+            }else{
+                binding.ivFrontNote.setImageURI(data.noteFront!!.uriImage)
+            }
+
         }
-        binding.root.setCardBackgroundColor(ContextCompat.getColor(binding.root.context,data.color))
+        binding.root.setCardBackgroundColor(ContextCompat.getColor(binding.root.context,data.noteBackground))
         binding.selected.visibility =
-            if (data == currentNote) {
+            if (data.hasVinculation) {
                 View.VISIBLE
             } else {
                 View.GONE
             }
-        binding.tvNoteTittle.text = data.name
+        binding.tvNoteTittle.text = data.noteTittle
     }
 }

@@ -6,8 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tdone.R
 import com.example.tdone.dataclasses.TaskDataClass
 
-class SelectionTasksAdapter(val tasks: List<TaskDataClass>,
-                            var currentTask: TaskDataClass,
+class SelectionTasksAdapter(var tasks: List<TaskDataClass>,
                             val onSelectedTask: (TaskDataClass)-> Unit) :
     RecyclerView.Adapter<SelectionTasksViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SelectionTasksViewHolder {
@@ -19,9 +18,14 @@ class SelectionTasksAdapter(val tasks: List<TaskDataClass>,
     override fun getItemCount(): Int = tasks.size
 
     override fun onBindViewHolder(holder: SelectionTasksViewHolder, position: Int) {
-        holder.bind(tasks[position], currentTask)
+        holder.bind(tasks[position])
         holder.itemView.setOnClickListener{
             onSelectedTask(tasks[position])
         }
+    }
+
+    fun updateTasks(newTasks:List<TaskDataClass>){
+        tasks=newTasks
+        notifyDataSetChanged()
     }
 }

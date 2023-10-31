@@ -4,6 +4,6 @@ import java.io.Serializable
 
 
 data class TagDataClass(
-    var name:String,
-    var color: Int
+    var tagName:String,
+    var tagColor: Int
 ): Serializable
