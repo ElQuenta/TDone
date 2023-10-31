@@ -30,4 +30,10 @@
     <string name="add">Add</string>
     <string name="Title">Title</string>
     <string name="Content">Content</string>
+    <string name="name_tag">Tag Name</string>
+    <string name="empty_fields">Empty Fields Are not Allowed !!!</string>
+    <string name="not_verify">Not verify yet</string>
+    <string name="time_verify">You have 15 seconds to verify your e-mail</string>
+    <string name="not_matching">Password is not matching</string>
+    <string name="verify_email">Verify your email to continue</string>
 </resources>

@@ -6,6 +6,7 @@ import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tdone.MainActivity
+import com.example.tdone.R
 import com.example.tdone.databinding.ActivitySignInBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -42,7 +43,7 @@ class SignIn : AppCompatActivity() {
                     }
                 }
             } else {
-                Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.empty_fields, Toast.LENGTH_SHORT).show()
 
             }
         }
@@ -65,13 +66,13 @@ class SignIn : AppCompatActivity() {
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 } else {
-                    val message = "not verify yet"
+                    val message = R.string.not_verify
                     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                     if (firstTime) {
                         user.sendEmailVerification()
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
-                                    val message2 = "You have 15 seconds to verify your e-mail"
+                                    val message2 = R.string.time_verify
                                     Toast.makeText(this, message2, Toast.LENGTH_SHORT).show()
                                     Handler().postDelayed({
                                         userVerified(false)

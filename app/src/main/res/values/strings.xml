@@ -29,4 +29,10 @@
     <string name="add">Añadir</string>
     <string name="Title">Título</string>
     <string name="Content">Contenido</string>
+    <string name="name_tag">Nombre Tag</string>
+    <string name="empty_fields">¡¡¡Los espacios en blanco no estan permitidos!!!</string>
+    <string name="not_verify">Aún no se ha verificado</string>
+    <string name="time_verify">Tienes 15 segundos para verificar tu e-mail</string>
+    <string name="not_matching">La contraseña no coincide</string>
+    <string name="verify_email">Verifique su correo electrónico para continuar</string>
 </resources>

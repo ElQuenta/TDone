@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tdone.R
 import com.example.tdone.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -51,10 +52,10 @@ class SignUp : AppCompatActivity() {
                         }
                     }
                 } else {
-                    Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, R.string.not_matching, Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "Empty Fields Are not Allowed !!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,R.string.empty_fields, Toast.LENGTH_SHORT).show()
 
             }
         }
@@ -62,7 +63,7 @@ class SignUp : AppCompatActivity() {
 
     private fun validateUser(username: String, user: FirebaseUser) {
 
-        Toast.makeText(this, "verify your email to continue", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,R.string.verify_email, Toast.LENGTH_SHORT).show()
         val profileUpdates = UserProfileChangeRequest.Builder().setDisplayName(username).build()
         user.updateProfile(profileUpdates).addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -73,7 +74,7 @@ class SignUp : AppCompatActivity() {
                                 val intent = Intent(this, SignIn::class.java)
                                 startActivity(intent)
                             } else {
-                                Toast.makeText(this, "not verify yet", Toast.LENGTH_SHORT)
+                                Toast.makeText(this,R.string.not_verify, Toast.LENGTH_SHORT)
                                     .show()
                             }
                         }
