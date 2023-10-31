@@ -8,7 +8,8 @@ import com.example.tdone.dataclasses.TagDataClass
 
 class SelectionTagAdapter(
     val tags: MutableList<TagDataClass>,
-    var change: (TagDataClass,Boolean) -> Unit
+    var change: (TagDataClass,Boolean) -> Unit,
+    var create: () -> Unit
 ) : RecyclerView.Adapter<SelectionTagViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SelectionTagViewHolder {
         return SelectionTagViewHolder(
@@ -19,6 +20,6 @@ class SelectionTagAdapter(
     override fun getItemCount(): Int = tags.size
 
     override fun onBindViewHolder(holder: SelectionTagViewHolder, position: Int) {
-        holder.bind(tags[position],change)
+        holder.bind(tags[position],change,create)
     }
 }

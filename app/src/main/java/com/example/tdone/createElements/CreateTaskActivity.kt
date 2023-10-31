@@ -1,5 +1,6 @@
 package com.example.tdone.createElements
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -128,9 +129,13 @@ class CreateTaskActivity : AppCompatActivity() {
     private var screenState = NO_SELECT
 
     private fun initUi() {
-        selectionTagsAdapter = SelectionTagAdapter(tags) { tag, isChecked ->
-            updateTag(tag, isChecked)
-        }
+        selectionTagsAdapter = SelectionTagAdapter(tags,
+            change = { tag, isChecked ->
+                updateTag(tag, isChecked)
+            },
+            create = {
+                createTag()
+            })
         binding.rvSelectionTag.layoutManager = LinearLayoutManager(this)
         binding.rvSelectionTag.adapter = selectionTagsAdapter
 
@@ -211,14 +216,19 @@ class CreateTaskActivity : AppCompatActivity() {
     }
 
     private fun updateGroup(group: GroupDataClass) {
-        groups[groups.indexOf(selectedGroup)].groupSelected=false
+        groups[groups.indexOf(selectedGroup)].groupSelected = false
         if (group != selectedGroup) {
             selectedGroup = group
-        }else{
+        } else {
             selectedGroup = groups.last()
         }
-        groups[groups.indexOf(selectedGroup)].groupSelected=true
+        groups[groups.indexOf(selectedGroup)].groupSelected = true
         selectionGroupAdapter.updateGroups(groups)
+    }
+
+    private fun createTag() {
+        val intent = Intent(this, CreateTagActivity::class.java)
+        startActivity(intent)
     }
 
 }

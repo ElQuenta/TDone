@@ -11,7 +11,7 @@ class SelectionTagViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemDifficultBinding.bind(view)
 
-    fun bind(tag: TagDataClass, funtion: (TagDataClass, Boolean) -> Unit) {
+    fun bind(tag: TagDataClass, funtion: (TagDataClass, Boolean) -> Unit, create: () -> Unit) {
         binding.cvTag.setCardBackgroundColor(
             ContextCompat.getColor(
                 binding.cvTag.context,
@@ -34,6 +34,9 @@ class SelectionTagViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             binding.fabEdit.isClickable = false
             binding.cbSelectTag.visibility = View.INVISIBLE
             binding.cbSelectTag.isClickable = false
+            binding.cvTag.setOnClickListener {
+                create()
+            }
         }
 
     }
