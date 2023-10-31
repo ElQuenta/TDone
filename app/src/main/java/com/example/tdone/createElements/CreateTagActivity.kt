@@ -54,7 +54,6 @@ class CreateTagActivity : AppCompatActivity() {
     private fun updateColor(color: Int) {
         if (color != selectedColor) {
             selectedColor = color
-            binding.root.setBackgroundColor(ContextCompat.getColor(this, selectedColor))
             selectionColorAdapter.currentColor = selectedColor
             selectionColorAdapter.notifyDataSetChanged()
         }
