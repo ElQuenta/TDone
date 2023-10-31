@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:hint="Nombre del Grupo"
+                    android:hint="@string/group_name"
                     android:inputType="text"
                     android:maxLines="1"
                     android:minHeight="48dp" />
@@ -63,7 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:hint="descripción"
+                    android:hint="@string/description"
                     android:inputType="textMultiLine"
                     android:maxLength="150"
                     android:minHeight="48dp" />
@@ -80,7 +80,7 @@
         android:layout_margin="32dp"
         android:backgroundTint="@color/black"
         android:elevation="1dp"
-        android:text="añadir"
+        android:text="@string/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
