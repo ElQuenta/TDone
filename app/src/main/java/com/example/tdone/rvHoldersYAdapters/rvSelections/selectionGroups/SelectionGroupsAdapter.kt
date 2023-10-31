@@ -8,7 +8,6 @@ import com.example.tdone.dataclasses.GroupDataClass
 
 class SelectionGroupsAdapter(
     var groups: List<GroupDataClass>,
-    var currentGroup: GroupDataClass,
     val onGroupSelected: (GroupDataClass) -> Unit
 ) : RecyclerView.Adapter<SelectionGroupsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SelectionGroupsViewHolder {

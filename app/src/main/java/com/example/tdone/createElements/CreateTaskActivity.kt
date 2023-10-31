@@ -148,7 +148,7 @@ class CreateTaskActivity : AppCompatActivity() {
             this.adapter = selectionNoteAdapter
         }
 
-        selectionGroupAdapter = SelectionGroupsAdapter(groups, selectedGroup) { group ->
+        selectionGroupAdapter = SelectionGroupsAdapter(groups) { group ->
             updateGroup(group)
         }
         binding.rvSelectionGroup.apply {
