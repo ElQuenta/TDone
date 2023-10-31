@@ -11,7 +11,7 @@ class TagsAdapter(
 ): RecyclerView.Adapter<TagsViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagsViewHolder {
         return TagsViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_tag,parent,false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_advanced_tag,parent,false)
         )
     }
 

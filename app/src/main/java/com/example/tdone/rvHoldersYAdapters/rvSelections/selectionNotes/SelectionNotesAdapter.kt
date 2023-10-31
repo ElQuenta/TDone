@@ -7,8 +7,7 @@ import com.example.tdone.R
 import com.example.tdone.dataclasses.NoteDataClass
 
 class SelectionNotesAdapter(
-    val notes: List<NoteDataClass>,
-    var currentNote: NoteDataClass,
+    var notes: List<NoteDataClass>,
     val onNoteSelected: (NoteDataClass) -> Unit
 ) : RecyclerView.Adapter<SelectionNotesViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SelectionNotesViewHolder {
@@ -20,9 +19,15 @@ class SelectionNotesAdapter(
     override fun getItemCount(): Int = notes.size
 
     override fun onBindViewHolder(holder: SelectionNotesViewHolder, position: Int) {
-        holder.bind(notes[position],currentNote)
+        holder.bind(notes[position])
         holder.itemView.setOnClickListener {
             onNoteSelected(notes[position])
         }
     }
+
+    fun updateNotes(newNotes:List<NoteDataClass>){
+        notes = newNotes
+        notifyDataSetChanged()
+    }
+
 }

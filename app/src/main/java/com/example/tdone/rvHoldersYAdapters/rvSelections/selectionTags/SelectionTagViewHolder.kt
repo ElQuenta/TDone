@@ -15,15 +15,15 @@ class SelectionTagViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.cvTag.setCardBackgroundColor(
             ContextCompat.getColor(
                 binding.cvTag.context,
-                tag.color
+                tag.tagColor
             )
         )
-        binding.tvTagName.text = tag.name
+        binding.tvTagName.text = tag.tagName
         binding.cbSelectTag.setOnCheckedChangeListener { _, isChecked ->
             funtion(tag, isChecked)
         }
 
-        if (tag.name == "Nueva Tag") {
+        if (tag.tagName == "Nueva Tag") {
             binding.tvTagName.setTextColor(
                 ContextCompat.getColor(
                     binding.tvTagName.context,

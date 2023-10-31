@@ -14,11 +14,6 @@ class CreateGroupActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initListeners()
-        initUi()
-    }
-
-    private fun initUi() {
-
     }
 
     private fun initListeners() {

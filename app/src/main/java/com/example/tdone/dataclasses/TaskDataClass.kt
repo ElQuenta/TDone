@@ -4,11 +4,11 @@ import java.io.Serializable
 import java.time.LocalDate
 
 data class TaskDataClass(
-    var name: String,
-    var tag_DataClasses: List<TagDataClass> = listOf(),
-    var group: GroupDataClass? = null,
-    var NoteDataClass: NoteDataClass? = null,
-    var vinculed: Boolean = false,
-    var date: LocalDate? = null,
-    var checked: Boolean = false
+    var taskName: String,
+    var taskTags: List<TagDataClass> = listOf(),
+    var taskGroup: GroupDataClass? = null,
+    var taskVinculation: NoteDataClass? = null,
+    var hasVinculation: Boolean = false,
+    var taskEndDate: LocalDate? = null,
+    var taskCompleted: Boolean = false
 ): Serializable

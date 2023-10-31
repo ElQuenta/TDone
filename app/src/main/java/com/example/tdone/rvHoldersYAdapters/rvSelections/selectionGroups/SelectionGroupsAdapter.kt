@@ -7,7 +7,7 @@ import com.example.tdone.R
 import com.example.tdone.dataclasses.GroupDataClass
 
 class SelectionGroupsAdapter(
-    val groups: List<GroupDataClass>,
+    var groups: List<GroupDataClass>,
     var currentGroup: GroupDataClass,
     val onGroupSelected: (GroupDataClass) -> Unit
 ) : RecyclerView.Adapter<SelectionGroupsViewHolder>() {
@@ -20,9 +20,14 @@ class SelectionGroupsAdapter(
     override fun getItemCount(): Int = groups.size
 
     override fun onBindViewHolder(holder: SelectionGroupsViewHolder, position: Int) {
-        holder.bind(groups[position],currentGroup)
+        holder.bind(groups[position])
         holder.itemView.setOnClickListener {
             onGroupSelected(groups[position])
         }
+    }
+
+    fun updateGroups(newGroups:List<GroupDataClass>){
+        groups=newGroups
+        notifyDataSetChanged()
     }
 }

@@ -117,277 +117,277 @@ class MainActivity : AppCompatActivity() {
 
     private val notes = listOf<NoteDataClass>(
         NoteDataClass(
-            name = "Prueba 1",
-            content = "En un mundo cada vez más conectado y globalizado, la comunicación efectiva se ha convertido en una habilidad esencial. Ya sea en el ámbito personal o profesional, la capacidad de expresar ideas de manera clara y coherente es fundamental para establecer relaciones significativas y alcanzar el éxito.\n\nEn el contexto actual, la tecnología desempeña un papel crucial en nuestras vidas. La omnipresencia de los dispositivos electrónicos y la disponibilidad de internet han transformado la forma en que interactuamos con el mundo que nos rodea. Estamos constantemente expuestos a una avalancha de información, lo que nos brinda la oportunidad de aprender y crecer, pero también nos desafía a discernir entre lo relevante y lo superfluo.\n\nEn este escenario, la educación se erige como el pilar fundamental sobre el cual se construye el futuro. Las instituciones educativas tienen la responsabilidad de preparar a las generaciones venideras para enfrentar los desafíos del siglo XXI. Esto implica no solo impartir conocimientos académicos, sino también fomentar habilidades como el pensamiento crítico, la creatividad y la colaboración. Los educadores desempeñan un papel vital al guiar y apoyar a los estudiantes en su viaje de aprendizaje.\n\nAdemás, la conciencia sobre cuestiones medioambientales y sociales está en aumento. La sostenibilidad se ha convertido en un tema central en las agendas de gobiernos, empresas y ciudadanos. La necesidad de preservar nuestro planeta para las generaciones futuras impulsa iniciativas en áreas como la energía renovable, la conservación de recursos y la reducción de emisiones de carbono.\n\nEn conclusión, vivimos en una era emocionante y desafiante, llena de oportunidades y responsabilidades. Es crucial que nos adaptemos a los cambios, aprendamos de las experiencias pasadas y trabajemos juntos para construir un futuro mejor y más equitativo para todos.",
-            color = R.color.background_note_color2
+            noteTittle = "Prueba 1",
+            noteBody = "En un mundo cada vez más conectado y globalizado, la comunicación efectiva se ha convertido en una habilidad esencial. Ya sea en el ámbito personal o profesional, la capacidad de expresar ideas de manera clara y coherente es fundamental para establecer relaciones significativas y alcanzar el éxito.\n\nEn el contexto actual, la tecnología desempeña un papel crucial en nuestras vidas. La omnipresencia de los dispositivos electrónicos y la disponibilidad de internet han transformado la forma en que interactuamos con el mundo que nos rodea. Estamos constantemente expuestos a una avalancha de información, lo que nos brinda la oportunidad de aprender y crecer, pero también nos desafía a discernir entre lo relevante y lo superfluo.\n\nEn este escenario, la educación se erige como el pilar fundamental sobre el cual se construye el futuro. Las instituciones educativas tienen la responsabilidad de preparar a las generaciones venideras para enfrentar los desafíos del siglo XXI. Esto implica no solo impartir conocimientos académicos, sino también fomentar habilidades como el pensamiento crítico, la creatividad y la colaboración. Los educadores desempeñan un papel vital al guiar y apoyar a los estudiantes en su viaje de aprendizaje.\n\nAdemás, la conciencia sobre cuestiones medioambientales y sociales está en aumento. La sostenibilidad se ha convertido en un tema central en las agendas de gobiernos, empresas y ciudadanos. La necesidad de preservar nuestro planeta para las generaciones futuras impulsa iniciativas en áreas como la energía renovable, la conservación de recursos y la reducción de emisiones de carbono.\n\nEn conclusión, vivimos en una era emocionante y desafiante, llena de oportunidades y responsabilidades. Es crucial que nos adaptemos a los cambios, aprendamos de las experiencias pasadas y trabajemos juntos para construir un futuro mejor y más equitativo para todos.",
+            noteBackground = R.color.background_note_color2
         ), NoteDataClass(
-            name = "Prueba 2", content = "Prueba", color = R.color.background_note_color3
+            noteTittle = "Prueba 2", noteBody = "Prueba", noteBackground = R.color.background_note_color3
         ), NoteDataClass(
-            name = "Prueba 3", content = "Prueba", color = R.color.background_note_color4
+            noteTittle = "Prueba 3", noteBody = "Prueba", noteBackground = R.color.background_note_color4
         ), NoteDataClass(
-            name = "Prueba 4", content = "Prueba", color = R.color.background_note_color5
+            noteTittle = "Prueba 4", noteBody = "Prueba", noteBackground = R.color.background_note_color5
         ), NoteDataClass(
-            name = "Prueba 5", content = "Prueba", color = R.color.background_note_color1
+            noteTittle = "Prueba 5", noteBody = "Prueba", noteBackground = R.color.background_note_color1
         )
     )
 
     private val groups = listOf<GroupDataClass>(
         GroupDataClass(
-            name = "Grupo Prueba1",
-            description = "Grupo Prueba1"
+            groupName = "Grupo Prueba1",
+            groupDescription = "Grupo Prueba1"
         ), GroupDataClass(
-            name = "Grupo Prueba2",
-            description = "Grupo Prueba2"
+            groupName = "Grupo Prueba2",
+            groupDescription = "Grupo Prueba2"
         ), GroupDataClass(
-            name = "Grupo Prueba1",
-            description = "Grupo Prueba1"
+            groupName = "Grupo Prueba1",
+            groupDescription = "Grupo Prueba1"
         ), GroupDataClass(
-            name = "Grupo Prueba2",
-            description = "Grupo Prueba2"
+            groupName = "Grupo Prueba2",
+            groupDescription = "Grupo Prueba2"
         ), GroupDataClass(
-            name = "Grupo Prueba1",
-            description = "Grupo Prueba1"
+            groupName = "Grupo Prueba1",
+            groupDescription = "Grupo Prueba1"
         ), GroupDataClass(
-            name = "Grupo Prueba2",
-            description = "Grupo Prueba2"
+            groupName = "Grupo Prueba2",
+            groupDescription = "Grupo Prueba2"
         ), GroupDataClass(
-            name = "Grupo Prueba1",
-            description = "Grupo Prueba1"
+            groupName = "Grupo Prueba1",
+            groupDescription = "Grupo Prueba1"
         ), GroupDataClass(
-            name = "Grupo Prueba2",
-            description = "Grupo Prueba2"
+            groupName = "Grupo Prueba2",
+            groupDescription = "Grupo Prueba2"
         )
     )
 
     private val tags = listOf<TagDataClass>(
         TagDataClass(
-            name = "Tag Prueba1",
-            color = R.color.tag_color1
+            tagName = "Tag Prueba1",
+            tagColor = R.color.tag_color1
         ), TagDataClass(
-            name = "Tag Prueba2",
-            color = R.color.tag_color2
+            tagName = "Tag Prueba2",
+            tagColor = R.color.tag_color2
         ), TagDataClass(
-            name = "Tag Prueba3",
-            color = R.color.tag_color3
+            tagName = "Tag Prueba3",
+            tagColor = R.color.tag_color3
         ), TagDataClass(
-            name = "Tag Prueba4",
-            color = R.color.tag_color4
+            tagName = "Tag Prueba4",
+            tagColor = R.color.tag_color4
         )
     )
 
     private val nearToEndTasks = listOf<TaskDataClass>(
         TaskDataClass(
-            name = "Tarea Prueba 1",
-            tag_DataClasses = listOf(tags[0]),
-            group = groups[0]
+            taskName = "Tarea Prueba 1",
+            taskTags = listOf(tags[0]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 2",
-            tag_DataClasses = listOf(tags[1]),
-            group = groups[1]
+            taskName = "Tarea Prueba 2",
+            taskTags = listOf(tags[1]),
+            taskGroup = groups[1]
         ), TaskDataClass(
-            name = "Tarea Prueba 3",
-            tag_DataClasses = listOf(tags[2]),
-            group = groups[0]
+            taskName = "Tarea Prueba 3",
+            taskTags = listOf(tags[2]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 4",
-            tag_DataClasses = listOf(tags[0], tags[1]),
-            group = groups[0]
+            taskName = "Tarea Prueba 4",
+            taskTags = listOf(tags[0], tags[1]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 5",
-            tag_DataClasses = listOf(tags[2], tags[3]),
-            group = groups[1]
+            taskName = "Tarea Prueba 5",
+            taskTags = listOf(tags[2], tags[3]),
+            taskGroup = groups[1]
         ), TaskDataClass(
-            name = "Tarea Prueba 6",
-            group = groups[0]
+            taskName = "Tarea Prueba 6",
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 7"
+            taskName = "Tarea Prueba 7"
         ), TaskDataClass(
-            name = "Tarea Prueba 8",
-            tag_DataClasses = listOf(tags[2], tags[3])
+            taskName = "Tarea Prueba 8",
+            taskTags = listOf(tags[2], tags[3])
         )
     )
 
     private val allNotes = mutableListOf<NoteDataClass>(
         NoteDataClass(
-            name = "Prueba 1", content = "Prueba", color = R.color.background_note_color2
+            noteTittle = "Prueba 1", noteBody = "Prueba", noteBackground = R.color.background_note_color2
         ), NoteDataClass(
-            name = "Prueba 2", content = "Prueba", color = R.color.background_note_color3
+            noteTittle = "Prueba 2", noteBody = "Prueba", noteBackground = R.color.background_note_color3
         ), NoteDataClass(
-            name = "Prueba 3", content = "Prueba", color = R.color.background_note_color4
+            noteTittle = "Prueba 3", noteBody = "Prueba", noteBackground = R.color.background_note_color4
         ), NoteDataClass(
-            name = "Prueba 4", content = "Prueba", color = R.color.background_note_color5
+            noteTittle = "Prueba 4", noteBody = "Prueba", noteBackground = R.color.background_note_color5
         ), NoteDataClass(
-            name = "Prueba 5", content = "Prueba", color = R.color.background_note_color1
+            noteTittle = "Prueba 5", noteBody = "Prueba", noteBackground = R.color.background_note_color1
         ), NoteDataClass(
-            name = "Prueba 1", content = "Prueba", color = R.color.background_note_color2
+            noteTittle = "Prueba 1", noteBody = "Prueba", noteBackground = R.color.background_note_color2
         ), NoteDataClass(
-            name = "Prueba 2", content = "Prueba", color = R.color.background_note_color3
+            noteTittle = "Prueba 2", noteBody = "Prueba", noteBackground = R.color.background_note_color3
         ), NoteDataClass(
-            name = "Prueba 3", content = "Prueba", color = R.color.background_note_color4
+            noteTittle = "Prueba 3", noteBody = "Prueba", noteBackground = R.color.background_note_color4
         ), NoteDataClass(
-            name = "Prueba 4", content = "Prueba", color = R.color.background_note_color5
+            noteTittle = "Prueba 4", noteBody = "Prueba", noteBackground = R.color.background_note_color5
         ), NoteDataClass(
-            name = "Prueba 5", content = "Prueba", color = R.color.background_note_color1
+            noteTittle = "Prueba 5", noteBody = "Prueba", noteBackground = R.color.background_note_color1
         ), NoteDataClass(
-            name = "Prueba 1", content = "Prueba", color = R.color.background_note_color2
+            noteTittle = "Prueba 1", noteBody = "Prueba", noteBackground = R.color.background_note_color2
         ), NoteDataClass(
-            name = "Prueba 2", content = "Prueba", color = R.color.background_note_color3
+            noteTittle = "Prueba 2", noteBody = "Prueba", noteBackground = R.color.background_note_color3
         ), NoteDataClass(
-            name = "Prueba 3", content = "Prueba", color = R.color.background_note_color4
+            noteTittle = "Prueba 3", noteBody = "Prueba", noteBackground = R.color.background_note_color4
         ), NoteDataClass(
-            name = "Prueba 4", content = "Prueba", color = R.color.background_note_color5
+            noteTittle = "Prueba 4", noteBody = "Prueba", noteBackground = R.color.background_note_color5
         ), NoteDataClass(
-            name = "Prueba 5", content = "Prueba", color = R.color.background_note_color1
+            noteTittle = "Prueba 5", noteBody = "Prueba", noteBackground = R.color.background_note_color1
         ), NoteDataClass(
-            name = "Prueba 1", content = "Prueba", color = R.color.background_note_color2
+            noteTittle = "Prueba 1", noteBody = "Prueba", noteBackground = R.color.background_note_color2
         ), NoteDataClass(
-            name = "Prueba 2", content = "Prueba", color = R.color.background_note_color3
+            noteTittle = "Prueba 2", noteBody = "Prueba", noteBackground = R.color.background_note_color3
         ), NoteDataClass(
-            name = "Prueba 3", content = "Prueba", color = R.color.background_note_color4
+            noteTittle = "Prueba 3", noteBody = "Prueba", noteBackground = R.color.background_note_color4
         ), NoteDataClass(
-            name = "Prueba 4", content = "Prueba", color = R.color.background_note_color5
+            noteTittle = "Prueba 4", noteBody = "Prueba", noteBackground = R.color.background_note_color5
         ), NoteDataClass(
-            name = "Prueba 5", content = "Prueba", color = R.color.background_note_color1
+            noteTittle = "Prueba 5", noteBody = "Prueba", noteBackground = R.color.background_note_color1
         )
     )
 
     private val allTasks = mutableListOf<TaskDataClass>(
         TaskDataClass(
-            name = "Tarea Prueba 1",
-            tag_DataClasses = listOf(tags[0]),
-            group = groups[0]
+            taskName = "Tarea Prueba 1",
+            taskTags = listOf(tags[0]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 2",
-            tag_DataClasses = listOf(tags[1]),
-            group = groups[1]
+            taskName = "Tarea Prueba 2",
+            taskTags = listOf(tags[1]),
+            taskGroup = groups[1]
         ), TaskDataClass(
-            name = "Tarea Prueba 3",
-            tag_DataClasses = listOf(tags[2]),
-            group = groups[0]
+            taskName = "Tarea Prueba 3",
+            taskTags = listOf(tags[2]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 4",
-            tag_DataClasses = listOf(tags[0], tags[1]),
-            group = groups[0]
+            taskName = "Tarea Prueba 4",
+            taskTags = listOf(tags[0], tags[1]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 5",
-            tag_DataClasses = listOf(tags[2], tags[3]),
-            group = groups[1]
+            taskName = "Tarea Prueba 5",
+            taskTags = listOf(tags[2], tags[3]),
+            taskGroup = groups[1]
         ), TaskDataClass(
-            name = "Tarea Prueba 6",
-            group = groups[0]
+            taskName = "Tarea Prueba 6",
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 7",
+            taskName = "Tarea Prueba 7",
         ), TaskDataClass(
-            name = "Tarea Prueba 1",
-            tag_DataClasses = listOf(tags[0]),
-            group = groups[0]
+            taskName = "Tarea Prueba 1",
+            taskTags = listOf(tags[0]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 2",
-            tag_DataClasses = listOf(tags[1]),
-            group = groups[1]
+            taskName = "Tarea Prueba 2",
+            taskTags = listOf(tags[1]),
+            taskGroup = groups[1]
         ), TaskDataClass(
-            name = "Tarea Prueba 3",
-            tag_DataClasses = listOf(tags[2]),
-            group = groups[0]
+            taskName = "Tarea Prueba 3",
+            taskTags = listOf(tags[2]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 4",
-            tag_DataClasses = listOf(tags[0], tags[1]),
-            group = groups[0]
+            taskName = "Tarea Prueba 4",
+            taskTags = listOf(tags[0], tags[1]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 5",
-            tag_DataClasses = listOf(tags[2], tags[3]),
-            group = groups[1]
+            taskName = "Tarea Prueba 5",
+            taskTags = listOf(tags[2], tags[3]),
+            taskGroup = groups[1]
         ), TaskDataClass(
-            name = "Tarea Prueba 6",
-            group = groups[0]
+            taskName = "Tarea Prueba 6",
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 7",
+            taskName = "Tarea Prueba 7",
         ), TaskDataClass(
-            name = "Tarea Prueba 1",
-            tag_DataClasses = listOf(tags[0]),
-            group = groups[0]
+            taskName = "Tarea Prueba 1",
+            taskTags = listOf(tags[0]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 2",
-            tag_DataClasses = listOf(tags[1]),
-            group = groups[1]
+            taskName = "Tarea Prueba 2",
+            taskTags = listOf(tags[1]),
+            taskGroup = groups[1]
         ), TaskDataClass(
-            name = "Tarea Prueba 3",
-            tag_DataClasses = listOf(tags[2]),
-            group = groups[0]
+            taskName = "Tarea Prueba 3",
+            taskTags = listOf(tags[2]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 4",
-            tag_DataClasses = listOf(tags[0], tags[1]),
-            group = groups[0]
+            taskName = "Tarea Prueba 4",
+            taskTags = listOf(tags[0], tags[1]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 5",
-            tag_DataClasses = listOf(tags[2], tags[3]),
-            group = groups[1]
+            taskName = "Tarea Prueba 5",
+            taskTags = listOf(tags[2], tags[3]),
+            taskGroup = groups[1]
         ), TaskDataClass(
-            name = "Tarea Prueba 6",
-            group = groups[0]
+            taskName = "Tarea Prueba 6",
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 7",
+            taskName = "Tarea Prueba 7",
         ), TaskDataClass(
-            name = "Tarea Prueba 1",
-            tag_DataClasses = listOf(tags[0]),
-            group = groups[0]
+            taskName = "Tarea Prueba 1",
+            taskTags = listOf(tags[0]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 2",
-            tag_DataClasses = listOf(tags[1]),
-            group = groups[1]
+            taskName = "Tarea Prueba 2",
+            taskTags = listOf(tags[1]),
+            taskGroup = groups[1]
         ), TaskDataClass(
-            name = "Tarea Prueba 3",
-            tag_DataClasses = listOf(tags[2]),
-            group = groups[0]
+            taskName = "Tarea Prueba 3",
+            taskTags = listOf(tags[2]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 4",
-            tag_DataClasses = listOf(tags[0], tags[1]),
-            group = groups[0]
+            taskName = "Tarea Prueba 4",
+            taskTags = listOf(tags[0], tags[1]),
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 5",
-            tag_DataClasses = listOf(tags[2], tags[3]),
-            group = groups[1]
+            taskName = "Tarea Prueba 5",
+            taskTags = listOf(tags[2], tags[3]),
+            taskGroup = groups[1]
         ), TaskDataClass(
-            name = "Tarea Prueba 6",
-            group = groups[0]
+            taskName = "Tarea Prueba 6",
+            taskGroup = groups[0]
         ), TaskDataClass(
-            name = "Tarea Prueba 7",
+            taskName = "Tarea Prueba 7",
         )
     )
 
     private val history = mutableListOf<TaskDataClass>(
         TaskDataClass(
-            name = "Tarea Prueba 1",
-            tag_DataClasses = listOf(tags[0]),
-            group = groups[0],
-            checked = true
+            taskName = "Tarea Prueba 1",
+            taskTags = listOf(tags[0]),
+            taskGroup = groups[0],
+            taskCompleted = true
         ), TaskDataClass(
-            name = "Tarea Prueba 2",
-            tag_DataClasses = listOf(tags[1]),
-            group = groups[1],
-            checked = true
+            taskName = "Tarea Prueba 2",
+            taskTags = listOf(tags[1]),
+            taskGroup = groups[1],
+            taskCompleted = true
         ), TaskDataClass(
-            name = "Tarea Prueba 3",
-            tag_DataClasses = listOf(tags[2]),
-            group = groups[0],
-            checked = true
+            taskName = "Tarea Prueba 3",
+            taskTags = listOf(tags[2]),
+            taskGroup = groups[0],
+            taskCompleted = true
         ), TaskDataClass(
-            name = "Tarea Prueba 4",
-            tag_DataClasses = listOf(tags[0], tags[1]),
-            group = groups[0],
-            checked = true
+            taskName = "Tarea Prueba 4",
+            taskTags = listOf(tags[0], tags[1]),
+            taskGroup = groups[0],
+            taskCompleted = true
         ), TaskDataClass(
-            name = "Tarea Prueba 5",
-            tag_DataClasses = listOf(tags[2], tags[3]),
-            group = groups[1],
-            checked = true
+            taskName = "Tarea Prueba 5",
+            taskTags = listOf(tags[2], tags[3]),
+            taskGroup = groups[1],
+            taskCompleted = true
         ), TaskDataClass(
-            name = "Tarea Prueba 6",
-            group = groups[0],
-            checked = true
+            taskName = "Tarea Prueba 6",
+            taskGroup = groups[0],
+            taskCompleted = true
         ), TaskDataClass(
-            name = "Tarea Prueba 7",
-            checked = true
+            taskName = "Tarea Prueba 7",
+            taskCompleted = true
         )
     )
 

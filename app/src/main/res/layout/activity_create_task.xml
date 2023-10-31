@@ -146,6 +146,7 @@
                     android:id="@+id/selection_tag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
                     android:orientation="vertical"
                     android:visibility="gone">
 

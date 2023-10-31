@@ -4,7 +4,8 @@ import java.io.Serializable
 
 data class GroupDataClass(
 
-    var name:String,
-    var description: String
+    var groupName:String,
+    var groupDescription: String,
+    var groupSelected: Boolean = false
 ): Serializable
 

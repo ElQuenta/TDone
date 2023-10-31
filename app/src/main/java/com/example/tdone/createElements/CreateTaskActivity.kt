@@ -32,80 +32,81 @@ class CreateTaskActivity : AppCompatActivity() {
 
     private val tags = mutableListOf(
         TagDataClass(
-            name = "Tag Prueba1",
-            color = R.color.tag_color1
+            tagName = "Tag Prueba1",
+            tagColor = R.color.tag_color1
         ), TagDataClass(
-            name = "Tag Prueba2",
-            color = R.color.tag_color2
+            tagName = "Tag Prueba2",
+            tagColor = R.color.tag_color2
         ), TagDataClass(
-            name = "Tag Prueba3",
-            color = R.color.tag_color3
+            tagName = "Tag Prueba3",
+            tagColor = R.color.tag_color3
         ), TagDataClass(
-            name = "Tag Prueba4",
-            color = R.color.tag_color4
+            tagName = "Tag Prueba4",
+            tagColor = R.color.tag_color4
         ), TagDataClass(
-            name = "Tag Prueba5",
-            color = R.color.tag_color5
+            tagName = "Tag Prueba5",
+            tagColor = R.color.tag_color5
         ), TagDataClass(
-            name = "Tag Prueba6",
-            color = R.color.tag_color6
+            tagName = "Tag Prueba6",
+            tagColor = R.color.tag_color6
         ), TagDataClass(
-            name = "Tag Prueba7",
-            color = R.color.tag_color7
+            tagName = "Tag Prueba7",
+            tagColor = R.color.tag_color7
         ), TagDataClass(
-            name = "Tag Prueba8",
-            color = R.color.tag_color8
+            tagName = "Tag Prueba8",
+            tagColor = R.color.tag_color8
         ), TagDataClass(
-            name = "Tag Prueba9",
-            color = R.color.tag_color9
+            tagName = "Tag Prueba9",
+            tagColor = R.color.tag_color9
         ), TagDataClass(
-            name = "Tag Prueba10",
-            color = R.color.tag_color10
+            tagName = "Tag Prueba10",
+            tagColor = R.color.tag_color10
         ), TagDataClass(
-            name = "Tag Prueba11",
-            color = R.color.tag_color11
+            tagName = "Tag Prueba11",
+            tagColor = R.color.tag_color11
         ), TagDataClass(
-            name = "Nueva Tag",
-            color = R.color.white
+            tagName = "Nueva Tag",
+            tagColor = R.color.white
         )
 
     )
     private val notes = listOf<NoteDataClass>(
         NoteDataClass(
-            name = "Prueba 1",
-            content = "Prueba 1",
-            color = R.color.background_note_color2
+            noteTittle = "Prueba 1",
+            noteBody = "Prueba 1",
+            noteBackground = R.color.background_note_color2
         ), NoteDataClass(
-            name = "Prueba 2", content = "Prueba", color = R.color.background_note_color3
+            noteTittle = "Prueba 2", noteBody = "Prueba", noteBackground = R.color.background_note_color3
         ), NoteDataClass(
-            name = "Prueba 3", content = "Prueba", color = R.color.background_note_color4
+            noteTittle = "Prueba 3", noteBody = "Prueba", noteBackground = R.color.background_note_color4
         ), NoteDataClass(
-            name = "Prueba 4", content = "Prueba", color = R.color.background_note_color5
+            noteTittle = "Prueba 4", noteBody = "Prueba", noteBackground = R.color.background_note_color5
         ), NoteDataClass(
-            name = "Prueba 5", content = "Prueba", color = R.color.background_note_color1
+            noteTittle = "Prueba 5", noteBody = "Prueba", noteBackground = R.color.background_note_color1
         ), NoteDataClass(
-            name = "Ninguno", content = "", color = R.color.background_note_color1
+            noteTittle = "Ninguno", noteBody = "", noteBackground = R.color.background_note_color1, hasVinculation = true
         )
     )
     private val groups = listOf<GroupDataClass>(
         GroupDataClass(
-            name = "Grupo Prueba1",
-            description = "Grupo Prueba1"
+            groupName = "Grupo Prueba1",
+            groupDescription = "Grupo Prueba1"
         ), GroupDataClass(
-            name = "Grupo Prueba2",
-            description = "Grupo Prueba2"
+            groupName = "Grupo Prueba2",
+            groupDescription = "Grupo Prueba2"
         ),GroupDataClass(
-            name = "Grupo Prueba3",
-            description = "Grupo Prueba1"
+            groupName = "Grupo Prueba3",
+            groupDescription = "Grupo Prueba1"
         ), GroupDataClass(
-            name = "Grupo Prueba4",
-            description = "Grupo Prueba2"
+            groupName = "Grupo Prueba4",
+            groupDescription = "Grupo Prueba2"
         ),GroupDataClass(
-            name = "Grupo Prueba5",
-            description = "Grupo Prueba1"
+            groupName = "Grupo Prueba5",
+            groupDescription = "Grupo Prueba1"
         ), GroupDataClass(
-            name = "ninguno",
-            description = ""
+            groupName = "ninguno",
+            groupDescription = "",
+            groupSelected = true
         )
     )
     private val selectedTags = mutableListOf<TagDataClass>()
@@ -138,7 +139,7 @@ class CreateTaskActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvSelectedTags.adapter = selectedTagsAdapter
 
-        selectionNoteAdapter = SelectionNotesAdapter(notes, selectedNote) { note ->
+        selectionNoteAdapter = SelectionNotesAdapter(notes) { note ->
             updateNote(note)
         }
         binding.rvSelectionNote.apply {
@@ -199,23 +200,25 @@ class CreateTaskActivity : AppCompatActivity() {
     }
 
     private fun updateNote(note: NoteDataClass) {
+        notes[notes.indexOf(selectedNote)].hasVinculation=false
         if (selectedNote != note) {
             selectedNote = note
         } else {
             selectedNote = notes.last()
         }
-        selectionNoteAdapter.currentNote = selectedNote
-        selectionNoteAdapter.notifyDataSetChanged()
+        notes[notes.indexOf(selectedNote)].hasVinculation=true
+        selectionNoteAdapter.updateNotes(notes)
     }
 
     private fun updateGroup(group: GroupDataClass) {
+        groups[groups.indexOf(selectedGroup)].groupSelected=false
         if (group != selectedGroup) {
             selectedGroup = group
         }else{
             selectedGroup = groups.last()
         }
-        selectionGroupAdapter.currentGroup=selectedGroup
-        selectionGroupAdapter.notifyDataSetChanged()
+        groups[groups.indexOf(selectedGroup)].groupSelected=true
+        selectionGroupAdapter.updateGroups(groups)
     }
 
 }
