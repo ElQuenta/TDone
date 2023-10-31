@@ -37,13 +37,18 @@ class ResizeImages : AppCompatActivity() {
     }
 
 
+    //manejar el resultado de la seleccion de las imagenes
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == REQUEST_CODE_PICK_IMAGE && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_CODE_PICK_IMAGE && resultCode == RESULT_OK) { //verificar si la imagen se subio de la manera correcta
+            //se obtiene el uri de la data
             val imageUri = data?.data
+            //si el uri no es nulo
             imageUri?.let {
+                //leer los datos en forma binaria, es un flujo de entrada
                 val inputStream = contentResolver.openInputStream(it)
+
                 val originalBitmap = BitmapFactory.decodeStream(inputStream)
                 inputStream?.close()
 
@@ -58,10 +63,13 @@ class ResizeImages : AppCompatActivity() {
                 val imagesRef = storageRef.child("images/$userUid/${System.currentTimeMillis()}.jpg")
 
                 val baos = ByteArrayOutputStream()
+                //comprime el bitmap
                 resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                //array de bytes del baos
                 val data = baos.toByteArray()
 
                 val uploadTask = imagesRef.putBytes(data)
+                //si al subida es exitosa se ejecuta el codigo
                 uploadTask.addOnSuccessListener {
                     // La imagen se ha subido exitosamente
                     // Puedes obtener la URL de descarga de la imagen
@@ -85,7 +93,7 @@ class ResizeImages : AppCompatActivity() {
 
     companion object {
         private const val REQUEST_CODE_PICK_IMAGE = 100
-        private const val targetWidth = 200
-        private const val targetHeight = 200
+        private const val targetWidth = 320
+        private const val targetHeight = 320
     }
 }
