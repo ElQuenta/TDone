@@ -2,10 +2,10 @@ package com.example.tdone.createElements
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.tdone.R
 import com.example.tdone.databinding.ActivityCreateTagBinding
+import com.example.tdone.dataclasses.TagDataClass
 import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionBackground.SelectionColorAdapter
 
 class CreateTagActivity : AppCompatActivity() {
@@ -49,6 +49,15 @@ class CreateTagActivity : AppCompatActivity() {
     }
     private fun initListeners() {
         binding.icCancel.setOnClickListener { onBackPressed() }
+        binding.btnAdd.setOnClickListener {
+            val name = binding.etTagName.text.toString()
+            if (name != null) {
+                val newTag = TagDataClass(
+                    tagName = name,
+                    tagColor = selectedColor
+                )
+            }
+        }
     }
 
     private fun updateColor(color: Int) {

@@ -601,17 +601,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
         fabAddNote.setOnClickListener {
-            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "A crear una Nota", Toast.LENGTH_SHORT).show()
             val intent = Intent(this,CreateNoteActivity::class.java)
             startActivity(intent)
         }
         fabAddTask.setOnClickListener {
-            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "A crear una Tarea", Toast.LENGTH_SHORT).show()
             val intent = Intent(this,CreateTaskActivity::class.java)
             startActivity(intent)
         }
         fabAddGroup.setOnClickListener {
-            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "A crear un Grupo", Toast.LENGTH_SHORT).show()
             val intent = Intent(this,CreateGroupActivity::class.java)
             startActivity(intent)
         }

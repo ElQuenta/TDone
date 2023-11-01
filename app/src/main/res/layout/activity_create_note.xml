@@ -52,6 +52,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <EditText
+                    android:id="@+id/et_note_title"
                     android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -174,17 +175,18 @@
                         android:layout_height="wrap_content" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="16dp"
-                    android:hint="@string/Content"
-                    android:inputType="textMultiLine"
-                    android:minHeight="48dp" />
-
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <EditText
+            android:id="@+id/et_note_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            android:hint="@string/Content"
+            android:inputType="textMultiLine"
+            android:minHeight="48dp" />
 
     </LinearLayout>
 

@@ -15,7 +15,7 @@ class SelectionColorViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
             ContextCompat.getColor(
                 binding.root.context,
                 if (color == currentColor) {
-                    R.color.purple_200
+                    R.color.selected
                 } else {
                     R.color.black
                 }
