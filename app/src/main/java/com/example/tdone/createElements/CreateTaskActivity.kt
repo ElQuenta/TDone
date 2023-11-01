@@ -8,7 +8,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.tdone.MainActivity
 import com.example.tdone.R
+import com.example.tdone.auth.SignUp
 import com.example.tdone.createElements.CreateTaskActivity.ScreenState.NO_SELECT
 import com.example.tdone.createElements.CreateTaskActivity.ScreenState.SELECT_DATE
 import com.example.tdone.createElements.CreateTaskActivity.ScreenState.SELECT_GROUP
@@ -23,6 +25,8 @@ import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionGroups.Selecti
 import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionNotes.SelectionNotesAdapter
 import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionTags.SelectionTagAdapter
 import com.example.tdone.rvHoldersYAdapters.rvTags.TagsAdapter
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Calendar
 import java.util.Locale
 
@@ -36,97 +40,41 @@ class CreateTaskActivity : AppCompatActivity() {
     private lateinit var selectionNoteAdapter: SelectionNotesAdapter
     private lateinit var selectionGroupAdapter: SelectionGroupsAdapter
 
-    private val tags = mutableListOf(
-        TagDataClass(
-            tagName = "Tag Prueba1",
-            tagColor = R.color.tag_color1
-        ), TagDataClass(
-            tagName = "Tag Prueba2",
-            tagColor = R.color.tag_color2
-        ), TagDataClass(
-            tagName = "Tag Prueba3",
-            tagColor = R.color.tag_color3
-        ), TagDataClass(
-            tagName = "Tag Prueba4",
-            tagColor = R.color.tag_color4
-        ), TagDataClass(
-            tagName = "Tag Prueba5",
-            tagColor = R.color.tag_color5
-        ), TagDataClass(
-            tagName = "Tag Prueba6",
-            tagColor = R.color.tag_color6
-        ), TagDataClass(
-            tagName = "Tag Prueba7",
-            tagColor = R.color.tag_color7
-        ), TagDataClass(
-            tagName = "Tag Prueba8",
-            tagColor = R.color.tag_color8
-        ), TagDataClass(
-            tagName = "Tag Prueba9",
-            tagColor = R.color.tag_color9
-        ), TagDataClass(
-            tagName = "Tag Prueba10",
-            tagColor = R.color.tag_color10
-        ), TagDataClass(
-            tagName = "Tag Prueba11",
-            tagColor = R.color.tag_color11
-        ), TagDataClass(
-            tagName = "Nueva Tag",
-            tagColor = R.color.white
-        )
-
-    )
-    private val notes = listOf<NoteDataClass>(
-        NoteDataClass(
-            noteTittle = "Prueba 1",
-            noteBody = "Prueba 1",
-            noteBackground = R.color.background_note_color2
-        ), NoteDataClass(
-            noteTittle = "Prueba 2", noteBody = "Prueba", noteBackground = R.color.background_note_color3
-        ), NoteDataClass(
-            noteTittle = "Prueba 3", noteBody = "Prueba", noteBackground = R.color.background_note_color4
-        ), NoteDataClass(
-            noteTittle = "Prueba 4", noteBody = "Prueba", noteBackground = R.color.background_note_color5
-        ), NoteDataClass(
-            noteTittle = "Prueba 5", noteBody = "Prueba", noteBackground = R.color.background_note_color1
-        ), NoteDataClass(
-            noteTittle = "Ninguno", noteBody = "", noteBackground = R.color.background_note_color1, hasVinculation = true
-        )
-    )
-    private val groups = listOf<GroupDataClass>(
-        GroupDataClass(
-            groupName = "Grupo Prueba1",
-            groupDescription = "Grupo Prueba1"
-        ), GroupDataClass(
-            groupName = "Grupo Prueba2",
-            groupDescription = "Grupo Prueba2"
-        ),GroupDataClass(
-            groupName = "Grupo Prueba3",
-            groupDescription = "Grupo Prueba1"
-        ), GroupDataClass(
-            groupName = "Grupo Prueba4",
-            groupDescription = "Grupo Prueba2"
-        ),GroupDataClass(
-            groupName = "Grupo Prueba5",
-            groupDescription = "Grupo Prueba1"
-        ), GroupDataClass(
-            groupName = "ninguno",
-            groupDescription = "",
-            groupSelected = true
-        )
-    )
+    private lateinit var alltasks: MutableList<TaskDataClass>
+    private lateinit var allNotes: MutableList<NoteDataClass>
+    private lateinit var tags: MutableList<TagDataClass>
+    private lateinit var notes: MutableList<NoteDataClass>
+    private lateinit var groups: List<GroupDataClass>
     private val selectedTags = mutableListOf<TagDataClass>()
-    private var selectedNote = notes.last()
-    private var selectedGroup = groups.last()
+    private lateinit var selectedNote: NoteDataClass
+    private lateinit var selectedGroup: GroupDataClass
     private var selectedDate: Long? = null
     private var selectedDateString: String? = null
+
+    private val db = FirebaseFirestore.getInstance()
+    private val user = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initListeners()
+        initValues()
+        notes.add(NoteDataClass("Ninguna"," ", noteBackground = R.color.white))
+        selectedNote=notes.last()
+        tags.add(TagDataClass("Nueva Tag",R.color.white))
+        selectedGroup=groups.last()
         initUi()
+        initListeners()
+    }
+
+    private fun initValues() {
+        db.collection(SignUp.KEY_USER).document(user?.email!!).get().addOnSuccessListener {
+            allNotes = it.get(SignUp.KEY_ALL_NOTES) as MutableList<NoteDataClass>
+            alltasks = it.get(SignUp.KEY_ALL_TASKS) as MutableList<TaskDataClass>
+            groups = it.get(SignUp.KEY_ALL_GROUPS) as MutableList<GroupDataClass>
+            tags = it.get(SignUp.KEY_ALL_TAGS) as MutableList<TagDataClass>
+        }
+        notes = allNotes.filter { notes -> !notes.hasVinculation }.toMutableList()
     }
 
     enum class ScreenState() {
@@ -136,7 +84,8 @@ class CreateTaskActivity : AppCompatActivity() {
     private var screenState = NO_SELECT
 
     private fun initUi() {
-        selectionTagsAdapter = SelectionTagAdapter(tags,
+        selectionTagsAdapter = SelectionTagAdapter(
+            tags,
             change = { tag, isChecked ->
                 updateTag(tag, isChecked)
             },
@@ -211,8 +160,29 @@ class CreateTaskActivity : AppCompatActivity() {
                     taskEndDate = selectedDate,
                     taskEndDateString = selectedDateString
                 )
+                alltasks.add(newTask)
+                val changes: HashMap<String, Any>
+                if (newTask.hasVinculation) {
+                    allNotes[allNotes.indexOf(selectedNote)].hasVinculation = true
+                    allNotes[allNotes.indexOf(selectedNote)].noteVinculation = newTask
+                    changes = hashMapOf(
+                        SignUp.KEY_ALL_TASKS to alltasks,
+                        SignUp.KEY_ALL_NOTES to allNotes
+                    )
+                } else {
+                    changes = hashMapOf(SignUp.KEY_ALL_TASKS to alltasks)
+                }
+                updateData(changes)
             }
         }
+    }
+
+    private fun updateData(changes: java.util.HashMap<String, Any>) {
+        db.collection(SignUp.KEY_USER).document(user?.email!!).update(changes)
+            .addOnSuccessListener {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
     }
 
     private fun changeScreenState(newScreenState: ScreenState) {

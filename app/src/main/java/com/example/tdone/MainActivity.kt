@@ -121,15 +121,14 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private lateinit var notes: MutableList<NoteDataClass>
     private lateinit var tasks: MutableList<TaskDataClass>
-    private lateinit var recentNotes: List<NoteDataClass>
-    private lateinit var nearEndTasks: List<TaskDataClass>
-    private lateinit var allGroups: List<GroupDataClass>
-    private lateinit var allTags: List<TagDataClass>
-    private lateinit var allNotes: List<NoteDataClass>
-    private lateinit var allTasks: List<TaskDataClass>
-    private lateinit var history: List<TaskDataClass>
+    private lateinit var recentNotes: MutableList<NoteDataClass>
+    private lateinit var nearEndTasks: MutableList<TaskDataClass>
+    private lateinit var allNotes: MutableList<NoteDataClass>
+    private lateinit var allGroups: MutableList<GroupDataClass>
+    private lateinit var allTags: MutableList<TagDataClass>
+    private lateinit var allTasks: MutableList<TaskDataClass>
+    private lateinit var history: MutableList<TaskDataClass>
 
 
     private fun saveImageToSharedPreferences(bitmap: Bitmap) {
@@ -214,19 +213,25 @@ class MainActivity : AppCompatActivity() {
 
     private fun initValues() {
         db.collection(SignUp.KEY_USER).document(user?.email!!).get().addOnSuccessListener {
-            notes = it.get(SignUp.KEY_ALL_NOTES) as MutableList<NoteDataClass>
+            allNotes = it.get(SignUp.KEY_ALL_NOTES) as MutableList<NoteDataClass>
             tasks = it.get(SignUp.KEY_ALL_TASKS) as MutableList<TaskDataClass>
+            allGroups = it.get(SignUp.KEY_ALL_GROUPS) as MutableList<GroupDataClass>
+            allTags = it.get(SignUp.KEY_ALL_TAGS) as MutableList<TagDataClass>
         }
         val date = SimpleDateFormat(
             "ddMMyyyy",
             Locale.getDefault()
         ).format(Calendar.getInstance().timeInMillis).toLong()
-        recentNotes = notes.filter { note ->                      //00-00-0000
-            note.lastUpdate < date+1000000 && note.lastUpdate > date-3000000}
-            .drop(if (notes.size > 5) notes.size - 5 else 0)
+        recentNotes = allNotes.filter { note ->                      //00-00-0000
+            note.lastUpdate < date + 1000000 && note.lastUpdate > date - 3000000
+        }.toMutableList()
+        recentNotes.drop(if (recentNotes.size > 5) recentNotes.size - 5 else 0)
         nearEndTasks = tasks.filter { task ->
-            task.taskEndDate!! <date+5000000
-        }
+            task.taskEndDate!! < date + 5000000
+        }.toMutableList()
+        history = tasks.filter { task -> task.taskCompleted }.toMutableList()
+        allTasks = tasks.filter { task -> !task.taskCompleted }.toMutableList()
+
     }
 
 
@@ -649,6 +654,22 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, TaskViewActivity::class.java)
         intent.putExtra(KEY_TASK, task)
         startActivity(intent)
+    }
+    private fun updateTasksLists(task: TaskDataClass,isChecked:Boolean){
+        tasks[tasks.indexOf(task)].taskCompleted = isChecked
+        val changes = hashMapOf<String,Any>(SignUp.KEY_ALL_TASKS to tasks)
+        updateScreen(changes)
+    }
+
+    private fun updateScreen(changes : HashMap<String,Any>){
+        db.collection(SignUp.KEY_USER).document(user?.email!!).update(changes)
+        initValues()
+        currentNotesAdapter.notifyDataSetChanged()
+        nearToEndTaskAdapter.notifyDataSetChanged()
+        allNotesAdapter.notifyDataSetChanged()
+        allTasksAdapter.notifyDataSetChanged()
+        allGroupsAdapter.notifyDataSetChanged()
+        historyAdapter.notifyDataSetChanged()
     }
 
     private fun navigateNote(note: NoteDataClass) {

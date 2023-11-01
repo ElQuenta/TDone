@@ -8,7 +8,7 @@ import java.util.Locale
 data class NoteDataClass(
     val noteTittle: String,
     var noteBody: String,
-    val noteVinculation: TaskDataClass? = null,
+    var noteVinculation: TaskDataClass? = null,
     var hasVinculation: Boolean = false,
     var noteTags: List<TagDataClass> = listOf(),
     var noteFront: ImageDataClass? = null, //investigar referencia al archivo de las imagenes

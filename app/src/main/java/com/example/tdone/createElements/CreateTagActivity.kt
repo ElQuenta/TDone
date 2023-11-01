@@ -1,12 +1,17 @@
 package com.example.tdone.createElements
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.tdone.MainActivity
 import com.example.tdone.R
+import com.example.tdone.auth.SignUp
 import com.example.tdone.databinding.ActivityCreateTagBinding
 import com.example.tdone.dataclasses.TagDataClass
 import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionBackground.SelectionColorAdapter
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class CreateTagActivity : AppCompatActivity() {
 
@@ -28,13 +33,23 @@ class CreateTagActivity : AppCompatActivity() {
         R.color.tag_color12
     )
     private var selectedColor = colors[0]
+    private lateinit var tags: MutableList<TagDataClass>
+    private val db = FirebaseFirestore.getInstance()
+    private val user = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateTagBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initValues()
         initUi()
         initListeners()
+    }
+
+    private fun initValues() {
+        db.collection(SignUp.KEY_USER).document(user?.email!!).get().addOnSuccessListener {
+            tags = it.get(SignUp.KEY_ALL_TAGS) as MutableList<TagDataClass>
+        }
     }
 
     private fun initUi() {
@@ -56,8 +71,18 @@ class CreateTagActivity : AppCompatActivity() {
                     tagName = name,
                     tagColor = selectedColor
                 )
+                tags.add(newTag)
+                val changes = hashMapOf<String, Any>(SignUp.KEY_ALL_TAGS to tags)
+                updateData(changes)
             }
         }
+    }
+
+    private fun updateData(changes: java.util.HashMap<String, Any>) {
+        db.collection(SignUp.KEY_USER).document(user?.email!!).update(changes)
+            .addOnSuccessListener {
+                onBackPressed()
+            }
     }
 
     private fun updateColor(color: Int) {
