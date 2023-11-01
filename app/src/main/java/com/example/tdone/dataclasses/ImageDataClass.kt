@@ -7,5 +7,5 @@ data class ImageDataClass(
     val refImage: Int=0,
     var isReferenceImage: Boolean = true,
     var selected: Boolean = false,
-    val uriImage: Uri? = null
+    var uriImage: Uri? = null
 ): Serializable

@@ -312,6 +312,8 @@ class CreateNoteActivity : AppCompatActivity() {
 
         if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK && data != null) {
             selectedImageUri = data.data
+            fronts.last().uriImage= data.data
+            selectionFrontAdapter.updateImages(fronts)
 
             // También puedes actualizar la vista de la imagen seleccionada
             binding.ivFrontNote.setImageURI(selectedImageUri)
