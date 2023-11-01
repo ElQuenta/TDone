@@ -35,4 +35,6 @@
     <string name="time_verify">Tienes 15 segundos para verificar tu e-mail</string>
     <string name="not_matching">La contraseña no coincide</string>
     <string name="verify_email">Verifique su correo electrónico para continuar</string>
+    <string name="welcom_user_title">Introduciendo a TDone</string>
+    <string name="welcom_user_body">Bienvenido a TDone, crea notas, tareas y personaliza tu estadia</string>
 </resources>

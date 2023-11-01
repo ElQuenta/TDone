@@ -36,4 +36,7 @@
     <string name="time_verify">You have 15 seconds to verify your e-mail</string>
     <string name="not_matching">Password is not matching</string>
     <string name="verify_email">Verify your email to continue</string>
+    <string name="welcom_user_title">Introducing TDone</string>
+    <string name="welcom_user_body">Welcome to TDone, make notes, tasks and personalize your experience</string>
+
 </resources>
