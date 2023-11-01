@@ -7,14 +7,30 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tdone.R
 import com.example.tdone.databinding.ActivitySignUpBinding
+import com.example.tdone.dataclasses.GroupDataClass
+import com.example.tdone.dataclasses.NoteDataClass
+import com.example.tdone.dataclasses.TagDataClass
+import com.example.tdone.dataclasses.TaskDataClass
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SignUp : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    private val dataBase = FirebaseFirestore.getInstance()
+
+    companion object {
+        const val KEY_USER = "key_user"
+        const val KEY_ALL_NOTES = "key_all_notes"
+        const val KEY_ALL_TASKS = "key_all_tasks"
+        const val KEY_ALL_TAGS = "key_all_tags"
+        const val KEY_ALL_GROUPS = "key_all_groups"
+
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +96,7 @@ class SignUp : AppCompatActivity() {
                 Handler().postDelayed({
                     user.reload().addOnCompleteListener { reloadTask ->
                         if (reloadTask.isSuccessful) {
+                            createDocumentForUser(user)
                             if (user.isEmailVerified) {
                                 // Redirigimos al usuario a la pantalla de inicio de sesión si el correo electrónico está verificado.
                                 val intent = Intent(this, SignIn::class.java)
@@ -93,5 +110,21 @@ class SignUp : AppCompatActivity() {
                 }, 10000)
             }
         }
+    }
+
+    private fun createDocumentForUser(user: FirebaseUser) {
+        dataBase.collection(KEY_USER).document(user.email!!).set(
+            hashMapOf(
+                KEY_ALL_NOTES to mutableListOf<NoteDataClass>(
+                    NoteDataClass(
+                        noteTittle = R.string.welcom_user_title.toString(),
+                        noteBody = R.string.welcom_user_body.toString(),
+                        noteBackground = R.color.background_note_color2
+                    )
+                ), KEY_ALL_TASKS to mutableListOf<TaskDataClass>(),
+                KEY_ALL_TAGS to mutableListOf<TagDataClass>(),
+                KEY_ALL_GROUPS to mutableListOf<GroupDataClass>()
+            )
+        )
     }
 }

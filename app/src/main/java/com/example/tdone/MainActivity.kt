@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Rect
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
@@ -23,6 +24,7 @@ import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tdone.auth.SignIn
+import com.example.tdone.auth.SignUp
 import com.example.tdone.createElements.CreateGroupActivity
 import com.example.tdone.createElements.CreateNoteActivity
 import com.example.tdone.createElements.CreateTaskActivity
@@ -41,7 +43,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
 import java.io.ByteArrayOutputStream
+import java.util.Calendar
 import java.util.Locale
 
 
@@ -65,6 +69,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var allTasksAdapter: BaseTasksAdapter
     private lateinit var allGroupsAdapter: BaseGroupsAdapter
     private lateinit var historyAdapter: BaseTasksAdapter
+
+    private val db = FirebaseFirestore.getInstance()
 
     enum class Screens() {
         HOME, NOTES, TASKS, GROUPS, HISTORY;
@@ -115,289 +121,21 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    private val notes = listOf<NoteDataClass>(
-        NoteDataClass(
-            noteTittle = "Prueba 1",
-            noteBody = "En un mundo cada vez más conectado y globalizado, la comunicación efectiva se ha convertido en una habilidad esencial. Ya sea en el ámbito personal o profesional, la capacidad de expresar ideas de manera clara y coherente es fundamental para establecer relaciones significativas y alcanzar el éxito.\n\nEn el contexto actual, la tecnología desempeña un papel crucial en nuestras vidas. La omnipresencia de los dispositivos electrónicos y la disponibilidad de internet han transformado la forma en que interactuamos con el mundo que nos rodea. Estamos constantemente expuestos a una avalancha de información, lo que nos brinda la oportunidad de aprender y crecer, pero también nos desafía a discernir entre lo relevante y lo superfluo.\n\nEn este escenario, la educación se erige como el pilar fundamental sobre el cual se construye el futuro. Las instituciones educativas tienen la responsabilidad de preparar a las generaciones venideras para enfrentar los desafíos del siglo XXI. Esto implica no solo impartir conocimientos académicos, sino también fomentar habilidades como el pensamiento crítico, la creatividad y la colaboración. Los educadores desempeñan un papel vital al guiar y apoyar a los estudiantes en su viaje de aprendizaje.\n\nAdemás, la conciencia sobre cuestiones medioambientales y sociales está en aumento. La sostenibilidad se ha convertido en un tema central en las agendas de gobiernos, empresas y ciudadanos. La necesidad de preservar nuestro planeta para las generaciones futuras impulsa iniciativas en áreas como la energía renovable, la conservación de recursos y la reducción de emisiones de carbono.\n\nEn conclusión, vivimos en una era emocionante y desafiante, llena de oportunidades y responsabilidades. Es crucial que nos adaptemos a los cambios, aprendamos de las experiencias pasadas y trabajemos juntos para construir un futuro mejor y más equitativo para todos.",
-            noteBackground = R.color.background_note_color2
-        ), NoteDataClass(
-            noteTittle = "Prueba 2", noteBody = "Prueba", noteBackground = R.color.background_note_color3
-        ), NoteDataClass(
-            noteTittle = "Prueba 3", noteBody = "Prueba", noteBackground = R.color.background_note_color4
-        ), NoteDataClass(
-            noteTittle = "Prueba 4", noteBody = "Prueba", noteBackground = R.color.background_note_color5
-        ), NoteDataClass(
-            noteTittle = "Prueba 5", noteBody = "Prueba", noteBackground = R.color.background_note_color1
-        )
-    )
-
-    private val groups = listOf<GroupDataClass>(
-        GroupDataClass(
-            groupName = "Grupo Prueba1",
-            groupDescription = "Grupo Prueba1"
-        ), GroupDataClass(
-            groupName = "Grupo Prueba2",
-            groupDescription = "Grupo Prueba2"
-        ), GroupDataClass(
-            groupName = "Grupo Prueba1",
-            groupDescription = "Grupo Prueba1"
-        ), GroupDataClass(
-            groupName = "Grupo Prueba2",
-            groupDescription = "Grupo Prueba2"
-        ), GroupDataClass(
-            groupName = "Grupo Prueba1",
-            groupDescription = "Grupo Prueba1"
-        ), GroupDataClass(
-            groupName = "Grupo Prueba2",
-            groupDescription = "Grupo Prueba2"
-        ), GroupDataClass(
-            groupName = "Grupo Prueba1",
-            groupDescription = "Grupo Prueba1"
-        ), GroupDataClass(
-            groupName = "Grupo Prueba2",
-            groupDescription = "Grupo Prueba2"
-        )
-    )
-
-    private val tags = listOf<TagDataClass>(
-        TagDataClass(
-            tagName = "Tag Prueba1",
-            tagColor = R.color.tag_color1
-        ), TagDataClass(
-            tagName = "Tag Prueba2",
-            tagColor = R.color.tag_color2
-        ), TagDataClass(
-            tagName = "Tag Prueba3",
-            tagColor = R.color.tag_color3
-        ), TagDataClass(
-            tagName = "Tag Prueba4",
-            tagColor = R.color.tag_color4
-        )
-    )
-
-    private val nearToEndTasks = listOf<TaskDataClass>(
-        TaskDataClass(
-            taskName = "Tarea Prueba 1",
-            taskTags = listOf(tags[0]),
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 2",
-            taskTags = listOf(tags[1]),
-            taskGroup = groups[1]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 3",
-            taskTags = listOf(tags[2]),
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 4",
-            taskTags = listOf(tags[0], tags[1]),
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 5",
-            taskTags = listOf(tags[2], tags[3]),
-            taskGroup = groups[1]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 6",
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 7"
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 8",
-            taskTags = listOf(tags[2], tags[3])
-        )
-    )
-
-    private val allNotes = mutableListOf<NoteDataClass>(
-        NoteDataClass(
-            noteTittle = "Prueba 1", noteBody = "Prueba", noteBackground = R.color.background_note_color2
-        ), NoteDataClass(
-            noteTittle = "Prueba 2", noteBody = "Prueba", noteBackground = R.color.background_note_color3
-        ), NoteDataClass(
-            noteTittle = "Prueba 3", noteBody = "Prueba", noteBackground = R.color.background_note_color4
-        ), NoteDataClass(
-            noteTittle = "Prueba 4", noteBody = "Prueba", noteBackground = R.color.background_note_color5
-        ), NoteDataClass(
-            noteTittle = "Prueba 5", noteBody = "Prueba", noteBackground = R.color.background_note_color1
-        ), NoteDataClass(
-            noteTittle = "Prueba 1", noteBody = "Prueba", noteBackground = R.color.background_note_color2
-        ), NoteDataClass(
-            noteTittle = "Prueba 2", noteBody = "Prueba", noteBackground = R.color.background_note_color3
-        ), NoteDataClass(
-            noteTittle = "Prueba 3", noteBody = "Prueba", noteBackground = R.color.background_note_color4
-        ), NoteDataClass(
-            noteTittle = "Prueba 4", noteBody = "Prueba", noteBackground = R.color.background_note_color5
-        ), NoteDataClass(
-            noteTittle = "Prueba 5", noteBody = "Prueba", noteBackground = R.color.background_note_color1
-        ), NoteDataClass(
-            noteTittle = "Prueba 1", noteBody = "Prueba", noteBackground = R.color.background_note_color2
-        ), NoteDataClass(
-            noteTittle = "Prueba 2", noteBody = "Prueba", noteBackground = R.color.background_note_color3
-        ), NoteDataClass(
-            noteTittle = "Prueba 3", noteBody = "Prueba", noteBackground = R.color.background_note_color4
-        ), NoteDataClass(
-            noteTittle = "Prueba 4", noteBody = "Prueba", noteBackground = R.color.background_note_color5
-        ), NoteDataClass(
-            noteTittle = "Prueba 5", noteBody = "Prueba", noteBackground = R.color.background_note_color1
-        ), NoteDataClass(
-            noteTittle = "Prueba 1", noteBody = "Prueba", noteBackground = R.color.background_note_color2
-        ), NoteDataClass(
-            noteTittle = "Prueba 2", noteBody = "Prueba", noteBackground = R.color.background_note_color3
-        ), NoteDataClass(
-            noteTittle = "Prueba 3", noteBody = "Prueba", noteBackground = R.color.background_note_color4
-        ), NoteDataClass(
-            noteTittle = "Prueba 4", noteBody = "Prueba", noteBackground = R.color.background_note_color5
-        ), NoteDataClass(
-            noteTittle = "Prueba 5", noteBody = "Prueba", noteBackground = R.color.background_note_color1
-        )
-    )
-
-    private val allTasks = mutableListOf<TaskDataClass>(
-        TaskDataClass(
-            taskName = "Tarea Prueba 1",
-            taskTags = listOf(tags[0]),
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 2",
-            taskTags = listOf(tags[1]),
-            taskGroup = groups[1]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 3",
-            taskTags = listOf(tags[2]),
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 4",
-            taskTags = listOf(tags[0], tags[1]),
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 5",
-            taskTags = listOf(tags[2], tags[3]),
-            taskGroup = groups[1]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 6",
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 7",
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 1",
-            taskTags = listOf(tags[0]),
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 2",
-            taskTags = listOf(tags[1]),
-            taskGroup = groups[1]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 3",
-            taskTags = listOf(tags[2]),
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 4",
-            taskTags = listOf(tags[0], tags[1]),
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 5",
-            taskTags = listOf(tags[2], tags[3]),
-            taskGroup = groups[1]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 6",
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 7",
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 1",
-            taskTags = listOf(tags[0]),
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 2",
-            taskTags = listOf(tags[1]),
-            taskGroup = groups[1]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 3",
-            taskTags = listOf(tags[2]),
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 4",
-            taskTags = listOf(tags[0], tags[1]),
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 5",
-            taskTags = listOf(tags[2], tags[3]),
-            taskGroup = groups[1]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 6",
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 7",
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 1",
-            taskTags = listOf(tags[0]),
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 2",
-            taskTags = listOf(tags[1]),
-            taskGroup = groups[1]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 3",
-            taskTags = listOf(tags[2]),
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 4",
-            taskTags = listOf(tags[0], tags[1]),
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 5",
-            taskTags = listOf(tags[2], tags[3]),
-            taskGroup = groups[1]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 6",
-            taskGroup = groups[0]
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 7",
-        )
-    )
-
-    private val history = mutableListOf<TaskDataClass>(
-        TaskDataClass(
-            taskName = "Tarea Prueba 1",
-            taskTags = listOf(tags[0]),
-            taskGroup = groups[0],
-            taskCompleted = true
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 2",
-            taskTags = listOf(tags[1]),
-            taskGroup = groups[1],
-            taskCompleted = true
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 3",
-            taskTags = listOf(tags[2]),
-            taskGroup = groups[0],
-            taskCompleted = true
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 4",
-            taskTags = listOf(tags[0], tags[1]),
-            taskGroup = groups[0],
-            taskCompleted = true
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 5",
-            taskTags = listOf(tags[2], tags[3]),
-            taskGroup = groups[1],
-            taskCompleted = true
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 6",
-            taskGroup = groups[0],
-            taskCompleted = true
-        ), TaskDataClass(
-            taskName = "Tarea Prueba 7",
-            taskCompleted = true
-        )
-    )
-
-
-
+    private lateinit var notes: MutableList<NoteDataClass>
+    private lateinit var tasks: MutableList<TaskDataClass>
+    private lateinit var recentNotes: List<NoteDataClass>
+    private lateinit var nearEndTasks: List<TaskDataClass>
+    private lateinit var allGroups: List<GroupDataClass>
+    private lateinit var allTags: List<TagDataClass>
+    private lateinit var allNotes: List<NoteDataClass>
+    private lateinit var allTasks: List<TaskDataClass>
+    private lateinit var history: List<TaskDataClass>
 
 
     private fun saveImageToSharedPreferences(bitmap: Bitmap) {
         // Obteniene una referencia a las SharedPreferences llamadas "MisPrefs".
-        val sharedPreferences: SharedPreferences = getSharedPreferences("MisPrefs", Context.MODE_PRIVATE)
+        val sharedPreferences: SharedPreferences =
+            getSharedPreferences("MisPrefs", Context.MODE_PRIVATE)
 
         // Crea un editor de SharedPreferences para realizar cambios.
         val editor = sharedPreferences.edit()
@@ -436,15 +174,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
-
-
-
-
-
-
-
     private val PICK_IMAGE_REQUEST = 1
     private var isExpanded = false
 
@@ -476,10 +205,29 @@ class MainActivity : AppCompatActivity() {
             pickPhoto(it)
         }
 
+        initValues()
+
         initUi()
+
         initListeners()
     }
 
+    private fun initValues() {
+        db.collection(SignUp.KEY_USER).document(user?.email!!).get().addOnSuccessListener {
+            notes = it.get(SignUp.KEY_ALL_NOTES) as MutableList<NoteDataClass>
+            tasks = it.get(SignUp.KEY_ALL_TASKS) as MutableList<TaskDataClass>
+        }
+        val date = SimpleDateFormat(
+            "ddMMyyyy",
+            Locale.getDefault()
+        ).format(Calendar.getInstance().timeInMillis).toLong()
+        recentNotes = notes.filter { note ->                      //00-00-0000
+            note.lastUpdate < date+1000000 && note.lastUpdate > date-3000000}
+            .drop(if (notes.size > 5) notes.size - 5 else 0)
+        nearEndTasks = tasks.filter { task ->
+            task.taskEndDate!! <date+5000000
+        }
+    }
 
 
 //        user = FirebaseAuth.getInstance().currentUser
@@ -624,7 +372,7 @@ class MainActivity : AppCompatActivity() {
          */
 
         currentNotesAdapter = BaseNotesAdapter(
-            notes,
+            recentNotes,
             getSize().getMainScreenWidth(this)
         ) { note ->
             navigateNote(note)
@@ -633,7 +381,7 @@ class MainActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvCurrentNotes.adapter = currentNotesAdapter
 
-        nearToEndTaskAdapter = BaseTasksAdapter(nearToEndTasks) { task ->
+        nearToEndTaskAdapter = BaseTasksAdapter(nearEndTasks) { task ->
             navigateTask(task)
         }
         binding.rvNearToEndTasks.layoutManager = LinearLayoutManager(this)
@@ -643,7 +391,7 @@ class MainActivity : AppCompatActivity() {
         Screen Group
          */
 
-        allGroupsAdapter = BaseGroupsAdapter(groups){ group ->
+        allGroupsAdapter = BaseGroupsAdapter(allGroups) { group ->
             navigateGroup(group)
         }
         binding.rvAllGroups.layoutManager = LinearLayoutManager(this)
