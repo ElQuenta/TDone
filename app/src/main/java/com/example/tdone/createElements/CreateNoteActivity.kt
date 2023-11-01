@@ -1,7 +1,10 @@
 package com.example.tdone.createElements
 
+import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -169,6 +172,7 @@ class CreateNoteActivity : AppCompatActivity() {
     private val selectedTags = mutableListOf<TagDataClass>()
     private var selectedColor = colors[0]
     private var selectedFront = fronts[0]
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateNoteBinding.inflate(layoutInflater)
@@ -303,6 +307,19 @@ class CreateNoteActivity : AppCompatActivity() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            selectedImageUri = data.data
+
+            // También puedes actualizar la vista de la imagen seleccionada
+            binding.ivFrontNote.setImageURI(selectedImageUri)
+        }
+    }
+
+    private var selectedImageUri: Uri? = null
+    private val IMAGE_PICK_CODE = 1000
     private fun updateFront(image: ImageDataClass) {
         fronts[fronts.indexOf(selectedFront)].selected = false
         if (selectedFront != image) {
@@ -312,13 +329,20 @@ class CreateNoteActivity : AppCompatActivity() {
                 }
 
                 fronts.last() -> {
+                    image.isReferenceImage = false
+
                     if (image.isReferenceImage) {
                         binding.ivFrontNote.setImageResource(image.refImage)
                     } else {
-                        binding.ivFrontNote.setImageURI(image.uriImage)
+                        // Abre la galería para seleccionar una imagen
+                        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+                        startActivityForResult(intent, IMAGE_PICK_CODE)
                     }
+
                     binding.ivFrontNote.visibility = View.VISIBLE
                 }
+
+
 
                 else -> {
                     if (image.isReferenceImage) {
