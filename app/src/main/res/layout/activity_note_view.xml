@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".viewIntoElements.NoteViewActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray"
+        android:elevation="1dp"
+        android:theme="?attr/actionBarTheme"
+        app:navigationIcon="@drawable/ic_back" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_note_tittle"
+                style="@style/TDone_titles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Nota 1" />
+
+            <View
+                android:id="@+id/div"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/black" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rv_selected_tags"/>
+
+            <TextView
+                android:id="@+id/tv_note_body"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="50dp"
+                android:scrollbars="vertical"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus cursus urna in odio fermentum, id cursus dolor vehicula. Nulla facilisi. Quisque consequat orci ac turpis cursus, ac rhoncus mi pulvinar. Suspendisse lacinia semper urna, et vulputate magna placerat id. Curabitur suscipit libero ut mi semper, ac eleifend quam fermentum. Praesent vitae elit et augue gravida imperdiet. Fusce non neque ut massa dapibus malesuada. Quisque aliquam orci in risus tincidunt, nec rhoncus justo bibendum. Curabitur dignissim nisi non purus pellentesque, vel fringilla elit cursus. Maecenas sed arcu in odio laoreet tincidunt non vel libero. Integer eu magna in arcu vestibulum pharetra. Sed auctor tortor et nunc vestibulum, vel interdum nunc pellentesque. Integer fermentum, velit nec ullamcorper tincidunt, odio dolor posuere ligula, et condimentum sapien arcu non dui. Maecenas ullamcorper tellus vitae tellus lobortis, vitae pharetra arcu auctor." />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

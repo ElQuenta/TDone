@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@color/colorGris"
+    tools:context=".MainActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_profile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:onClick="pickPhoto"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="50dp"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <!-- Un CardView que se utilizará para mostrar la imagen de perfil del usuario. -->
+
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/ic_launcher_background"/>
+        <!-- Un ImageView dentro del CardView para mostrar la imagen de perfil. -->
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        tools:text="Jorge Luis Kalla"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/cv_profile"
+        app:layout_constraintTop_toTopOf="@+id/cv_profile" />
+    <!-- Un TextView para mostrar el nombre del usuario, posicionado a la derecha del CardView. -->
+
+    <TextView
+        android:id="@+id/tv_user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxEms="16"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="6dp"
+        android:textSize="15sp"
+        tools:text="JorgeK@gmail.com"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/cv_profile"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
+    <!-- Un TextView para mostrar el correo electrónico del usuario, posicionado debajo del nombre. -->
+</androidx.constraintlayout.widget.ConstraintLayout>

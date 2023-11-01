@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "818243053322",
+    "project_id": "tdone-bbe79",
+    "storage_bucket": "tdone-bbe79.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818243053322:android:56c9c9bf0b281d1e08fcf3",
+        "android_client_info": {
+          "package_name": "com.example.tdone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATv0w_-y2jNblOfaQAIrtAVe2yn9vH_g4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
