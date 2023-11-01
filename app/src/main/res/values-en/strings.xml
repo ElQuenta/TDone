@@ -38,5 +38,14 @@
     <string name="verify_email">Verify your email to continue</string>
     <string name="welcom_user_title">Introducing TDone</string>
     <string name="welcom_user_body">Welcome to TDone, make notes, tasks and personalize your experience</string>
-
+    <string name="Fecha_escogida">Date Selected</string>
+    <string name="Selecciona_una_fecha_futura">Select a future date</string>
+    <string name="Inicio">Home😀</string>
+    <string name="Notas">Notes</string>
+    <string name="Tareas">Tasks</string>
+    <string name="Grupos">Groups</string>
+    <string name="Historal">History</string>
+    <string name="A_crear_una_Nota">Create a note</string>
+    <string name="A_crear_una_tarea">Create a task</string>
+    <string name="A_crear_un_grupo">Create a group</string>
 </resources>

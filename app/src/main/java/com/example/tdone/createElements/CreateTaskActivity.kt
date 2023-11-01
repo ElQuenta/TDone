@@ -189,13 +189,13 @@ class CreateTaskActivity : AppCompatActivity() {
                 this.selectedDate = sdf2.format(selectedDate.time).toLong()
                 Toast.makeText(
                     this,
-                    "Fecha escogida ${selectedDateString ?: ""}",
+                     "${R.string.Fecha_escogida} ${selectedDateString ?:""}",
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
                 // La fecha seleccionada es anterior o igual a la fecha actual
                 // Puedes mostrar un mensaje o realizar otra acción si lo deseas
-                Toast.makeText(this, "Selecciona una fecha futura", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.Selecciona_una_fecha_futura, Toast.LENGTH_SHORT).show()
             }
 
         }

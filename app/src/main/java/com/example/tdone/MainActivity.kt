@@ -70,11 +70,11 @@ class MainActivity : AppCompatActivity() {
         HOME, NOTES, TASKS, GROUPS, HISTORY;
 
         fun navMessage(): String = when (this) {
-            HOME -> "Inicio😀"
-            NOTES -> "Notas"
-            TASKS -> "Tareas"
-            GROUPS -> "Grupos"
-            HISTORY -> "Historal"
+            HOME -> R.string.Inicio.toString()
+            NOTES -> R.string.Notas.toString()
+            TASKS -> R.string.Tareas.toString()
+            GROUPS -> R.string.Grupos.toString()
+            HISTORY -> R.string.Historal.toString()
         }
     }
 
@@ -601,17 +601,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
         fabAddNote.setOnClickListener {
-            Toast.makeText(this, "A crear una Nota", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,R.string.A_crear_una_Nota, Toast.LENGTH_SHORT).show()
             val intent = Intent(this,CreateNoteActivity::class.java)
             startActivity(intent)
         }
         fabAddTask.setOnClickListener {
-            Toast.makeText(this, "A crear una Tarea", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.A_crear_una_tarea, Toast.LENGTH_SHORT).show()
             val intent = Intent(this,CreateTaskActivity::class.java)
             startActivity(intent)
         }
         fabAddGroup.setOnClickListener {
-            Toast.makeText(this, "A crear un Grupo", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,R.string.A_crear_un_grupo, Toast.LENGTH_SHORT).show()
             val intent = Intent(this,CreateGroupActivity::class.java)
             startActivity(intent)
         }
