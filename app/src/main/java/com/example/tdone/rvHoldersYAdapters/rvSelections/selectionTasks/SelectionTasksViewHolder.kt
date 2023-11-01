@@ -14,9 +14,9 @@ class SelectionTasksViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(task: TaskDataClass) {
         binding.root.setCardBackgroundColor(
             if (task.hasVinculation) {
-                ContextCompat.getColor(binding.root.context, R.color.white)
+                ContextCompat.getColor(binding.root.context, R.color.background_task_selected)
             } else {
-                ContextCompat.getColor(binding.root.context, R.color.colorGris)
+                ContextCompat.getColor(binding.root.context, R.color.background_task_non_selected)
             }
         )
         binding.tvTaskTittle.text = task.taskName

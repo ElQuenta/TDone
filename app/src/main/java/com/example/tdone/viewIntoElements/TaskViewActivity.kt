@@ -1,15 +1,18 @@
 package com.example.tdone.viewIntoElements
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tdone.MainActivity
 import com.example.tdone.databinding.ActivityTaskViewBinding
 import com.example.tdone.dataclasses.TaskDataClass
+import com.example.tdone.rvHoldersYAdapters.rvTags.TagsAdapter
 
 class TaskViewActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTaskViewBinding
     private lateinit var data : TaskDataClass
+    private lateinit var tagsAdapter: TagsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +27,10 @@ class TaskViewActivity : AppCompatActivity() {
 
     private fun initUi() {
         binding.tvTaskTittle.text = data.taskName
+        tagsAdapter = TagsAdapter(data.taskTags)
+        binding.rvSelectedTags.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvSelectedTags.adapter = tagsAdapter
     }
 
     private fun initListeners() {

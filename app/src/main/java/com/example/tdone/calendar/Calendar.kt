@@ -36,13 +36,11 @@ class Calendar : AppCompatActivity() {
 
 
         val calendarView = binding.calendarView
-        val editText = binding.editTextText
 
 
 
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             val formattedDate = String.format("%04d%02d%02d", year, month + 1, dayOfMonth)
-            updateEditTextWithDatabaseValue(formattedDate, editText)
 
         }
     }
@@ -69,12 +67,10 @@ class Calendar : AppCompatActivity() {
     fun clickBoton(){
         val selectedDate = binding.calendarView.date
         val formattedDate = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date(selectedDate))
-        val eventText = binding.editTextText.text.toString()
 
         val uid = auth.currentUser?.uid
         if (uid != null) {
             val userCalendarReference = databaseReference.child(uid).child(formattedDate)
-            userCalendarReference.setValue(eventText)
             Toast.makeText(this, "Event saved successfully", Toast.LENGTH_SHORT).show()
 
             // Envía una notificación cuando se guarda el evento
