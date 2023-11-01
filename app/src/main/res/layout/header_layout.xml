@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,13 +19,16 @@
         app:cardCornerRadius="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <!-- Un CardView que se utilizará para mostrar la imagen de perfil del usuario. -->
 
         <ImageView
             android:id="@+id/iv_profile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:srcCompat="@drawable/ic_launcher_background"/>
+        <!-- Un ImageView dentro del CardView para mostrar la imagen de perfil. -->
     </androidx.cardview.widget.CardView>
+
     <TextView
         android:id="@+id/tv_user_name"
         android:layout_width="wrap_content"
@@ -35,6 +40,7 @@
         android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/cv_profile"
         app:layout_constraintTop_toTopOf="@+id/cv_profile" />
+    <!-- Un TextView para mostrar el nombre del usuario, posicionado a la derecha del CardView. -->
 
     <TextView
         android:id="@+id/tv_user_email"
@@ -47,5 +53,5 @@
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/cv_profile"
         app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
-
+    <!-- Un TextView para mostrar el correo electrónico del usuario, posicionado debajo del nombre. -->
 </androidx.constraintlayout.widget.ConstraintLayout>

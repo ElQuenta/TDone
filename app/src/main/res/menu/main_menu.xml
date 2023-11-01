@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<!-- Este archivo XML define un menú para una aplicación Android. -->
 
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Definición de un grupo de elementos del menú. -->
     <group>
+        <!-- Elemento del menú "Home" con un título, un ID único y un icono. -->
         <item android:title="@string/iten_nav_home_text"
             android:id="@+id/item_nav_home"
             android:icon="@drawable/ic_home"/>
+
+        <!-- Otros elementos del menú similares para grupos, tareas, notas y historial. -->
         <item android:title="@string/iten_nav_groups_text"
             android:id="@+id/item_nav_groups"
             android:icon="@drawable/ic_group"/>
@@ -17,10 +22,11 @@
         <item android:title="@string/iten_nav_history_text"
             android:id="@+id/item_nav_history"
             android:icon="@drawable/ic_history"/>
-
     </group>
 
-        <item android:title="@string/iten_nav_idioma">
+    <!-- Elemento del menú para seleccionar el idioma. -->
+    <item android:title="@string/iten_nav_idioma">
+        <!-- Submenú para idioma con elementos "Inglés" y "Español". -->
         <menu>
             <group>
                 <item android:title="@string/iten_nav_idioma_english"
@@ -31,7 +37,9 @@
         </menu>
     </item>
 
+    <!-- Elemento del menú para opciones de perfil. -->
     <item android:title="@string/iten_nav_profile_group_text">
+        <!-- Submenú para opciones de perfil con un elemento de "Cerrar sesión". -->
         <menu>
             <group>
                 <item android:title="@string/iten_nav_log_out_text"
@@ -40,5 +48,4 @@
             </group>
         </menu>
     </item>
-
 </menu>

@@ -396,27 +396,42 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun saveImageToSharedPreferences(bitmap: Bitmap) {
+        // Obteniene una referencia a las SharedPreferences llamadas "MisPrefs".
         val sharedPreferences: SharedPreferences = getSharedPreferences("MisPrefs", Context.MODE_PRIVATE)
+
+        // Crea un editor de SharedPreferences para realizar cambios.
         val editor = sharedPreferences.edit()
 
+        // Convierte la imagen Bitmap en una matriz de bytes comprimida en formato PNG.
         val byteArrayOutputStream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
         val byteArray = byteArrayOutputStream.toByteArray()
 
+        // Almacena la matriz de bytes en SharedPreferences como una cadena codificada en Base64.
         editor.putString("imagen_de_perfil", Base64.encodeToString(byteArray, Base64.DEFAULT))
+
+        // Aplica los cambios en SharedPreferences.
         editor.apply()
     }
 
-    // Recuperar la imagen de SharedPreferences
+    // Recupera la imagen de SharedPreferences
     private fun retrieveImageFromSharedPreferences(): Bitmap? {
+        // Obtiene una referencia a las SharedPreferences llamadas "MisPrefs".
         val sharedPreferences: SharedPreferences = getSharedPreferences("MisPrefs", Context.MODE_PRIVATE)
+
+        // Recupera la imagen codificada en Base64 como una cadena desde SharedPreferences.
         val encodedImage = sharedPreferences.getString("imagen_de_perfil", null)
 
+        // Condicion Si se encontró una imagen codificada en SharedPreferences.
         if (encodedImage != null) {
+            // Decodifica la cadena Base64 en una matriz de bytes.
             val byteArray = Base64.decode(encodedImage, Base64.DEFAULT)
+
+            // Convierte la matriz de bytes en un objeto Bitmap.
             return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
         }
 
+        // Si no se encontró ninguna imagen en SharedPreferences, devolver null.
         return null
     }
 
@@ -429,26 +444,34 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
     private val PICK_IMAGE_REQUEST = 1
     private var isExpanded = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Obteneiene la instancia actual del usuario autenticado a través de Firebase Authentication.
         user = FirebaseAuth.getInstance().currentUser
 
+        // Obtiene una referencia al menú de navegación (NavigationView).
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
-        val headerView = navigationView.getHeaderView(0) // 0 es el primer encabezado en NavigationView
+
+        // Obtiene una referencia al primer encabezado en el menú de navegación.
+        val headerView = navigationView.getHeaderView(0)
+
+        // Obtiene una referencia al ImageView que mostrará la imagen de perfil en el encabezado.
         val headerImageView = headerView.findViewById<ImageView>(R.id.iv_profile)
 
-        // Recuperar la imagen de perfil y establecerla en el ImageView
+        // Recupera la imagen de perfil del almacenamiento persistente y establecerla en el ImageView.
         val imagenDePerfil = retrieveImageFromSharedPreferences()
         if (imagenDePerfil != null) {
             headerImageView.setImageBitmap(imagenDePerfil)
         }
 
-        // Establecer un listener de clic en el ImageView para seleccionar una nueva foto
+        // Establece un clicklistener en el ImageView para permitir al usuario seleccionar una nueva foto de perfil.
         headerImageView.setOnClickListener {
             pickPhoto(it)
         }
@@ -456,6 +479,7 @@ class MainActivity : AppCompatActivity() {
         initUi()
         initListeners()
     }
+
 
 
 //        user = FirebaseAuth.getInstance().currentUser
@@ -523,16 +547,19 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        // Comprueba si el resultado proviene de la solicitud de selección de imágenes y si la selección fue exitosa.
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
+            // Obtiene la URI de la imagen seleccionada desde los datos de la intención.
             val selectedImage = data?.data
 
             if (selectedImage != null) {
+                // Convierte la URI de la imagen seleccionada en un objeto Bitmap.
                 val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedImage)
 
-                // Guardar la imagen seleccionada en SharedPreferences
+                // Guarda la imagen seleccionada en SharedPreferences para su uso posterior.
                 saveImageToSharedPreferences(bitmap)
 
-                // Mostrar la imagen seleccionada en el ImageView
+                // Muestra la imagen seleccionada en el ImageView del menú de navegación.
                 val navigationView = findViewById<NavigationView>(R.id.nav_view)
                 val headerView = navigationView.getHeaderView(0)
                 val headerImageView = headerView.findViewById<ImageView>(R.id.iv_profile)
@@ -541,6 +568,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
 
 
@@ -672,24 +700,34 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun setAppLocale(localeCode: String) {
+        // Crea un objeto Locale con el código de idioma proporcionado.
         val locale = Locale(localeCode)
+
+        // Establece el nuevo Locale como el predeterminado en la aplicación.
         Locale.setDefault(locale)
         val resources = resources
+
+        // Obteniene la configuración actual.
         val configuration = resources.configuration
+
+        // Establece el nuevo Locale en la configuración.
         configuration.setLocale(locale)
+
+        // Actualiza la configuración de los recursos con el nuevo Locale.
         resources.updateConfiguration(configuration, resources.displayMetrics)
 
-        // Guardar la configuración del idioma en SharedPreferences para futuras sesiones
+        // Guardar la configuración del idioma en SharedPreferences.
         val prefs = getSharedPreferences("Settings", MODE_PRIVATE)
         val editor = prefs.edit()
         editor.putString("My_Lang", localeCode)
         editor.apply()
 
-        // Reiniciar la actividad para aplicar los cambios de idioma
+        // Reinicia la actividad actual para aplicar los cambios de idioma.
         val refresh = Intent(this, MainActivity::class.java)
         startActivity(refresh)
         finish()
     }
+
 
 
 
@@ -767,11 +805,16 @@ class MainActivity : AppCompatActivity() {
                         drawerLayout.closeDrawer(GravityCompat.START)
                     }
                     R.id.log -> {
+                        // Cuando se selecciona la opción "Cerrar sesión" en el menú.
+                        // Cerrar la sesión actual del usuario utilizando Firebase Authentication.
                         FirebaseAuth.getInstance().signOut()
+                        // Se crea una nueva intención para iniciar la actividad de inicio de sesión (SignIn).
                         val intent = Intent(this@MainActivity, SignIn::class.java)
                         startActivity(intent)
+                        // Finaliza la actividad actual (cerrar la sesión y vuelve a la pantalla de inicio de sesión).
                         finish()
                     }R.id.language_english->{
+                    // Llama a una función (setAppLocale) para cambiar el idioma de la aplicación a inglés.
                     setAppLocale("en") // Cambiar a inglés
                     true
                     }R.id.language_spanish->{
@@ -824,11 +867,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Se llama cuando se selecciona un elemento del menú de opciones en la barra de acción.
 
         return if (toggle.onOptionsItemSelected(item)) {
             true
         } else {
-            return super.onOptionsItemSelected(item)
+
+            super.onOptionsItemSelected(item)
         }
     }
 
