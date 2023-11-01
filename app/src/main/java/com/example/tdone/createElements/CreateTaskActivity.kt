@@ -1,8 +1,10 @@
 package com.example.tdone.createElements
 
 import android.content.Intent
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,10 +18,13 @@ import com.example.tdone.databinding.ActivityCreateTaskBinding
 import com.example.tdone.dataclasses.GroupDataClass
 import com.example.tdone.dataclasses.NoteDataClass
 import com.example.tdone.dataclasses.TagDataClass
+import com.example.tdone.dataclasses.TaskDataClass
 import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionGroups.SelectionGroupsAdapter
 import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionNotes.SelectionNotesAdapter
 import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionTags.SelectionTagAdapter
 import com.example.tdone.rvHoldersYAdapters.rvTags.TagsAdapter
+import java.util.Calendar
+import java.util.Locale
 
 
 class CreateTaskActivity : AppCompatActivity() {
@@ -113,6 +118,8 @@ class CreateTaskActivity : AppCompatActivity() {
     private val selectedTags = mutableListOf<TagDataClass>()
     private var selectedNote = notes.last()
     private var selectedGroup = groups.last()
+    private var selectedDate: Long? = null
+    private var selectedDateString: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -169,6 +176,43 @@ class CreateTaskActivity : AppCompatActivity() {
         binding.btnAddDate.setOnClickListener { changeScreenState(SELECT_DATE) }
         binding.btnAddGroup.setOnClickListener { changeScreenState(SELECT_GROUP) }
         binding.btnAddTag.setOnClickListener { changeScreenState(SELECT_TAG) }
+        binding.calendarView.setOnDateChangeListener { _, year, month, day ->
+            val selectedDate = Calendar.getInstance()
+            selectedDate.set(year, month, day)
+            val currentDateInMillis = Calendar.getInstance().timeInMillis
+            if (selectedDate.timeInMillis > currentDateInMillis) {
+                // La fecha seleccionada es futura, puedes trabajar con ella aquí
+                // Por ejemplo, puedes obtener la fecha en un formato específico
+                val sdf1 = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val sdf2 = SimpleDateFormat("ddMMyyyy", Locale.getDefault())
+                selectedDateString = sdf1.format(selectedDate.time)
+                this.selectedDate = sdf2.format(selectedDate.time).toLong()
+                Toast.makeText(
+                    this,
+                    "Fecha escogida ${selectedDateString ?: ""}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                // La fecha seleccionada es anterior o igual a la fecha actual
+                // Puedes mostrar un mensaje o realizar otra acción si lo deseas
+                Toast.makeText(this, "Selecciona una fecha futura", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        binding.btnAdd.setOnClickListener {
+            val newTaskTitle = binding.etTaskTittle.text.toString()
+            if (newTaskTitle != null) {
+                val newTask = TaskDataClass(
+                    taskName = newTaskTitle,
+                    taskTags = selectedTags,
+                    taskGroup = if (selectedGroup == groups.last()) null else selectedGroup,
+                    taskVinculation = if (selectedNote == notes.last()) null else selectedNote,
+                    hasVinculation = selectedNote != notes.last(),
+                    taskEndDate = selectedDate,
+                    taskEndDateString = selectedDateString
+                )
+            }
+        }
     }
 
     private fun changeScreenState(newScreenState: ScreenState) {

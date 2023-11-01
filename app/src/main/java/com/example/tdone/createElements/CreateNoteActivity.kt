@@ -16,6 +16,7 @@ import com.example.tdone.createElements.CreateNoteActivity.ScreenState.SELECT_TA
 import com.example.tdone.databinding.ActivityCreateNoteBinding
 import com.example.tdone.dataclasses.GroupDataClass
 import com.example.tdone.dataclasses.ImageDataClass
+import com.example.tdone.dataclasses.NoteDataClass
 import com.example.tdone.dataclasses.TagDataClass
 import com.example.tdone.dataclasses.TaskDataClass
 import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionBackground.SelectionColorAdapter
@@ -235,6 +236,22 @@ class CreateNoteActivity : AppCompatActivity() {
         binding.btnAddFront.setOnClickListener { changeScreenState(SELECT_FRONT) }
         binding.btnAddBackground.setOnClickListener { changeScreenState(SELECT_BACKGROUND) }
         binding.btnAddTag.setOnClickListener { changeScreenState(SELECT_TAG) }
+        binding.btnAdd.setOnClickListener {
+            val tittle = binding.etNoteTitle.text.toString()
+            val body = binding.etNoteBody.text.toString()
+            if (tittle != null && body != null) {
+                val newNote = NoteDataClass(
+                    noteTittle = tittle,
+                    noteBody = body,
+                    noteBackground = selectedColor,
+                    noteVinculation = if (selectedTask == tasks.last()) null else selectedTask,
+                    hasVinculation = selectedTask != tasks.last(),
+                    noteTags = selectedTags,
+                    noteFront = if (selectedFront == fronts[0]) null else selectedFront
+                )
+            }
+
+        }
     }
 
     private fun changeScreenState(newScreenState: ScreenState) {

@@ -15,7 +15,7 @@ class SelectionFrontViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             ContextCompat.getColor(
                 binding.root.context,
                 if (image.selected) {
-                    R.color.purple_700
+                    R.color.selected
                 } else {
                     R.color.black
                 }

@@ -1,7 +1,6 @@
 package com.example.tdone.dataclasses
 
 import java.io.Serializable
-import java.time.LocalDate
 
 data class TaskDataClass(
     var taskName: String,
@@ -9,6 +8,7 @@ data class TaskDataClass(
     var taskGroup: GroupDataClass? = null,
     var taskVinculation: NoteDataClass? = null,
     var hasVinculation: Boolean = false,
-    var taskEndDate: LocalDate? = null,
-    var taskCompleted: Boolean = false
+    var taskCompleted: Boolean = false,
+    var taskEndDate: Long? = null,
+    var taskEndDateString: String? = null
 ): Serializable
