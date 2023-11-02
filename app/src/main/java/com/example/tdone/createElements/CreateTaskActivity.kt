@@ -19,10 +19,14 @@ import com.example.tdone.dataclasses.GroupDataClass
 import com.example.tdone.dataclasses.NoteDataClass
 import com.example.tdone.dataclasses.TagDataClass
 import com.example.tdone.dataclasses.TaskDataClass
+import com.example.tdone.notification.NotificationHelper
 import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionGroups.SelectionGroupsAdapter
 import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionNotes.SelectionNotesAdapter
 import com.example.tdone.rvHoldersYAdapters.rvSelections.selectionTags.SelectionTagAdapter
 import com.example.tdone.rvHoldersYAdapters.rvTags.TagsAdapter
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import java.util.Calendar
 import java.util.Locale
 
@@ -35,6 +39,9 @@ class CreateTaskActivity : AppCompatActivity() {
     private lateinit var selectedTagsAdapter: TagsAdapter
     private lateinit var selectionNoteAdapter: SelectionNotesAdapter
     private lateinit var selectionGroupAdapter: SelectionGroupsAdapter
+    private lateinit var databaseReference: DatabaseReference
+    private lateinit var auth: FirebaseAuth
+    private lateinit var notificationHelper: NotificationHelper
 
     private val tags = mutableListOf(
         TagDataClass(
@@ -118,6 +125,7 @@ class CreateTaskActivity : AppCompatActivity() {
     private val selectedTags = mutableListOf<TagDataClass>()
     private var selectedNote = notes.last()
     private var selectedGroup = groups.last()
+
     private var selectedDate: Long? = null
     private var selectedDateString: String? = null
 
@@ -125,6 +133,14 @@ class CreateTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Calendar")
+        auth = FirebaseAuth.getInstance()
+
+        // Inicializando notificationHelper
+        notificationHelper = NotificationHelper(this)
+
+        // Llamada a la función para inicializar los listeners
         initListeners()
         initUi()
     }
@@ -176,41 +192,80 @@ class CreateTaskActivity : AppCompatActivity() {
         binding.btnAddDate.setOnClickListener { changeScreenState(SELECT_DATE) }
         binding.btnAddGroup.setOnClickListener { changeScreenState(SELECT_GROUP) }
         binding.btnAddTag.setOnClickListener { changeScreenState(SELECT_TAG) }
-        binding.calendarView.setOnDateChangeListener { _, year, month, day ->
-            val selectedDate = Calendar.getInstance()
-            selectedDate.set(year, month, day)
-            val currentDateInMillis = Calendar.getInstance().timeInMillis
-            if (selectedDate.timeInMillis > currentDateInMillis) {
-                // La fecha seleccionada es futura, puedes trabajar con ella aquí
-                // Por ejemplo, puedes obtener la fecha en un formato específico
-                val sdf1 = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                val sdf2 = SimpleDateFormat("ddMMyyyy", Locale.getDefault())
-                selectedDateString = sdf1.format(selectedDate.time)
-                this.selectedDate = sdf2.format(selectedDate.time).toLong()
+        binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            val selectedCalendar = Calendar.getInstance()
+            selectedCalendar.set(year, month, dayOfMonth)
+            val currentDateCalendar = Calendar.getInstance()
+
+            if (selectedCalendar.timeInMillis > currentDateCalendar.timeInMillis) {
+                // La fecha seleccionada es futura
+                val sdf = SimpleDateFormat("ddMMyyyy", Locale.getDefault())
+                selectedDateString = sdf.format(selectedCalendar.time)
+                selectedDate = selectedCalendar.timeInMillis
                 Toast.makeText(
                     this,
-                     "${R.string.Fecha_escogida} ${selectedDateString ?:""}",
+                    "${getString(R.string.Fecha_escogida)} $selectedDateString",
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
                 // La fecha seleccionada es anterior o igual a la fecha actual
-                // Puedes mostrar un mensaje o realizar otra acción si lo deseas
+                selectedDate = null
+                selectedDateString = null
                 Toast.makeText(this, R.string.Selecciona_una_fecha_futura, Toast.LENGTH_SHORT).show()
             }
-
         }
+
+
+        // Listener para el botón de agregar tarea
         binding.btnAdd.setOnClickListener {
             val newTaskTitle = binding.etTaskTittle.text.toString()
-            if (newTaskTitle != null) {
+            if (newTaskTitle.isNotEmpty()) {
+                // Si la fecha seleccionada es nula, establecerla como la fecha actual
+                if (selectedDate == null) {
+                    selectedDate = System.currentTimeMillis()
+                    val sdf = SimpleDateFormat("ddMMyyyy", Locale.getDefault())
+                    selectedDateString = sdf.format(selectedDate)
+                }
+
                 val newTask = TaskDataClass(
                     taskName = newTaskTitle,
                     taskTags = selectedTags,
                     taskGroup = if (selectedGroup == groups.last()) null else selectedGroup,
                     taskVinculation = if (selectedNote == notes.last()) null else selectedNote,
                     hasVinculation = selectedNote != notes.last(),
-                    taskEndDate = selectedDate,
-                    taskEndDateString = selectedDateString
+                    taskEndDate = selectedDate!!,
+                    taskEndDateString = selectedDateString!!
                 )
+
+                // Guardar la tarea en la base de datos de Firebase
+                val uid = auth.currentUser?.uid
+                if (uid != null) {
+                    val userCalendarReference = databaseReference.child(uid).push()
+                    userCalendarReference.setValue(newTask)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "La tarea fue guardada con exito!", Toast.LENGTH_SHORT).show()
+
+                            // Verificar si la fecha seleccionada es igual a la fecha actual
+                            val selectedCalendar = Calendar.getInstance()
+                            selectedCalendar.timeInMillis = selectedDate as Long
+
+                            val currentDateCalendar = Calendar.getInstance()
+                            //notificacion verificando cuando la fecha actual sea la fecha que fue marcada con aterioridad para mandar la notificacion
+                            if (selectedCalendar.get(Calendar.YEAR) == currentDateCalendar.get(Calendar.YEAR) &&
+                                selectedCalendar.get(Calendar.MONTH) == currentDateCalendar.get(Calendar.MONTH) &&
+                                selectedCalendar.get(Calendar.DAY_OF_MONTH) == currentDateCalendar.get(Calendar.DAY_OF_MONTH)) {
+                                notificationHelper.showNotification("La tarea $newTaskTitle ha vencido", "Haz click aca!")
+                            }
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(this, "Fallo al guardar la tarea", Toast.LENGTH_SHORT).show()
+                        }
+                } else {
+                    // Handle the case where user is not authenticated
+                    Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "Please enter a task title", Toast.LENGTH_SHORT).show()
             }
         }
     }

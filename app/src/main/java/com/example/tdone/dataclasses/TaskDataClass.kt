@@ -12,3 +12,4 @@ data class TaskDataClass(
     var taskEndDate: Long? = null,
     var taskEndDateString: String? = null
 ): Serializable
+
