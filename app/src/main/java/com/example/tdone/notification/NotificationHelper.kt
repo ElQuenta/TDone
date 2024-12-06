@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import com.example.tdone.MainActivity
 import com.example.tdone.R
 import java.util.Calendar
 
@@ -30,10 +31,9 @@ class NotificationHelper(private val context: Context) {
     }
 
     fun showNotification(title: String, message: String) {
-        val intent = Intent(context, Calendar::class.java)
+        val intent = Intent(context, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE) // Agregar el flag FLAG_IMMUTABLE
-
+        val pendingIntent = PendingIntent.getActivity(context, System.currentTimeMillis().toInt(), intent, PendingIntent.FLAG_IMMUTABLE)
         val channelId = "mi_canal"
         val notificationBuilder = NotificationCompat.Builder(context, channelId)
             .setSmallIcon(R.drawable.ic_launcher_background)
